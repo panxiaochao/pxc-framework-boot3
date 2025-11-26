@@ -1,0 +1,1 @@
+./fuck-u-code analyze --verbose --markdown > report.md

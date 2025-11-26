@@ -1,0 +1,6 @@
+io.github.panxiaochao.web.config.FilterAutoConfiguration
+io.github.panxiaochao.web.config.WebMvcAutoConfiguration
+io.github.panxiaochao.web.config.OkHttpAutoConfiguration
+io.github.panxiaochao.web.config.RestTemplateAutoConfiguration
+io.github.panxiaochao.web.handler.RestExceptionHandler
+io.github.panxiaochao.web.handler.RestResponseEntityExceptionHandler
