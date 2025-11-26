@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>pxc-framework-boot3-holiday</artifactId>
-    <description>[3.0.0-SNAPSHOT]pxc framework boot3 holiday 假期模块</description>
+    <description>[3.0.0]pxc framework boot3 holiday 假期模块</description>
 
     <dependencies>
         <!-- 核心模块 -->

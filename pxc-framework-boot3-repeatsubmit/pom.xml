@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>pxc-framework-boot3-repeatsubmit</artifactId>
-    <description>[3.0.0-SNAPSHOT]pxc framework boot3 repeatsubmit 幂等重复提交模块</description>
+    <description>[3.0.0]pxc framework boot3 repeatsubmit 幂等重复提交模块</description>
 
     <dependencies>
         <!-- Redis 模块 -->

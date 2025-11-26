@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>pxc-framework-boot3-ip2region</artifactId>
-    <description>[3.0.0-SNAPSHOT]pxc framework boot3 ip2region IP转换地址模块</description>
+    <description>[3.0.0]pxc framework boot3 ip2region IP转换地址模块</description>
 
     <dependencies>
         <dependency>

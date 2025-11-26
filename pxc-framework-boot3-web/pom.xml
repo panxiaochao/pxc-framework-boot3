@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>pxc-framework-boot3-web</artifactId>
-    <description>[3.0.0-SNAPSHOT]pxc framework boot3 web 模块</description>
+    <description>[3.0.0]pxc framework boot3 web 模块</description>
 
     <dependencies>
         <dependency>
