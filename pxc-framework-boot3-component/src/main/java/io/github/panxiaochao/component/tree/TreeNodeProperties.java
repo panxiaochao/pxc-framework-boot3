@@ -17,6 +17,7 @@ package io.github.panxiaochao.component.tree;
 
 import lombok.Getter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -30,6 +31,7 @@ import java.io.Serializable;
 @Getter
 public class TreeNodeProperties implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

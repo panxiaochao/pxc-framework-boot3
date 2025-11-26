@@ -18,7 +18,7 @@ import java.util.Arrays;
  * @version 1.0
  */
 @SpringBootTest(classes = { HolidayAutoConfiguration.class },
-        properties = { "spring.pxc-framework.holiday.json-locations=/data/**" })
+        properties = { "spring.pxc-framework-boot3.holiday.json-locations=/data/**" })
 public class HolidayTest {
 
     @Resource

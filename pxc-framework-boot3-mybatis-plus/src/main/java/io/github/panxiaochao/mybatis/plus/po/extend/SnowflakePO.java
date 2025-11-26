@@ -20,6 +20,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import io.github.panxiaochao.mybatis.plus.po.BasePO;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.io.Serial;
+
 /**
  * <p>
  * 主键采用雪花算法生成ID
@@ -30,6 +32,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 public class SnowflakePO extends BasePO {
 
+    @Serial
     private static final long serialVersionUID = 7230085915708636092L;
 
     /**

@@ -29,7 +29,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "spring.pxc-framework", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "spring.pxc-framework-boot3", ignoreInvalidFields = true)
 public class PxcFrameWorkProperties {
 
     /**
@@ -89,12 +89,12 @@ public class PxcFrameWorkProperties {
         /**
          * 线程前缀
          */
-        private String threadNamePrefix = "framework-thread-pool-";
+        private String threadNamePrefix = "boot3-thread-pool-";
 
         /**
          * 线程分组名称
          */
-        private String threadGroupName = "framework-group-thread-pool-";
+        private String threadGroupName = "boot3-group-thread-pool-";
 
     }
 
@@ -125,7 +125,7 @@ public class PxcFrameWorkProperties {
         /**
          * 线程前缀
          */
-        private String threadNamePrefix = "framework-scheduler-";
+        private String threadNamePrefix = "boot3-scheduler-";
 
     }
 

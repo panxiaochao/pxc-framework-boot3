@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.panxiaochao.cache.core;
+package io.github.panxiaochao.boot3.cache.core;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.CaffeineSpec;
 import io.github.panxiaochao.core.utils.StringPools;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.convert.DurationStyle;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -151,6 +152,7 @@ public class PlusCaffeineCacheManager implements CacheManager {
         return this.allowNullValues;
     }
 
+    @NotNull
     @Override
     public Collection<String> getCacheNames() {
         return Collections.unmodifiableSet(this.cacheMap.keySet());
@@ -158,7 +160,7 @@ public class PlusCaffeineCacheManager implements CacheManager {
 
     @Override
     @Nullable
-    public Cache getCache(String name) {
+    public Cache getCache(@NotNull String name) {
         // 重写 name 分割 name
         String[] array = StringUtils.delimitedListToStringArray(name, StringPools.HASH);
         name = array[0];

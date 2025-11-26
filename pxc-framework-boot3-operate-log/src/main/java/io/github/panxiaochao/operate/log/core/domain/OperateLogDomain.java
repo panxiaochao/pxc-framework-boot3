@@ -26,6 +26,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -42,6 +43,7 @@ import java.time.LocalDateTime;
 @ToString
 public class OperateLogDomain implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -8831737354114961499L;
 
     /**

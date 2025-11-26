@@ -32,6 +32,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serial;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -45,6 +46,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class CharacterCaptcha implements IDrawCaptcha {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private static final Builder INSTANCE = new Builder();

@@ -12,7 +12,6 @@
 
     <url>https://github.com/panxiaochao/pxc-framework-boot3</url>
 
-    <!-- licenses -->
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -20,7 +19,6 @@
         </license>
     </licenses>
 
-    <!-- developers -->
     <developers>
         <developer>
             <name>Lypxc</name>
@@ -29,7 +27,6 @@
         </developer>
     </developers>
 
-    <!-- scm -->
     <scm>
         <tag>master</tag>
         <url>https://github.com/panxiaochao/pxc-framework-boot3.git</url>
@@ -39,7 +36,6 @@
         </developerConnection>
     </scm>
 
-    <!-- distributionManagement -->
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -66,7 +62,9 @@
         <maven-compiler-plugin.verison>3.13.0</maven-compiler-plugin.verison>
         <maven-source-plugin.verison>3.3.1</maven-source-plugin.verison>
         <maven-javadoc-plugin.verison>3.11.2</maven-javadoc-plugin.verison>
+        <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
         <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
+        <license-maven-plugin.version>5.0.0</license-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -327,7 +325,7 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>4.6</version>
+                <version>${license-maven-plugin.version}</version>
                 <configuration>
                     <properties>
                         <year>2025-2026</year>
@@ -367,7 +365,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.2.7</version>
+                        <version>${maven-gpg-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>

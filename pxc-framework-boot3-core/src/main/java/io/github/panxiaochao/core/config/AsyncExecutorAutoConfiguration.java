@@ -47,7 +47,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @AutoConfiguration(beforeName = "org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration")
 @RequiredArgsConstructor
 @EnableAsync(proxyTargetClass = true)
-@ConditionalOnProperty(name = "spring.pxc-framework.async", havingValue = "true")
+@ConditionalOnProperty(name = "spring.pxc-framework-boot3.async", havingValue = "true")
 public class AsyncExecutorAutoConfiguration implements AsyncConfigurer {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(AsyncExecutorAutoConfiguration.class);

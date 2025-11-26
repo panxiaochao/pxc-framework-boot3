@@ -20,6 +20,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import io.github.panxiaochao.mybatis.plus.po.BasePO;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.io.Serial;
+
 /**
  * <p>
  * 主键采用UUID
@@ -30,6 +32,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 public class UuidPO extends BasePO {
 
+    @Serial
     private static final long serialVersionUID = 230788523080038096L;
 
     /**

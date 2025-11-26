@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.panxiaochao.cache.constants;
+package io.github.panxiaochao.boot3.cache.constants;
 
 /**
  * <p>

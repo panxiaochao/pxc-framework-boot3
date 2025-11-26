@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -36,6 +37,7 @@ import java.time.LocalDateTime;
 @Setter
 public abstract class BasePO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 846044951522308141L;
 
     /**

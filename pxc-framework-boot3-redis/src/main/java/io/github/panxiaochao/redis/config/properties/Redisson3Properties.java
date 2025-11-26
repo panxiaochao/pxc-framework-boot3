@@ -29,7 +29,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "spring.pxc-framework.redisson", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "spring.pxc-framework-boot3.redisson", ignoreInvalidFields = true)
 public class Redisson3Properties {
 
     /**

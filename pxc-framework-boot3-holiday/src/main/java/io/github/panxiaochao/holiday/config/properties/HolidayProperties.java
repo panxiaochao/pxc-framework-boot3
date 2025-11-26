@@ -47,7 +47,7 @@ import java.util.stream.Stream;
  * @since 2024-04-03
  * @version 1.0
  */
-@ConfigurationProperties(prefix = "spring.pxc-framework.holiday", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "spring.pxc-framework-boot3.holiday", ignoreInvalidFields = true)
 public class HolidayProperties implements InitializingBean {
 
     /**

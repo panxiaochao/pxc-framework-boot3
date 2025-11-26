@@ -21,6 +21,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -38,6 +39,7 @@ import java.util.function.Predicate;
 @Getter
 public class Tree<T> extends LinkedHashMap<String, Object> implements Comparable<Tree<T>> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     // 树节点属性配置

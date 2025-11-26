@@ -39,7 +39,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "spring.pxc-framework.wx", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "spring.pxc-framework-boot3.wx", ignoreInvalidFields = true)
 public class WxProperties {
 
     /**

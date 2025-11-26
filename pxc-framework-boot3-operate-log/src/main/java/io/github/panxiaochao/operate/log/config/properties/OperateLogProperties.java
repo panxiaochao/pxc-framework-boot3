@@ -33,7 +33,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @Setter
 @ToString
-@ConfigurationProperties(prefix = "spring.pxc-framework.operatelog", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "spring.pxc-framework-boot3.operatelog", ignoreInvalidFields = true)
 public class OperateLogProperties {
 
     /**

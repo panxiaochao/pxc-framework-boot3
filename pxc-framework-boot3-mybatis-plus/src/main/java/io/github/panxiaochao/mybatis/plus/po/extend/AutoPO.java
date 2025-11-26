@@ -22,6 +22,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+
 /**
  * <p>
  * 主键采用数据库自增
@@ -34,6 +36,7 @@ import lombok.Setter;
 @Setter
 public class AutoPO extends BasePO {
 
+    @Serial
     private static final long serialVersionUID = -2626183000481421947L;
 
     /**

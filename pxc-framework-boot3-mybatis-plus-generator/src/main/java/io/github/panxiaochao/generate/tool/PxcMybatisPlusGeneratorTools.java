@@ -24,7 +24,6 @@ import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
-import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.fill.Column;
@@ -70,7 +69,6 @@ public class PxcMybatisPlusGeneratorTools {
             .globalConfig(globalConfigBuilder -> this.createGlobalConfig(globalConfigBuilder, builder))
             .packageConfig(packageConfigBuilder -> this.createPackageConfig(packageConfigBuilder, builder))
             .strategyConfig(strategyConfigBuilder -> this.createStrategyConfig(strategyConfigBuilder, builder))
-            .templateConfig(templateConfigBuilder -> this.createTemplateConfig(templateConfigBuilder, builder))
             // 使用Freemarker引擎，默认使用Velocity引擎
             .templateEngine(new EnhanceFreemarkerTemplateEngine())
             .execute();
@@ -170,22 +168,28 @@ public class PxcMybatisPlusGeneratorTools {
         if (!CollectionUtils.isEmpty(builder.excludes)) {
             strategyBuilder.addExclude(builder.excludes);
         }
-    }
 
-    /**
-     * 模版引擎配置
-     * @param templateConfigBuilder 模版引擎生成器
-     * @param builder 自定义配置
-     */
-    private void createTemplateConfig(TemplateConfig.Builder templateConfigBuilder, Builder builder) {
-        templateConfigBuilder.controller("/templates/controller.java")
-            .entity("/templates/entity.java")
-            .service("/templates/service.java")
-            .serviceImpl("/templates/serviceImpl.java")
-            .mapper("/templates/mapper.java")
-            .xml("/templates/mapper.xml")
-            .controller("/templates/controller.java")
-            .build();
+        // 制定模版路径
+        strategyBuilder
+            // controller 模版路径
+            .controllerBuilder()
+            .template("/templates/controller.java")
+            // entity 模版路径
+            .entityBuilder()
+            .javaTemplate("/templates/entity.java")
+            // service 模版路径
+            .serviceBuilder()
+            .serviceTemplate("/templates/service.java")
+            // serviceImpl 模版路径
+            .serviceBuilder()
+            .serviceImplTemplate("/templates/serviceImpl.java")
+            // mapper 模版路径
+            .mapperBuilder()
+            .mapperTemplate("/templates/mapper.java")
+            // mapperXml 模版路径
+            .mapperBuilder()
+            .mapperXmlTemplate("/templates/mapper.xml");
+
     }
 
     /**

@@ -94,7 +94,7 @@ public class WxAutoConfiguration {
      * 微信公众号自动配置类
      */
     @Configuration
-    @ConditionalOnProperty(name = "spring.pxc-framework.wx.mp.enabled", havingValue = "true")
+    @ConditionalOnProperty(name = "spring.pxc-framework-boot3.wx.mp.enabled", havingValue = "true")
     static class WxMpConfiguration {
 
         /**
@@ -125,7 +125,7 @@ public class WxAutoConfiguration {
      * 微信小程序自动配置类
      */
     @Configuration
-    @ConditionalOnProperty(name = "spring.pxc-framework.wx.ma.enabled", havingValue = "true")
+    @ConditionalOnProperty(name = "spring.pxc-framework-boot3.wx.ma.enabled", havingValue = "true")
     static class WxMaConfiguration {
 
         /**
@@ -155,7 +155,7 @@ public class WxAutoConfiguration {
      * 微信开放平台自动配置类
      */
     @Configuration
-    @ConditionalOnProperty(name = "spring.pxc-framework.wx.open.enabled", havingValue = "true")
+    @ConditionalOnProperty(name = "spring.pxc-framework-boot3.wx.open.enabled", havingValue = "true")
     static class WxOpenConfiguration {
 
         /**
@@ -184,7 +184,7 @@ public class WxAutoConfiguration {
      * 企业号/企业微信自动配置类
      */
     @Configuration
-    @ConditionalOnProperty(name = "spring.pxc-framework.wx.cp.enabled", havingValue = "true")
+    @ConditionalOnProperty(name = "spring.pxc-framework-boot3.wx.cp.enabled", havingValue = "true")
     static class WxCpConfiguration {
 
         /**
@@ -204,7 +204,7 @@ public class WxAutoConfiguration {
      * 微信支付自动配置类
      */
     @Configuration
-    @ConditionalOnProperty(name = "spring.pxc-framework.wx.pay.enabled", havingValue = "true")
+    @ConditionalOnProperty(name = "spring.pxc-framework-boot3.wx.pay.enabled", havingValue = "true")
     static class WxPayConfiguration {
 
         /**
@@ -224,7 +224,7 @@ public class WxAutoConfiguration {
      * 微信视频号自动配置类
      */
     @Configuration
-    @ConditionalOnProperty(name = "spring.pxc-framework.wx.channel.enabled", havingValue = "true")
+    @ConditionalOnProperty(name = "spring.pxc-framework-boot3.wx.channel.enabled", havingValue = "true")
     static class WxChannelConfiguration {
 
         /**

@@ -18,6 +18,7 @@ package io.github.panxiaochao.component.tree;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -37,6 +38,7 @@ import java.util.function.BiConsumer;
  */
 public class TreeBuilder<E> implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final Tree<E> root;

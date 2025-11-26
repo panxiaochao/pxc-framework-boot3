@@ -19,6 +19,7 @@ import lombok.Getter;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.util.Assert;
 
+import java.io.Serial;
 import java.util.LinkedHashMap;
 import java.util.function.Predicate;
 
@@ -33,6 +34,7 @@ import java.util.function.Predicate;
 @Getter
 public class Select<T> extends LinkedHashMap<String, Object> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final SelectOptionProperties selectOptionProperties;

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.panxiaochao.cache.config;
+package io.github.panxiaochao.boot3.cache.config;
 
-import io.github.panxiaochao.cache.config.properties.CacheManagerProperties;
-import io.github.panxiaochao.cache.constants.CacheManagerType;
-import io.github.panxiaochao.cache.core.PlusCaffeineCacheManager;
+import io.github.panxiaochao.boot3.cache.config.properties.CacheManagerProperties;
+import io.github.panxiaochao.boot3.cache.constants.CacheManagerType;
+import io.github.panxiaochao.boot3.cache.core.PlusCaffeineCacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -62,11 +62,11 @@ public class CacheManagerAutoConfiguration {
             return caffeineCacheManager;
         }
         else if (CacheManagerType.REDIS.equals(cacheManagerProperties.getCacheType())) {
-            Class<?> cacheManagerClass = loadClass("io.github.panxiaochao.redis.cache.PlusRedissonCacheManager");
+            Class<?> cacheManagerClass = loadClass("io.github.panxiaochao.boot3.redis.cache.PlusRedissonCacheManager");
             if (cacheManagerClass != null) {
                 try {
                     LOGGER.info("配置[Cache -> Redis]成功！");
-                    return (CacheManager) cacheManagerClass.newInstance();
+                    return (CacheManager) cacheManagerClass.getDeclaredConstructor().newInstance();
                 }
                 catch (Exception e) {
                     throw new RuntimeException(e);

@@ -30,7 +30,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "spring.pxc-framework.ip2region", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "spring.pxc-framework-boot3.ip2region", ignoreInvalidFields = true)
 public class Ip2regionProperties {
 
     /**

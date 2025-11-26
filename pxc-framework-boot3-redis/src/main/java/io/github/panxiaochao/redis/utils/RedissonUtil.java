@@ -21,6 +21,7 @@ import io.github.panxiaochao.core.utils.StrUtil;
 import io.github.panxiaochao.core.utils.StringPools;
 import org.redisson.api.*;
 import org.redisson.api.geo.GeoSearchArgs;
+import org.redisson.api.options.KeysScanOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,7 +86,7 @@ public class RedissonUtil {
      * @return Set<String>
      */
     public static Set<String> getKeysByPattern(String pattern) {
-        Iterable<String> iterable = getRKey().getKeysByPattern(pattern);
+        Iterable<String> iterable = getRKey().getKeys(KeysScanOptions.defaults().pattern(pattern));
         return CollectionUtil.toHashSet(iterable);
     }
 
@@ -101,7 +102,7 @@ public class RedissonUtil {
      * @return Set<String>
      */
     public static Set<String> getKeysByPattern(String pattern, int count) {
-        Iterable<String> iterable = getRKey().getKeysByPattern(pattern, count);
+        Iterable<String> iterable = getRKey().getKeys(KeysScanOptions.defaults().pattern(pattern).limit(count));
         return CollectionUtil.toHashSet(iterable);
     }
 
@@ -361,11 +362,11 @@ public class RedissonUtil {
      */
     public static long tryRateLimiter(String key, RateType rateType, long rate, long rateInterval) {
         RRateLimiter rateLimiter = getRRateLimiter(key);
-        boolean trySetRateSuccess = rateLimiter.trySetRate(rateType, rate, rateInterval, RateIntervalUnit.MILLISECONDS);
+        boolean trySetRateSuccess = rateLimiter.trySetRate(rateType, rate, Duration.ofMillis(rateInterval));
         // 第一次成功 拿锁后进行设置过期时间
         if (trySetRateSuccess) {
             // 设置过期时间，和速率一样，防止缓存残留
-            rateLimiter.expire(Duration.ofSeconds(rateInterval));
+            rateLimiter.expire(Duration.ofMillis(rateInterval));
         }
         if (rateLimiter.tryAcquire()) {
             return rateLimiter.availablePermits();

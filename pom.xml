@@ -90,7 +90,7 @@
         <spring-data-redis.version>3.5.6</spring-data-redis.version>
         <spring-cloud.version>2025.0.0</spring-cloud.version>
         <spring-cloud-openfeign.version>4.3.0</spring-cloud-openfeign.version>
-        <spring-cloud-gateway.version>4.3.0</spring-cloud-gateway.version>
+        <spring-cloud-gateway.version>4.3.2</spring-cloud-gateway.version>
         <spring.version>6.2.14</spring.version>
         <mybatis-plus.version>3.5.14</mybatis-plus.version>
         <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
@@ -100,6 +100,7 @@
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-text.version>1.14.0</commons-text.version>
         <commons-collections4.version>4.5.0</commons-collections4.version>
+        <commons-fileupload.version>1.6.0</commons-fileupload.version>
         <hutool.version>5.8.41</hutool.version>
         <swagger-annotations.version>2.2.41</swagger-annotations.version>
         <zxing.version>3.5.4</zxing.version>
@@ -110,7 +111,7 @@
         <okhttp.version>4.12.0</okhttp.version>
         <aspectjweaver.version>1.9.24</aspectjweaver.version>
         <commons-pool2.version>2.12.1</commons-pool2.version>
-        <caffeine.version>3.2.2</caffeine.version>
+        <caffeine.version>3.2.3</caffeine.version>
         <lombok.version>1.18.42</lombok.version>
         <mysql.version>9.5.0</mysql.version>
         <freemarker.version>2.3.34</freemarker.version>
@@ -132,6 +133,7 @@
         <maven-compiler-plugin.verison>3.13.0</maven-compiler-plugin.verison>
         <maven-source-plugin.verison>3.3.1</maven-source-plugin.verison>
         <maven-javadoc-plugin.verison>3.11.2</maven-javadoc-plugin.verison>
+        <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
         <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
         <license-maven-plugin.version>5.0.0</license-maven-plugin.version>
         <spring-javaformat-maven-plugin.version>0.0.47</spring-javaformat-maven-plugin.version>
@@ -652,7 +654,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.2.7</version>
+                        <version>${maven-gpg-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>

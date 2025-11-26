@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.panxiaochao.cache.config.properties;
+package io.github.panxiaochao.boot3.cache.config.properties;
 
-import io.github.panxiaochao.cache.constants.CacheManagerType;
+import io.github.panxiaochao.boot3.cache.constants.CacheManagerType;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -30,7 +30,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "spring.pxc-framework.cache", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "spring.pxc-framework-boot3.cache", ignoreInvalidFields = true)
 public class CacheManagerProperties {
 
     /**

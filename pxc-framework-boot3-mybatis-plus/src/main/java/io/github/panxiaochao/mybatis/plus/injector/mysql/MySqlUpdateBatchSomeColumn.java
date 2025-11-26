@@ -21,6 +21,8 @@ import io.github.panxiaochao.core.utils.StringPools;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 
+import java.io.Serial;
+
 /**
  * <p>
  * 批量更新注入器
@@ -34,6 +36,7 @@ import org.apache.ibatis.mapping.SqlSource;
  */
 public class MySqlUpdateBatchSomeColumn extends AbstractMethod {
 
+    @Serial
     private static final long serialVersionUID = 794731765508860279L;
 
     private static final String METHOD_NAME = "updateBatchSomeColumn";

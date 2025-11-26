@@ -59,7 +59,9 @@ public class ThreadPoolAutoConfiguration {
     private final int core = Runtime.getRuntime().availableProcessors() + 1;
 
     /**
-     * 构造 ThreadPoolTaskExecutor 多线程配置： <pre>
+     * 构造 ThreadPoolTaskExecutor 多线程配置：
+     *
+     * <pre>
      * 1.corePoolSize：线程池维护线程最小的数量，默认为1
      * 2.maxPoolSize：线程池维护线程最大数量，默认为Integer.MAX_VALUE
      * 3.keepAliveSeconds：(maxPoolSize-corePoolSize)部分线程空闲最大存活时间，默认存活时间是60s
@@ -74,8 +76,6 @@ public class ThreadPoolAutoConfiguration {
      * </pre>
      */
     @Bean(name = "threadPoolTaskExecutor")
-    // @ConditionalOnProperty(prefix = "spring.pxc-framework.thread-pool", name =
-    // "enabled", havingValue = "true")
     public ThreadPoolTaskExecutor threadPoolTaskExecutor(PxcFrameWorkProperties pxcFrameWorkProperties) {
         PxcFrameWorkProperties.ThreadPoolConfig threadPoolConfig = pxcFrameWorkProperties.getThreadPool();
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();

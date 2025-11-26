@@ -49,7 +49,9 @@ import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 
 /**
  * <p>
@@ -145,6 +147,8 @@ public class Redisson3AutoConfiguration {
     private ObjectMapper objectMapper() {
         // 使用Jackson2JsonRedisSerialize 替换默认序列化(默认采用的是JDK序列化)
         ObjectMapper om = new ObjectMapper();
+        om.setLocale(Locale.CHINA);
+        om.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         // 指定要序列化的域, field, get, set, 以及修饰符范围，ANY是都有包括private和public
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         // 指定序列化输入的类型，类必须是非final修饰的，final修饰的类，比如String,Integer等会跑出异常

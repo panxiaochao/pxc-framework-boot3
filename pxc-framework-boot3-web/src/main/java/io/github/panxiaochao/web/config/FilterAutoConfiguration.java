@@ -61,7 +61,7 @@ public class FilterAutoConfiguration {
      * @return FilterRegistrationBean
      */
     @Bean
-    @ConditionalOnProperty(name = "spring.pxc-framework.cors.enabled", havingValue = "true")
+    @ConditionalOnProperty(name = "spring.pxc-framework-boot3.cors.enabled", havingValue = "true")
     public FilterRegistrationBean<CorsFilter> corsFilter() {
         FilterRegistrationBean<CorsFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new CorsFilter());
@@ -90,7 +90,7 @@ public class FilterAutoConfiguration {
      * @return FilterRegistrationBean
      */
     @Bean
-    @ConditionalOnProperty(name = "spring.pxc-framework.xss.enabled", havingValue = "true")
+    @ConditionalOnProperty(name = "spring.pxc-framework-boot3.xss.enabled", havingValue = "true")
     public FilterRegistrationBean<XssFilter> xssFilter(WebProperties webProperties) {
         FilterRegistrationBean<XssFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new XssFilter(webProperties.getXss().getExcludeUrls()));

@@ -33,11 +33,11 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -50,6 +50,7 @@ import java.util.stream.Collectors;
  */
 public class ArithmeticCaptcha implements IDrawCaptcha {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private static final ArithmeticCaptcha.Builder INSTANCE = new ArithmeticCaptcha.Builder();
@@ -281,9 +282,7 @@ public class ArithmeticCaptcha implements IDrawCaptcha {
             final int limit = Integer.parseInt("1" + StrUtil.repeat('0', this.numLength));
             String x = String.valueOf(random.nextInt(limit));
             String y = String.valueOf(random.nextInt(limit));
-            List<String> symbolList = Arrays.stream(MathSymbol.values())
-                .map(MathSymbol::getSymbol)
-                .collect(Collectors.toList());
+            List<String> symbolList = Arrays.stream(MathSymbol.values()).map(MathSymbol::getSymbol).toList();
             // @formatter:off
 			String operator = symbolList.get(random.nextInt(symbolList.size()));
 			this.captchaCode = new StringBuilder()
@@ -416,27 +415,15 @@ public class ArithmeticCaptcha implements IDrawCaptcha {
      * @return 结果
      */
     private BigDecimal calculate(String firstValue, String secondValue, char currentOp) {
-        final BigDecimal result;
-        switch (currentOp) {
-            case '+':
-                result = ArithmeticUtil.add(firstValue, secondValue);
-                break;
-            case '-':
-                result = ArithmeticUtil.sub(firstValue, secondValue);
-                break;
-            case '*':
-                result = ArithmeticUtil.mul(firstValue, secondValue);
-                break;
-            case 'x':
-                result = ArithmeticUtil.mul(firstValue, secondValue);
-                break;
+        return switch (currentOp) {
+            case '+' -> ArithmeticUtil.add(firstValue, secondValue);
+            case '-' -> ArithmeticUtil.sub(firstValue, secondValue);
+            case '*', 'x' -> ArithmeticUtil.mul(firstValue, secondValue);
             // case '/':
             // result = ArithmeticUtil.div(firstValue, secondValue);
             // break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + currentOp);
-        }
-        return result;
+            default -> throw new IllegalStateException("Unexpected value: " + currentOp);
+        };
     }
 
 }

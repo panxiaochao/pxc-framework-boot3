@@ -17,6 +17,7 @@ package io.github.panxiaochao.component.select;
 
 import lombok.Getter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -34,6 +35,7 @@ import java.util.function.Consumer;
 @Getter
 public class SelectOption<T> implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private boolean disabled;

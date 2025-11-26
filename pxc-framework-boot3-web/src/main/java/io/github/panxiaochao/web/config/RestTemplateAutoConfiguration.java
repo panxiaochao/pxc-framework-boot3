@@ -61,7 +61,7 @@ import java.util.List;
 @Configuration
 @RequiredArgsConstructor
 @EnableConfigurationProperties(WebProperties.class)
-@ConditionalOnProperty(name = "spring.pxc-framework.restTemplate.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "spring.pxc-framework-boot3.restTemplate.enabled", havingValue = "true")
 public class RestTemplateAutoConfiguration {
 
     private final WebProperties webProperties;

@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.panxiaochao.cache.utils;
+package io.github.panxiaochao.boot3.cache.utils;
 
 import io.github.panxiaochao.core.utils.SpringContextUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
@@ -28,6 +30,7 @@ import org.springframework.cache.CacheManager;
  * @since 2024-04-02
  * @version 1.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CacheUtil {
 
     private static final CacheManager CACHE_MANAGER = SpringContextUtil.getBean(CacheManager.class);
