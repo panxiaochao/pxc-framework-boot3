@@ -46,7 +46,8 @@ public class YmlPropertySourceFactory implements PropertySourceFactory {
      */
     @NotNull
     @Override
-    public PropertySource<?> createPropertySource(@Nullable String name, @NotNull EncodedResource resource) throws IOException {
+    public PropertySource<?> createPropertySource(@Nullable String name, @NotNull EncodedResource resource)
+            throws IOException {
         Properties propertiesFromYaml = loadYamlIntoProperties(resource);
         String sourceName = name != null ? name : resource.getResource().getFilename();
         return new PropertiesPropertySource(sourceName, propertiesFromYaml);

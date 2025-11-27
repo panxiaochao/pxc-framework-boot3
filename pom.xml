@@ -11,7 +11,6 @@
     <description>pxc-framework-boot3 is Converged Project, base on spring boot 3.X up-to-date</description>
     <url>https://github.com/panxiaochao/pxc-framework-boot3</url>
 
-    <!-- licenses -->
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -19,7 +18,6 @@
         </license>
     </licenses>
 
-    <!-- developers -->
     <developers>
         <developer>
             <name>Lypxc</name>
@@ -28,7 +26,6 @@
         </developer>
     </developers>
 
-    <!-- scm -->
     <scm>
         <tag>master</tag>
         <url>https://github.com/panxiaochao/pxc-framework-boot3.git</url>
@@ -38,19 +35,17 @@
         </developerConnection>
     </scm>
 
-    <!-- distributionManagement -->
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
         </snapshotRepository>
         <repository>
             <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <url>https://ossrh-staging-api.central.sonatype.com/service/local/</url>
         </repository>
     </distributionManagement>
 
-    <!-- modules -->
     <modules>
         <module>pxc-framework-boot3-bom</module>
         <module>pxc-framework-boot3-core</module>
@@ -76,7 +71,6 @@
         <module>pxc-framework-boot3-ip2region</module>
     </modules>
 
-    <!-- properties -->
     <properties>
         <revision>3.0.0</revision>
         <java.version>17</java.version>
@@ -130,6 +124,7 @@
         <!-- 插件版本 -->
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <maven-compiler-plugin.verison>3.13.0</maven-compiler-plugin.verison>
+        <maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
         <maven-source-plugin.verison>3.3.1</maven-source-plugin.verison>
         <maven-javadoc-plugin.verison>3.11.2</maven-javadoc-plugin.verison>
         <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
@@ -664,6 +659,17 @@
                                 <arg>--pinentry-mode</arg>
                                 <arg>loopback</arg>
                             </gpgArguments>
+                        </configuration>
+                    </plugin>
+                    <!-- 新版发布到 Maven 中心仓库插件 -->
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.9.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <autoPublish>false</autoPublish>
                         </configuration>
                     </plugin>
                 </plugins>

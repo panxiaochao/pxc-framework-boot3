@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>pxc-framework-boot3-mybatis-plus</artifactId>
+    <name>${project.artifactId}</name>
     <description>[3.0.0]pxc framework boot3 mybatis plus ORM模块</description>
 
     <dependencies>

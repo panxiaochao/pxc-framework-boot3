@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>pxc-framework-boot3-dynamic-datasource</artifactId>
+    <name>${project.artifactId}</name>
     <description>[2.0.9-SNAPSHOT]pxc framework boot3 dynamic datasource 动态数据源模块</description>
 
     <dependencies>

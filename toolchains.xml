@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolchains>
+    <!-- toolchain for jdk 1.8 -->
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>1.8</version>
+        </provides>
+        <configuration>
+            <jdkHome>/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home</jdkHome>
+        </configuration>
+    </toolchain>
+    <!-- toolchain for jdk 17 -->
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>17</version>
+        </provides>
+        <configuration>
+            <jdkHome>/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home</jdkHome>
+        </configuration>
+    </toolchain>
+    <!-- toolchain for jdk 21 -->
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>21</version>
+        </provides>
+        <configuration>
+            <jdkHome>/Library/Java/JavaVirtualMachines/zulu-21.jdk/Contents/Home</jdkHome>
+        </configuration>
+    </toolchain>
+</toolchains>

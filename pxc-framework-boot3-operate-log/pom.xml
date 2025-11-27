@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>pxc-framework-boot3-operate-log</artifactId>
+    <name>${project.artifactId}</name>
     <description>[3.0.0]pxc framework boot3 operatelog 操作日志模块</description>
 
     <dependencies>

@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>pxc-framework-boot3-weixin</artifactId>
+    <name>${project.artifactId}</name>
     <description>[2.0.9-SNAPSHOT]pxc framework boot3 weixin 微信模块</description>
 
     <dependencies>

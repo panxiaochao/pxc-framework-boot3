@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>pxc-framework-boot3-component</artifactId>
+    <name>${project.artifactId}</name>
     <description>[2.0.9-SNAPSHOT]pxc framework boot3 component 组件模块</description>
 
     <dependencies>

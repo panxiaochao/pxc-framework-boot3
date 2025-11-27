@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>pxc-framework-boot3-captcha</artifactId>
+    <name>${project.artifactId}</name>
     <description>[3.0.0]pxc framework boot3 captcha 验证码模块</description>
 
     <dependencies>
