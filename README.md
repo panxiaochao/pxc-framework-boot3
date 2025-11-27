@@ -6,14 +6,15 @@
 
 ## 系统介绍
 
-![Static Badge](https://img.shields.io/badge/1.8%2B-red?logo=oracle&logoColor=%23F80000&label=JDK&link=https%3A%2F%2Fwww.oracle.com%2Fjava%2Ftechnologies%2Fdownloads%2F%23java8)
+![Static Badge](https://img.shields.io/badge/17%2B-red?logo=oracle&logoColor=%23F80000&label=JDK&link=https%3A%2F%2Fwww.oracle.com%2Fjava%2Ftechnologies%2Fdownloads%2F%23java8)
 ![GitHub](https://img.shields.io/github/license/panxiaochao/pxc-framework-boot3?color=%230094F5)
 ![Maven Central](https://img.shields.io/maven-central/v/io.github.panxiaochao/pxc-framework-boot3-parent?color=%2300B388)
 
 ## 🔖 版本说明
 
-| 最新版本 | Spring Boot 版本 | 维护状态 |
-|:----:|:--------------:|:----:|
+| 最新版本  | Spring Boot 版本 |        维护状态        |
+|:-----:|:--------------:|:------------------:|
+| 3.0.0 |     3.5.8      | :white_check_mark: |
 
 ## 🏷️ 版本号说明
 

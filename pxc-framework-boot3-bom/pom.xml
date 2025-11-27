@@ -60,7 +60,6 @@
         <!-- 插件版本 -->
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <maven-compiler-plugin.verison>3.13.0</maven-compiler-plugin.verison>
-        <maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
         <maven-source-plugin.verison>3.3.1</maven-source-plugin.verison>
         <maven-javadoc-plugin.verison>3.11.2</maven-javadoc-plugin.verison>
         <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
