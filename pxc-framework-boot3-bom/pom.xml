@@ -165,12 +165,6 @@
                 <artifactId>pxc-framework-boot3-operate-log</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <!-- 二维码  模块 -->
-            <dependency>
-                <groupId>io.github.panxiaochao</groupId>
-                <artifactId>pxc-framework-boot3-qrcode</artifactId>
-                <version>${revision}</version>
-            </dependency>
             <!-- 日志追踪链路 模块 -->
             <dependency>
                 <groupId>io.github.panxiaochao</groupId>
@@ -375,6 +369,13 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--batch</arg>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

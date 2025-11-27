@@ -1,2 +1,2 @@
-io.github.panxiaochao.operate.log.config.OperateLogAutoConfiguration
-io.github.panxiaochao.operate.log.core.event.OperateLogEventListener
+io.github.panxiaochao.boot3.operate.log.config.OperateLogAutoConfiguration
+io.github.panxiaochao.boot3.operate.log.core.event.OperateLogEventListener

@@ -1,4 +1,4 @@
-io.github.panxiaochao.core.config.FrameworkContextAutoConfiguration
-io.github.panxiaochao.core.config.AsyncExecutorAutoConfiguration
-io.github.panxiaochao.core.config.ThreadPoolAutoConfiguration
-io.github.panxiaochao.core.config.VirtualThreadConfig
+io.github.panxiaochao.boot3.core.config.FrameworkContextAutoConfiguration
+io.github.panxiaochao.boot3.core.config.AsyncExecutorAutoConfiguration
+io.github.panxiaochao.boot3.core.config.ThreadPoolAutoConfiguration
+io.github.panxiaochao.boot3.core.config.VirtualThreadConfig

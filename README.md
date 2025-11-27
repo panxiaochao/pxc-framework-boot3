@@ -48,7 +48,6 @@
 |    `工具类模块`    |                   [pxc-framework-boot3-util](pxc-framework-boot3-util)                   |           |
 |  `Jackson模块`  |                [pxc-framework-boot3-jackson](pxc-framework-boot3-jackson)                |           |
 |   `操作日志模块`    |            [pxc-framework-boot3-operate-log](pxc-framework-boot3-operate-log)            | 6000-6009 |
-|    `二维码模块`    |                 [pxc-framework-boot3-qrcode](pxc-framework-boot3-qrcode)                 |           |
 |  `日志链路追踪模块`   |              [pxc-framework-boot3-trace-log](pxc-framework-boot3-trace-log)              |           |
 |    `ORM模块`    |           [pxc-framework-boot3-mybatis-plus](pxc-framework-boot3-mybatis-plus)           |           |
 |   `代码构建模块`    | [pxc-framework-boot3-mybatis-plus-generator](pxc-framework-boot3-mybatis-plus-generator) |           |
@@ -59,4 +58,4 @@
 |   `脱敏加密模块`    |              [pxc-framework-boot3-sensitive](pxc-framework-boot3-sensitive)              |           |
 |    `微信模块`     |                 [pxc-framework-boot3-weixin](pxc-framework-boot3-weixin)                 |           |
 |   `动态数据源模块`   |     [pxc-framework-boot3-dynamic-datasource](pxc-framework-boot3-dynamic-datasource)     |           |
-|    `组件模块`     |              [pxc-framework-boot3-component](pxc-framework-boot3-boot3-component)              |           |
+|    `组件模块`     |           [pxc-framework-boot3-component](pxc-framework-boot3-boot3-component)           |           |

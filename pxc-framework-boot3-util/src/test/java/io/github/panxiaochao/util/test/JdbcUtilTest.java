@@ -1,15 +1,12 @@
 package io.github.panxiaochao.util.test;
 
-import io.github.panxiaochao.core.enums.DatabaseType;
-import io.github.panxiaochao.core.utils.DbMetaUtil;
-import io.github.panxiaochao.core.utils.JacksonUtil;
-import io.github.panxiaochao.core.utils.JdbcUtil;
-import io.github.panxiaochao.core.utils.meta.db.ColumnMeta;
-import io.github.panxiaochao.core.utils.meta.db.TableMeta;
-import io.github.panxiaochao.core.utils.meta.ddl.AbstractDatabase;
-import io.github.panxiaochao.core.utils.meta.ddl.DatabaseFactory;
-import io.github.panxiaochao.core.utils.meta.ddl.IDatabase;
-import io.github.panxiaochao.core.utils.meta.ddl.impl.DatabaseMySqlImpl;
+import io.github.panxiaochao.boot3.core.enums.DatabaseType;
+import io.github.panxiaochao.boot3.core.utils.DbMetaUtil;
+import io.github.panxiaochao.boot3.core.utils.JacksonUtil;
+import io.github.panxiaochao.boot3.core.utils.JdbcUtil;
+import io.github.panxiaochao.boot3.core.utils.meta.db.ColumnMeta;
+import io.github.panxiaochao.boot3.core.utils.meta.ddl.AbstractDatabase;
+import io.github.panxiaochao.boot3.core.utils.meta.ddl.DatabaseFactory;
 import org.junit.jupiter.api.Test;
 
 import javax.sql.DataSource;

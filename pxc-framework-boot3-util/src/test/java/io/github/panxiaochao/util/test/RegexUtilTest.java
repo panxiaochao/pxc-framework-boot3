@@ -1,6 +1,6 @@
 package io.github.panxiaochao.util.test;
 
-import io.github.panxiaochao.core.utils.RegexUtil;
+import io.github.panxiaochao.boot3.core.utils.RegexUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;

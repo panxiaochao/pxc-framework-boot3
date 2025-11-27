@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.cache.utils;
 
-import io.github.panxiaochao.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.cache.Cache;

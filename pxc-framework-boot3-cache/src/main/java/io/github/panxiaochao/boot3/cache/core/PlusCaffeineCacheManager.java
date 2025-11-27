@@ -17,7 +17,7 @@ package io.github.panxiaochao.boot3.cache.core;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.CaffeineSpec;
-import io.github.panxiaochao.core.utils.StringPools;
+import io.github.panxiaochao.boot3.core.utils.StringPools;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.convert.DurationStyle;
 import org.springframework.cache.Cache;

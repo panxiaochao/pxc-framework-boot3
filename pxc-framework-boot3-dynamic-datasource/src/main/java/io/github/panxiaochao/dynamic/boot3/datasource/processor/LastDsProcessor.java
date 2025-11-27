@@ -1,0 +1,61 @@
+/*
+ * Copyright © 2025-2026 Lypxc (545685602@qq.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package io.github.panxiaochao.dynamic.boot3.datasource.processor;
+
+import com.baomidou.dynamic.datasource.processor.DsProcessor;
+import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
+import org.aopalliance.intercept.MethodInvocation;
+
+/**
+ * <p>
+ * 参数数据源解析 @DS("#last)
+ * </p>
+ *
+ * @author Lypxc
+ * @since 2024-12-27
+ * @version 1.0
+ */
+public class LastDsProcessor extends DsProcessor {
+
+    private static final String LAST_PREFIX = "#last";
+
+    /**
+     * 抽象匹配条件 匹配才会走当前执行器否则走下一级执行器
+     * @param key DS注解里的内容
+     * @return 是否匹配
+     */
+    @Override
+    public boolean matches(String key) {
+        if (key.startsWith(LAST_PREFIX)) {
+            DynamicDataSourceContextHolder.clear();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 抽象最终决定数据源
+     * @param invocation 方法执行信息
+     * @param key DS注解里的内容
+     * @return 数据源名称
+     */
+    @Override
+    public String doDetermineDatasource(MethodInvocation invocation, String key) {
+        Object[] arguments = invocation.getArguments();
+        return String.valueOf(arguments[arguments.length - 1]);
+    }
+
+}
