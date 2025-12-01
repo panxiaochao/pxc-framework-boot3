@@ -51,9 +51,17 @@ public class DatePattern {
 
     public static final String NORMAL_YEAR_PATTERN = "yyyy";
 
+    public static final DateTimeFormatter NORMAL_YEAR_FORMATTER = buildFormatter(NORMAL_YEAR_PATTERN);
+
     public static final String NORMAL_YEAR_MONTH_PATTERN = "yyyy-MM";
 
+    public static final DateTimeFormatter NORMAL_YEAR_MONTH_FORMATTER = buildFormatter(NORMAL_YEAR_MONTH_PATTERN);
+
     public static final String NORMAL_DATE_PATTERN = "yyyy-MM-dd";
+
+    public static final String NORMAL_TIME_PATTERN = "HH:mm:ss";
+
+    public static final DateTimeFormatter NORMAL_TIME_FORMATTER = buildFormatter(NORMAL_TIME_PATTERN);
 
     public static final DateTimeFormatter NORMAL_DATE_FORMATTER = buildFormatter(NORMAL_DATE_PATTERN);
 

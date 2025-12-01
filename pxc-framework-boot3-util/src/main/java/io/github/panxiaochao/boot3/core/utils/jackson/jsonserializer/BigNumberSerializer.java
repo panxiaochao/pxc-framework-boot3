@@ -20,10 +20,12 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
 import com.fasterxml.jackson.databind.ser.std.NumberSerializer;
 import java.io.IOException;
+import java.io.Serial;
+import java.math.BigDecimal;
 
 /**
  * <p>
- * 大精度转换String, 根据前端 JS Number.MAX_SAFE_INTEGER 与 Number.MIN_SAFE_INTEGER 百度得来
+ * 大精度转换String, 根据前端 JS Number.MAX_SAFE_INTEGER 与 Number.MIN_SAFE_INTEGER 百度得来.
  * </p>
  *
  * @author Lypxc
@@ -32,7 +34,8 @@ import java.io.IOException;
 @JacksonStdImpl
 public class BigNumberSerializer extends NumberSerializer {
 
-    private static final long serialVersionUID = 3143649332656435290L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
      * 最大范围
@@ -55,6 +58,15 @@ public class BigNumberSerializer extends NumberSerializer {
 
     @Override
     public void serialize(Number value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        if (value == null) {
+            gen.writeNull();
+            return;
+        }
+
+        if ((value instanceof BigDecimal) && value.longValue() > MAX_SAFE_INTEGER) {
+            gen.writeString(((BigDecimal) value).toPlainString());
+        }
+
         // MIN_SAFE_INTEGER < value < MAX_SAFE_INTEGER
         if (value.longValue() > MIN_SAFE_INTEGER && value.longValue() < MAX_SAFE_INTEGER) {
             super.serialize(value, gen, provider);

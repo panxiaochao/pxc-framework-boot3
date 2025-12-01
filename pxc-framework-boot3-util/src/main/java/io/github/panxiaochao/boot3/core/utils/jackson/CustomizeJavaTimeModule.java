@@ -16,29 +16,38 @@
 package io.github.panxiaochao.boot3.core.utils.jackson;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.datatype.jsr310.PackageVersion;
+import com.fasterxml.jackson.datatype.jsr310.deser.DurationDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.YearDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.YearMonthDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.DurationSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.YearMonthSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.YearSerializer;
+import io.github.panxiaochao.boot3.core.utils.date.DatePattern;
 import io.github.panxiaochao.boot3.core.utils.jackson.jsonserializer.BigNumberSerializer;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.time.Year;
+import java.time.YearMonth;
 
 /**
  * <p>
- * jackson TimeModule.
+ * 自定义 Jackson TimeModule.
  * </p>
  *
  * @author Lypxc
@@ -46,7 +55,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class CustomizeJavaTimeModule extends SimpleModule {
 
-    private static final long serialVersionUID = -7425869912487751834L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
      * 默认日期时间格式
@@ -65,25 +75,43 @@ public class CustomizeJavaTimeModule extends SimpleModule {
 
     public CustomizeJavaTimeModule() {
         super(PackageVersion.VERSION);
-        // Serializer
-        this.addSerializer(LocalDateTime.class,
-                new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(LOCAL_DATE_TIME_FORMAT)));
-        this.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(LOCAL_DATE_FORMAT)));
-        this.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)));
+        // ====== Serialize ======
+        // yyyy
+        this.addSerializer(Year.class, new YearSerializer(DatePattern.NORMAL_YEAR_FORMATTER));
+        // yyyy-MM
+        this.addSerializer(YearMonth.class, new YearMonthSerializer(DatePattern.NORMAL_YEAR_MONTH_FORMATTER));
+        // yyyy-MM-dd HH:mm:ss
+        this.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DatePattern.NORMAL_DATE_TIME_FORMATTER));
+        // yyyy-MM-dd
+        this.addSerializer(LocalDate.class, new LocalDateSerializer(DatePattern.NORMAL_DATE_FORMATTER));
+        // HH:mm:ss
+        this.addSerializer(LocalTime.class, new LocalTimeSerializer(DatePattern.NORMAL_TIME_FORMATTER));
+        // Instant 时间戳
         this.addSerializer(Instant.class, InstantSerializer.INSTANCE);
+        // Duration 类型
+        this.addSerializer(Duration.class, DurationSerializer.INSTANCE);
         // 数值型
         this.addSerializer(Long.class, BigNumberSerializer.INSTANCE);
         this.addSerializer(Long.TYPE, BigNumberSerializer.INSTANCE);
         this.addSerializer(BigInteger.class, BigNumberSerializer.INSTANCE);
-        this.addSerializer(BigDecimal.class, ToStringSerializer.instance);
+        this.addSerializer(BigDecimal.class, BigNumberSerializer.INSTANCE);
 
-        // Deserialize
+        // ====== Deserialize ======
+        // yyyy
+        this.addDeserializer(Year.class, new YearDeserializer(DatePattern.NORMAL_YEAR_FORMATTER));
+        // yyyy-MM
+        this.addDeserializer(YearMonth.class, new YearMonthDeserializer(DatePattern.NORMAL_YEAR_MONTH_FORMATTER));
+        // yyyy-MM-dd HH:mm:ss
         this.addDeserializer(LocalDateTime.class,
-                new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(LOCAL_DATE_TIME_FORMAT)));
-        this.addDeserializer(LocalDate.class,
-                new LocalDateDeserializer(DateTimeFormatter.ofPattern(LOCAL_DATE_FORMAT)));
-        this.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)));
+                new LocalDateTimeDeserializer(DatePattern.NORMAL_DATE_TIME_FORMATTER));
+        // yyyy-MM-dd
+        this.addDeserializer(LocalDate.class, new LocalDateDeserializer(DatePattern.NORMAL_DATE_FORMATTER));
+        // HH:mm:ss
+        this.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DatePattern.NORMAL_TIME_FORMATTER));
+        // Instant 时间戳
         this.addDeserializer(Instant.class, InstantDeserializer.INSTANT);
+        // Duration 类型
+        this.addDeserializer(Duration.class, DurationDeserializer.INSTANCE);
     }
 
 }

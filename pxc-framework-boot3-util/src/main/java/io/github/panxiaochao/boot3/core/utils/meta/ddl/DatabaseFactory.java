@@ -28,6 +28,7 @@ import io.github.panxiaochao.boot3.core.enums.DatabaseType;
 import io.github.panxiaochao.boot3.core.utils.meta.ddl.impl.DatabaseDMImpl;
 import io.github.panxiaochao.boot3.core.utils.meta.ddl.impl.DatabaseMySqlImpl;
 
+import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -43,7 +44,8 @@ import java.util.concurrent.Callable;
  */
 public final class DatabaseFactory {
 
-    private static final Map<DatabaseType, Callable<AbstractDatabase>> DATABASE_MAPPER = new HashMap<DatabaseType, Callable<AbstractDatabase>>() {
+    private static final Map<DatabaseType, Callable<AbstractDatabase>> DATABASE_MAPPER = new HashMap<>() {
+        @Serial
         private static final long serialVersionUID = 1L;
 
         {
