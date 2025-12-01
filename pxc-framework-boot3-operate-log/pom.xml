@@ -12,7 +12,7 @@
 
     <artifactId>pxc-framework-boot3-operate-log</artifactId>
     <name>${project.artifactId}</name>
-    <description>[3.0.0]pxc framework boot3 operatelog 操作日志模块</description>
+    <description>[3.0.1-SNAPSHOT]pxc framework boot3 operatelog 操作日志模块</description>
 
     <dependencies>
         <!-- 核心模块 -->

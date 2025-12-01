@@ -12,7 +12,7 @@
 
     <artifactId>pxc-framework-boot3-ratelimiter</artifactId>
     <name>${project.artifactId}</name>
-    <description>[3.0.0]pxc framework boot3 ratelimiter 限流模块</description>
+    <description>[3.0.1-SNAPSHOT]pxc framework boot3 ratelimiter 限流模块</description>
 
     <dependencies>
         <!-- Redis 模块 -->

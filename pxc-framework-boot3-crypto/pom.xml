@@ -12,7 +12,7 @@
 
     <artifactId>pxc-framework-boot3-crypto</artifactId>
     <name>${project.artifactId}</name>
-    <description>[3.0.0]pxc framework boot3 crypto 加密解密模块</description>
+    <description>[3.0.1-SNAPSHOT]pxc framework boot3 crypto 加密解密模块</description>
 
     <dependencies>
         <dependency>

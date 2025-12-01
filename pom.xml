@@ -72,7 +72,7 @@
     </modules>
 
     <properties>
-        <revision>3.0.0</revision>
+        <revision>3.0.1-SNAPSHOT</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
