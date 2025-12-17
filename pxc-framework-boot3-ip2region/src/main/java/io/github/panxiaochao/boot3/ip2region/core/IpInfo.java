@@ -125,7 +125,6 @@ public class IpInfo {
      * @return IpInfo
      */
     public static IpInfo toIpInfo(String region) {
-        System.out.println("region: " + region);
         IpInfo ipInfo = new IpInfo();
         if (!StringUtils.hasText(region)) {
             return ipInfo;

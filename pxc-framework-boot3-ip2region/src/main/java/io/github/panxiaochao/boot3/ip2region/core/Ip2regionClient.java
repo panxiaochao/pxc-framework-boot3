@@ -17,28 +17,23 @@ package io.github.panxiaochao.boot3.ip2region.core;
 
 import io.github.panxiaochao.boot3.ip2region.config.properties.Ip2regionProperties;
 import io.github.panxiaochao.boot3.ip2region.constants.Ip2regionConstant;
-import org.apache.commons.io.IOUtils;
-import org.lionsoul.ip2region.xdb.LongByteArray;
-import org.lionsoul.ip2region.xdb.Searcher;
-import org.lionsoul.ip2region.xdb.Version;
+import org.lionsoul.ip2region.service.Config;
+import org.lionsoul.ip2region.service.ConfigBuilder;
+import org.lionsoul.ip2region.service.Ip2Region;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
 import java.util.function.Function;
 
 /**
  * <p>
- * IP转换地址模块客户端类
+ * IP 转换地址模块客户端类
  * </p>
  *
  * @author lypxc
@@ -56,9 +51,7 @@ public class Ip2regionClient implements InitializingBean {
 
     private final Ip2regionProperties ip2regionProperties;
 
-    private static Searcher SEARCHER_V4;
-
-    private static Searcher SEARCHER_V6;
+    private static Ip2Region IP_SEARCHER;
 
     public Ip2regionClient(Ip2regionProperties ip2regionProperties) {
         this.ip2regionProperties = ip2regionProperties;
@@ -71,27 +64,9 @@ public class Ip2regionClient implements InitializingBean {
      */
     public IpInfo memorySearch(String ip) {
         try {
-            String[] ipV4Part = IpInfo.getIpv4Part(ip);
-            if (ipV4Part.length == 4) {
-                IpInfo ipInfo = IpInfo.toIpInfo(SEARCHER_V4.search(ip));
-                ipInfo.setIp(ip);
-                return ipInfo;
-            }
-            else if (ip.contains(":")) {
-                if (SEARCHER_V6 == null) {
-                    LOGGER.warn("IPV6 未初始化，请检查配置");
-                }
-                else {
-                    IpInfo ipInfo = IpInfo.toIpInfo(SEARCHER_V6.search(ip));
-                    ipInfo.setIp(ip);
-                    return ipInfo;
-                }
-            }
-            else {
-                // 3.不合法 IP
-                LOGGER.error("invalid ip address {}", ip);
-            }
-            return null;
+            IpInfo ipInfo = IpInfo.toIpInfo(IP_SEARCHER.search(ip));
+            ipInfo.setIp(ip);
+            return ipInfo;
         }
         catch (Exception e) {
             LOGGER.error("memorySearch ip {} parse is error", ip, e);
@@ -110,90 +85,55 @@ public class Ip2regionClient implements InitializingBean {
     }
 
     /**
-     * 获取资源
-     * @param location 路径
-     * @return Resource[]
+     * 构建 Config 对象
+     * @param inputStream xdb 输入流
+     * @param isV6 是否为 IPv6
+     * @return Config
      */
-    private Resource[] getResources(String location) {
+    private Config buildConfig(InputStream inputStream, boolean isV6) {
         try {
-            return this.resourcePatternResolver.getResources(location);
-        }
-        catch (IOException e) {
-            return new Resource[0];
-        }
-    }
-
-    /**
-     * 从内存加载DB数据
-     * @param filePath 路径
-     * @return byte[]
-     */
-    private LongByteArray loadContentFromFile(String filePath) {
-        Resource[] resources = getResources(filePath);
-        for (Resource resource : resources) {
-            Assert.isTrue(resource.exists(), "Cannot find config location: " + resource
-                    + " (please add config file or check your ip2region db configuration)");
-            // try {
-            // File file = resource.getFile();
-            // validateDbFromPath(file);
-            // }
-            // catch (IOException e) {
-            // throw new RuntimeException(e);
-            // }
-            try (InputStream inputStream = resource.getInputStream()) {
-                byte[] bytes = IOUtils.toByteArray(inputStream);
-                final LongByteArray byteArray = new LongByteArray();
-                byteArray.append(bytes);
-                return byteArray;
+            final ConfigBuilder configBuilder = Config.custom()
+                // 当指定 xdbInputStream 时，CachePolicy 必须为 BufferCache
+                .setCachePolicy(Config.BufferCache)
+                .setSearchers(15)
+                .setXdbInputStream(inputStream);
+            if (isV6) {
+                return configBuilder.asV6();
             }
-            catch (IOException e) {
-                throw new RuntimeException("load ip2region file db is error", e);
-            }
-        }
-        return null;
-    }
-
-    /**
-     * 验证xdb文件是否适配当前Searcher客户端
-     * @param dbFile 路径
-     */
-    private void validateDbFromPath(File dbFile) {
-        try {
-            // mode: r 只读模式打开文件
-            final RandomAccessFile handle = new RandomAccessFile(dbFile, "r");
-            Searcher.verify(handle);
-            handle.close();
+            return configBuilder.asV4();
         }
         catch (Exception e) {
-            // 适用性验证失败！！！
-            // 当前查询客户端实现不适用于 dbPath 指定的 xdb 文件的查询.
-            // 应该停止启动服务，使用合适的 xdb 文件或者升级到适合 dbPath 的 Searcher 实现。
-            LOGGER.error("当前查询客户端实现不适用于 dbPath 指定的 xdb 文件的查询. 路径：{}", dbFile.getPath());
-            throw new RuntimeException("当前查询客户端实现不适用于 dbPath 指定的 xdb 文件的查询. 路径：" + dbFile.getPath());
+            throw new RuntimeException("构建 Config 失败", e);
         }
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
         String v4dbLocation = ip2regionProperties.getV4dbLocation();
+        Config v4Config;
         if (StringUtils.hasText(v4dbLocation)) {
-            LongByteArray byteArray = loadContentFromFile(v4dbLocation);
-            SEARCHER_V4 = Searcher.newWithBuffer(Version.IPv4, byteArray);
+            Resource v4Resource = this.resourcePatternResolver.getResource(v4dbLocation);
+            v4Config = buildConfig(v4Resource.getInputStream(), false);
             LOGGER.info("配置自定义[ip2region_v4]成功！");
         }
         else {
             // 默认加载自带的 ip2region_v4.db 数据库
-            LongByteArray byteArray = loadContentFromFile(Ip2regionConstant.IP2REGION_V4_DB_LOCATION);
-            SEARCHER_V4 = Searcher.newWithBuffer(Version.IPv4, byteArray);
+            Resource v4Resource = this.resourcePatternResolver.getResource(Ip2regionConstant.IP2REGION_V4_DB_LOCATION);
+            v4Config = buildConfig(v4Resource.getInputStream(), false);
             LOGGER.info("配置默认[ip2region_v4]成功！");
         }
+
         // 自定义 IPV6 数据库
         String v6dbLocation = ip2regionProperties.getV6dbLocation();
+        Config v6Config = null;
         if (StringUtils.hasText(v6dbLocation)) {
-            LongByteArray byteArray = loadContentFromFile(v6dbLocation);
-            SEARCHER_V6 = Searcher.newWithBuffer(Version.IPv6, byteArray);
+            Resource v6Resource = this.resourcePatternResolver.getResource(v6dbLocation);
+            v6Config = buildConfig(v6Resource.getInputStream(), true);
             LOGGER.info("配置自定义[ip2region_v6]成功！");
         }
+
+        // 通过上述配置创建 Ip2Region 查询服务
+        IP_SEARCHER = org.lionsoul.ip2region.service.Ip2Region.create(v4Config, v6Config);
     }
 
 }

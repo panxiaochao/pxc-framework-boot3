@@ -29,6 +29,6 @@ public class Ip2regionConstant {
     /**
      * ip2region_v4.db 文件路径
      */
-    public static final String IP2REGION_V4_DB_LOCATION = "classpath*:/ip2region/v4/ip2region_v4.xdb";
+    public static final String IP2REGION_V4_DB_LOCATION = "classpath:/ip2region/v4/ip2region_v4.xdb";
 
 }

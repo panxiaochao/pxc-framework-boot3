@@ -88,7 +88,7 @@
         <mybatis-plus.version>3.5.14</mybatis-plus.version>
         <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
         <oshi.version>6.9.1</oshi.version>
-        <ip2region.version>3.1.1</ip2region.version>
+        <ip2region.version>3.3.1</ip2region.version>
         <commons-io.version>2.21.0</commons-io.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-text.version>1.14.0</commons-text.version>
