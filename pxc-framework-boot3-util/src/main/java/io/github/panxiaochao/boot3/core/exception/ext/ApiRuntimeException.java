@@ -18,6 +18,8 @@ package io.github.panxiaochao.boot3.core.exception.ext;
 import io.github.panxiaochao.boot3.core.ienums.IEnum;
 import lombok.Getter;
 
+import java.io.Serial;
+
 /**
  * <p>
  * 基础运行时异常类
@@ -29,6 +31,7 @@ import lombok.Getter;
 @Getter
 public class ApiRuntimeException extends RuntimeException {
 
+    @Serial
     private static final long serialVersionUID = -2307670685197783604L;
 
     /**

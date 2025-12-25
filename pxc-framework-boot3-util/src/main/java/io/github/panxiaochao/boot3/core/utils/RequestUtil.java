@@ -27,7 +27,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -270,7 +269,7 @@ public class RequestUtil {
         try {
             response.setStatus(HttpStatus.OK.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+            response.setCharacterEncoding(StandardCharsets.UTF_8);
             response.getWriter().print(content);
         }
         catch (IOException e) {
@@ -284,12 +283,7 @@ public class RequestUtil {
      * @return 编码后的内容
      */
     public static String urlEncode(String str) {
-        try {
-            return URLEncoder.encode(str, StandardCharsets.UTF_8.name());
-        }
-        catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        return URLEncoder.encode(str, StandardCharsets.UTF_8);
     }
 
     /**
@@ -298,12 +292,7 @@ public class RequestUtil {
      * @return 解码后的内容
      */
     public static String urlDecode(String encodedStr) {
-        try {
-            return URLDecoder.decode(encodedStr, StandardCharsets.UTF_8.name());
-        }
-        catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        return URLDecoder.decode(encodedStr, StandardCharsets.UTF_8);
     }
 
 }

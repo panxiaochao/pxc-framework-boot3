@@ -28,6 +28,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.StringUtils;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.Function;
 
@@ -112,9 +113,14 @@ public class Ip2regionClient implements InitializingBean {
         String v4dbLocation = ip2regionProperties.getV4dbLocation();
         Config v4Config;
         if (StringUtils.hasText(v4dbLocation)) {
-            Resource v4Resource = this.resourcePatternResolver.getResource(v4dbLocation);
-            v4Config = buildConfig(v4Resource.getInputStream(), false);
-            LOGGER.info("配置自定义[ip2region_v4]成功！");
+            try {
+                Resource v4Resource = this.resourcePatternResolver.getResource(v4dbLocation);
+                v4Config = buildConfig(v4Resource.getInputStream(), false);
+                LOGGER.info("配置自定义[ip2region_v4]成功！");
+            }
+            catch (IOException e) {
+                throw new RuntimeException("未找到自定义IPV4数据库文件：" + v4dbLocation, e);
+            }
         }
         else {
             // 默认加载自带的 ip2region_v4.db 数据库
@@ -127,9 +133,14 @@ public class Ip2regionClient implements InitializingBean {
         String v6dbLocation = ip2regionProperties.getV6dbLocation();
         Config v6Config = null;
         if (StringUtils.hasText(v6dbLocation)) {
-            Resource v6Resource = this.resourcePatternResolver.getResource(v6dbLocation);
-            v6Config = buildConfig(v6Resource.getInputStream(), true);
-            LOGGER.info("配置自定义[ip2region_v6]成功！");
+            try {
+                Resource v6Resource = this.resourcePatternResolver.getResource(v6dbLocation);
+                v6Config = buildConfig(v6Resource.getInputStream(), true);
+                LOGGER.info("配置自定义[ip2region_v6]成功！");
+            }
+            catch (IOException e) {
+                throw new RuntimeException("未找到自定义IPV6数据库文件：" + v6dbLocation, e);
+            }
         }
 
         // 通过上述配置创建 Ip2Region 查询服务

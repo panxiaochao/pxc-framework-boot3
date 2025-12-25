@@ -17,9 +17,7 @@ package io.github.panxiaochao.boot3.core.utils;
 
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -34,11 +32,9 @@ public class ConvertUtil {
 
     private static final String NULL_STR = "null";
 
-    public static final Set<String> TRUE_SET = Collections
-        .unmodifiableSet(new HashSet<>(Arrays.asList("y", "yes", "on", "true", "t")));
+    public static final Set<String> TRUE_SET = Set.of("y", "yes", "on", "true", "t");
 
-    public static final Set<String> FALSE_SET = Collections
-        .unmodifiableSet(new HashSet<>(Arrays.asList("n", "no", "off", "false", "f")));
+    public static final Set<String> FALSE_SET = Set.of("n", "no", "off", "false", "f");
 
     /**
      * Convert String value to int value if parameter value is legal. And it automatically
@@ -79,6 +75,9 @@ public class ConvertUtil {
      * @return Converted long value and its default value is null.
      */
     public static Long toLong(Object val) {
+        if (Objects.isNull(val)) {
+            return null;
+        }
         if (val instanceof Long) {
             return (Long) val;
         }
@@ -112,6 +111,22 @@ public class ConvertUtil {
         catch (NumberFormatException exception) {
             return defaultValue;
         }
+    }
+
+    /**
+     * Convert Object value to int value if parameter value is legal. And it automatically
+     * defaults to 0 if parameter value is null or other object.
+     * @param val object value
+     * @return Converted int value and its default value is null.
+     */
+    public static Integer toInteger(Object val) {
+        if (Objects.isNull(val)) {
+            return null;
+        }
+        if (val instanceof Integer) {
+            return (Integer) val;
+        }
+        return toInteger(val.toString());
     }
 
     /**

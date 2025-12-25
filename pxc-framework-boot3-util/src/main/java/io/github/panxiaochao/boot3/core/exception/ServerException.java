@@ -18,6 +18,8 @@ package io.github.panxiaochao.boot3.core.exception;
 import io.github.panxiaochao.boot3.core.ienums.IEnum;
 import lombok.Getter;
 
+import java.io.Serial;
+
 /**
  * <p>
  * 基础错误异常类
@@ -29,6 +31,7 @@ import lombok.Getter;
 @Getter
 public class ServerException extends Exception {
 
+    @Serial
     private static final long serialVersionUID = 9012390889969142663L;
 
     /**

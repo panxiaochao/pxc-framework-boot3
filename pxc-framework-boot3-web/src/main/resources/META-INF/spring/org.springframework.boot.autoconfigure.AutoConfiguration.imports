@@ -1,6 +1,5 @@
 io.github.panxiaochao.boot3.web.config.FilterAutoConfiguration
 io.github.panxiaochao.boot3.web.config.WebMvcAutoConfiguration
 io.github.panxiaochao.boot3.web.config.OkHttpAutoConfiguration
-io.github.panxiaochao.boot3.web.config.RestTemplateAutoConfiguration
 io.github.panxiaochao.boot3.web.handler.RestExceptionHandler
 io.github.panxiaochao.boot3.web.handler.RestResponseEntityExceptionHandler

@@ -58,4 +58,13 @@ public class PageRequest {
     @Schema(description = "排序字段")
     private List<OrderItems> orders;
 
+    /**
+     * 转换为分页参数
+     * @return Pagination
+     */
+    @Schema(description = "转化分页对象", hidden = true)
+    public Pagination toPagination() {
+        return new Pagination(this.pageNo, this.pageSize);
+    }
+
 }

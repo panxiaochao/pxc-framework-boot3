@@ -38,8 +38,8 @@ public class EncodingFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         // 编码
-        servletRequest.setCharacterEncoding(StandardCharsets.UTF_8.toString());
-        servletResponse.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        servletRequest.setCharacterEncoding(StandardCharsets.UTF_8);
+        servletResponse.setCharacterEncoding(StandardCharsets.UTF_8);
         // 放行
         filterChain.doFilter(servletRequest, servletResponse);
     }

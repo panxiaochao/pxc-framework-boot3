@@ -35,7 +35,6 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * OkHttp3 自动配置类
  * </p>
- * Ï
  *
  * @author Lypxc
  * @since 2023-08-18

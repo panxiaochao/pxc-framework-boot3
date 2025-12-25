@@ -19,6 +19,8 @@ import io.github.panxiaochao.boot3.core.exception.ServerException;
 import io.github.panxiaochao.boot3.core.ienums.IEnum;
 import lombok.Getter;
 
+import java.io.Serial;
+
 /**
  * <p>
  * Api and Server exception
@@ -30,6 +32,7 @@ import lombok.Getter;
 @Getter
 public class ApiException extends ServerException {
 
+    @Serial
     private static final long serialVersionUID = -4367714276298639594L;
 
     /**

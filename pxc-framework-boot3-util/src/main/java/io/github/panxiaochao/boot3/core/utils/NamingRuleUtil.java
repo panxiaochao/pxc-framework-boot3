@@ -97,7 +97,7 @@ public class NamingRuleUtil {
      * @return 转换后符号连接方式命名的字符串
      */
     public static String toSymbolCase(CharSequence str, char symbol) {
-        if (str == null || str.length() == 0) {
+        if (str == null || str.isEmpty()) {
             return null;
         }
 
