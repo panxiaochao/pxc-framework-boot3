@@ -15,10 +15,10 @@
  */
 package io.github.panxiaochao.boot3.core.utils;
 
-import org.springframework.util.StringUtils;
-
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 
 /**
  * <p>
@@ -32,38 +32,108 @@ public class ConvertUtil {
 
     private static final String NULL_STR = "null";
 
-    public static final Set<String> TRUE_SET = Set.of("y", "yes", "on", "true", "t");
+    public static final Set<String> TRUE_SET = Set.of("y", "yes", "on", "true", "t", "1");
 
-    public static final Set<String> FALSE_SET = Set.of("n", "no", "off", "false", "f");
+    public static final Set<String> FALSE_SET = Set.of("n", "no", "off", "false", "f", "0");
 
     /**
-     * Convert String value to int value if parameter value is legal. And it automatically
-     * defaults to 0 if parameter value is null or blank str.
-     * @param val String value which need to be converted to int value.
-     * @return Converted int value and its default value is 0.
+     * Converts a {@link String} to a {@code float}, returning {@code 0.0f} if the
+     * conversion fails.
+     *
+     * <p>
+     * If the string {@code str} is {@code null}, {@code 0.0f} is returned.
+     * </p>
+     *
+     * <pre>
+     *   ConvertUtil.toFloat(null)   = 0.0f
+     *   ConvertUtil.toFloat("")     = 0.0f
+     *   ConvertUtil.toFloat("1.5")  = 1.5f
+     * </pre>
+     * @param str the string to convert, may be {@code null}.
+     * @return the float represented by the string, or {@code 0.0f} if conversion fails.
+     * @since 2.1
      */
-    public static int toInt(String val) {
-        return toInt(val, 0);
+    public static float toFloat(final String str) {
+        return toFloat(str, 0.0f);
     }
 
     /**
-     * Convert String value to int value if parameter value is legal. And return default
-     * value if parameter value is null or blank str.
-     * @param val value
-     * @param defaultValue default value
-     * @return int value if input value is legal, otherwise default value
+     * Converts a {@link String} to a {@code float}, returning a default value if the
+     * conversion fails.
+     *
+     * <p>
+     * If the string {@code str} is {@code null}, the default value is returned.
+     * </p>
+     *
+     * <pre>
+     *   ConvertUtil.toFloat(null, 1.1f)   = 1.1f
+     *   ConvertUtil.toFloat("", 1.1f)     = 1.1f
+     *   ConvertUtil.toFloat("1.5", 0.0f)  = 1.5f
+     * </pre>
+     * @param str the string to convert, may be {@code null}.
+     * @param defaultValue the default value.
+     * @return the float represented by the string, or defaultValue if conversion fails.
+     * @since 2.1
      */
-    public static int toInt(String val, int defaultValue) {
-        if (!StringUtils.hasText(val)) {
-            return defaultValue;
-        }
-        if (val.equalsIgnoreCase(NULL_STR)) {
+    public static float toFloat(final String str, final float defaultValue) {
+        if (StrUtil.isBlank(str)) {
             return defaultValue;
         }
         try {
-            return Integer.parseInt(val);
+            return Float.parseFloat(str);
         }
-        catch (NumberFormatException exception) {
+        catch (final RuntimeException e) {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Converts a {@link String} to a {@code double}, returning {@code 0.0d} if the
+     * conversion fails.
+     *
+     * <p>
+     * If the string {@code str} is {@code null}, {@code 0.0d} is returned.
+     * </p>
+     *
+     * <pre>
+     *   NumberUtils.toDouble(null)   = 0.0d
+     *   NumberUtils.toDouble("")     = 0.0d
+     *   NumberUtils.toDouble("1.5")  = 1.5d
+     * </pre>
+     * @param str the string to convert, may be {@code null}.
+     * @return the double represented by the string, or {@code 0.0d} if conversion fails.
+     * @since 2.1
+     */
+    public static double toDouble(final String str) {
+        return toDouble(str, 0.0d);
+    }
+
+    /**
+     * Converts a {@link String} to a {@code double}, returning a default value if the
+     * conversion fails.
+     *
+     * <p>
+     * If the string {@code str} is {@code null}, the default value is returned.
+     * </p>
+     *
+     * <pre>
+     *   NumberUtils.toDouble(null, 1.1d)   = 1.1d
+     *   NumberUtils.toDouble("", 1.1d)     = 1.1d
+     *   NumberUtils.toDouble("1.5", 0.0d)  = 1.5d
+     * </pre>
+     * @param str the string to convert, may be {@code null}
+     * @param defaultValue the default value.
+     * @return the double represented by the string, or defaultValue if conversion fails.
+     * @since 2.1
+     */
+    public static double toDouble(final String str, final double defaultValue) {
+        if (StrUtil.isBlank(str)) {
+            return defaultValue;
+        }
+        try {
+            return Double.parseDouble(str);
+        }
+        catch (final RuntimeException e) {
             return defaultValue;
         }
     }
@@ -102,7 +172,7 @@ public class ConvertUtil {
      * @return Long value if input value is legal, otherwise default value
      */
     public static Long toLong(String val, Long defaultValue) {
-        if (!StringUtils.hasText(val)) {
+        if (StrUtil.isBlank(val)) {
             return defaultValue;
         }
         try {
@@ -149,29 +219,20 @@ public class ConvertUtil {
      * @return Integer value if input value is legal, otherwise default value
      */
     public static Integer toInteger(String val, Integer defaultValue) {
-        if (!StringUtils.hasText(val)) {
+        if (StrUtil.isBlank(val)) {
+            return defaultValue;
+        }
+        if (val.equalsIgnoreCase(NULL_STR)) {
             return defaultValue;
         }
         try {
+            // 去除前后空格以处理 " 123 " 这类情况
+            val = val.trim();
             return Integer.parseInt(val);
         }
         catch (NumberFormatException exception) {
             return defaultValue;
         }
-    }
-
-    /**
-     * Convert String value to boolean value if parameter value is legal. And return
-     * default value if parameter value is null or blank str.
-     * @param val value
-     * @param defaultValue default value
-     * @return boolean value if input value is legal, otherwise default value
-     */
-    public static Boolean toBoolean(String val, boolean defaultValue) {
-        if (!StringUtils.hasText(val)) {
-            return defaultValue;
-        }
-        return Boolean.parseBoolean(val);
     }
 
     /**
@@ -256,13 +317,272 @@ public class ConvertUtil {
         String formatStr = (str == null ? StrUtil.EMPTY : str).toLowerCase();
 
         if (TRUE_SET.contains(formatStr)) {
-            return true;
+            return Boolean.TRUE;
         }
         else if (FALSE_SET.contains(formatStr)) {
-            return false;
+            return Boolean.FALSE;
         }
         else {
             return null;
+        }
+    }
+
+    /**
+     * Converts an Integer to a Boolean using the convention that {@code zero} is
+     * {@code false}, every other numeric value is {@code true}.
+     *
+     * <p>
+     * {@code null} will be converted to {@code null}.
+     * </p>
+     *
+     * <p>
+     * NOTE: This method may return {@code null} and may throw a
+     * {@link NullPointerException} if unboxed to a {@code boolean}.
+     * </p>
+     *
+     * <pre>
+     *   BooleanUtils.toBooleanObject(Integer.valueOf(0))    = Boolean.FALSE
+     *   BooleanUtils.toBooleanObject(Integer.valueOf(1))    = Boolean.TRUE
+     *   BooleanUtils.toBooleanObject(Integer.valueOf(null)) = null
+     * </pre>
+     * @param value the Integer to convert
+     * @return Boolean.TRUE if non-zero, Boolean.FALSE if zero, {@code null} if
+     * {@code null} input
+     */
+    public static Boolean toBooleanObject(final Integer value) {
+        if (value == null) {
+            return null;
+        }
+        return value.longValue() == 0 ? Boolean.FALSE : Boolean.TRUE;
+    }
+
+    /**
+     * Convert Object value to short value if parameter value is legal.
+     * @param val object value
+     * @return Converted short value and its default value is null.
+     */
+    public static Short toShort(Object val) {
+        if (Objects.isNull(val)) {
+            return null;
+        }
+        if (val instanceof Short) {
+            return (Short) val;
+        }
+        return toShort(val.toString());
+    }
+
+    /**
+     * Convert String value to short value if parameter value is legal.
+     * @param val String value which need to be converted to short value.
+     * @return Converted short value and its default value is null.
+     */
+    public static Short toShort(String val) {
+        return toShort(val, null);
+    }
+
+    /**
+     * Convert String value to short value if parameter value is legal. And return default
+     * value if parameter value is null or blank str.
+     * @param val value
+     * @param defaultValue default value
+     * @return Short value if input value is legal, otherwise default value
+     */
+    public static Short toShort(String val, Short defaultValue) {
+        if (StrUtil.isBlank(val)) {
+            return defaultValue;
+        }
+        try {
+            return Short.parseShort(val);
+        }
+        catch (NumberFormatException exception) {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Convert Object value to byte value if parameter value is legal.
+     * @param val object value
+     * @return Converted byte value and its default value is null.
+     */
+    public static Byte toByte(Object val) {
+        if (Objects.isNull(val)) {
+            return null;
+        }
+        if (val instanceof Byte) {
+            return (Byte) val;
+        }
+        return toByte(val.toString());
+    }
+
+    /**
+     * Convert String value to byte value if parameter value is legal.
+     * @param val String value which need to be converted to byte value.
+     * @return Converted byte value and its default value is null.
+     */
+    public static Byte toByte(String val) {
+        return toByte(val, null);
+    }
+
+    /**
+     * Convert String value to byte value if parameter value is legal. And return default
+     * value if parameter value is null or blank str.
+     * @param val value
+     * @param defaultValue default value
+     * @return Byte value if input value is legal, otherwise default value
+     */
+    public static Byte toByte(String val, Byte defaultValue) {
+        if (StrUtil.isBlank(val)) {
+            return defaultValue;
+        }
+        try {
+            return Byte.parseByte(val);
+        }
+        catch (NumberFormatException exception) {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Convert Object to String. Returns empty string if object is null.
+     * @param obj Object to convert
+     * @return String representation of object
+     */
+    public static String toString(Object obj) {
+        return toString(obj, StrUtil.EMPTY);
+    }
+
+    /**
+     * Convert Object to String with default value.
+     * @param obj Object to convert
+     * @param defaultValue Default value if object is null
+     * @return String representation of object or default value
+     */
+    public static String toString(Object obj, String defaultValue) {
+        if (Objects.isNull(obj)) {
+            return defaultValue;
+        }
+        if (obj instanceof String) {
+            return (String) obj;
+        }
+        if (obj instanceof Object[]) {
+            return Arrays.deepToString((Object[]) obj);
+        }
+        if (obj instanceof boolean[]) {
+            return Arrays.toString((boolean[]) obj);
+        }
+        if (obj instanceof byte[]) {
+            return Arrays.toString((byte[]) obj);
+        }
+        if (obj instanceof char[]) {
+            return Arrays.toString((char[]) obj);
+        }
+        if (obj instanceof short[]) {
+            return Arrays.toString((short[]) obj);
+        }
+        if (obj instanceof int[]) {
+            return Arrays.toString((int[]) obj);
+        }
+        if (obj instanceof long[]) {
+            return Arrays.toString((long[]) obj);
+        }
+        if (obj instanceof float[]) {
+            return Arrays.toString((float[]) obj);
+        }
+        if (obj instanceof double[]) {
+            return Arrays.toString((double[]) obj);
+        }
+        return obj.toString();
+    }
+
+    /**
+     * Convert int to String.
+     * @param value int value to convert
+     * @return String representation of int value
+     */
+    public static String toString(int value) {
+        return Integer.toString(value);
+    }
+
+    /**
+     * Convert long to String.
+     * @param value long value to convert
+     * @return String representation of long value
+     */
+    public static String toString(long value) {
+        return Long.toString(value);
+    }
+
+    /**
+     * Convert double to String.
+     * @param value double value to convert
+     * @return String representation of double value
+     */
+    public static String toString(double value) {
+        return Double.toString(value);
+    }
+
+    /**
+     * Convert float to String.
+     * @param value float value to convert
+     * @return String representation of float value
+     */
+    public static String toString(float value) {
+        return Float.toString(value);
+    }
+
+    /**
+     * Convert boolean to String.
+     * @param value boolean value to convert
+     * @return String representation of boolean value
+     */
+    public static String toString(boolean value) {
+        return Boolean.toString(value);
+    }
+
+    /**
+     * Convert byte to String.
+     * @param value byte value to convert
+     * @return String representation of byte value
+     */
+    public static String toString(byte value) {
+        return Byte.toString(value);
+    }
+
+    /**
+     * Convert short to String.
+     * @param value short value to convert
+     * @return String representation of short value
+     */
+    public static String toString(short value) {
+        return Short.toString(value);
+    }
+
+    /**
+     * Convert char to String.
+     * @param value char value to convert
+     * @return String representation of char value
+     */
+    public static String toString(char value) {
+        return Character.toString(value);
+    }
+
+    /**
+     * Convert String to specified type with default value
+     * @param str String to convert
+     * @param defaultValue default value if conversion fails
+     * @param parser function to parse string to target type
+     * @param <T> target type
+     * @return converted value or default value
+     */
+    public static <T> T convert(String str, T defaultValue, Function<String, T> parser) {
+        if (StrUtil.isBlank(str)) {
+            return defaultValue;
+        }
+        try {
+            return parser.apply(str);
+        }
+        catch (NumberFormatException e) {
+            return defaultValue;
         }
     }
 
