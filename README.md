@@ -26,9 +26,9 @@
 
 ## 老版本
 
-老版本 1.X：[pxc-framework](https://github.com/panxiaochao/pxc-framework)
+老版本 1.X：[pxc-framework](https://github.com/panxiaochao/pxc-framework/tree/main)
 
-老版本 2.X：[pxc-framework](https://github.com/panxiaochao/pxc-framework)
+老版本 2.X：[pxc-framework](https://github.com/panxiaochao/pxc-framework/tree/framework-2.0)
 
 ## 当前版本号
 
@@ -60,3 +60,10 @@
 |    `微信模块`     |                 [pxc-framework-boot3-weixin](pxc-framework-boot3-weixin)                 |           |
 |   `动态数据源模块`   |     [pxc-framework-boot3-dynamic-datasource](pxc-framework-boot3-dynamic-datasource)     |           |
 |    `组件模块`     |           [pxc-framework-boot3-component](pxc-framework-boot3-boot3-component)           |           |
+
+## 未来模块
+
+|    模块名    | 位置 | 错误码号段 |
+|:---------:|:--:|-------|
+| `Diff模块`  |    |       |
+| `Excel模块` |    |       |

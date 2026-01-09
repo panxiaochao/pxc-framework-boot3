@@ -89,7 +89,7 @@
         <mybatis-plus-join.version>1.5.5</mybatis-plus-join.version>
         <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
         <oshi.version>6.9.1</oshi.version>
-        <ip2region.version>3.3.1</ip2region.version>
+        <ip2region.version>3.3.4</ip2region.version>
         <commons-io.version>2.21.0</commons-io.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-text.version>1.14.0</commons-text.version>
@@ -118,10 +118,11 @@
         <jsoup.version>1.21.2</jsoup.version>
         <httpclient5.version>5.5.1</httpclient5.version>
         <emoji-java.version>5.1.1</emoji-java.version>
-        <weixin-java.version>4.7.8.B</weixin-java.version>
+        <weixin-java.version>4.8.0</weixin-java.version>
         <dynamic-datasource-spring-boot3.version>4.3.1</dynamic-datasource-spring-boot3.version>
         <jasypt-spring-boot-starter.version>3.0.5</jasypt-spring-boot-starter.version>
         <logback.version>1.5.21</logback.version>
+        <java-diff-utils.version>4.16</java-diff-utils.version>
         <!-- 插件版本 -->
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <maven-compiler-plugin.verison>3.13.0</maven-compiler-plugin.verison>
@@ -187,6 +188,7 @@
             </dependency>
 
             <!-- Other 依赖管理 -->
+            <!-- Spring 依赖管理 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
@@ -232,11 +234,13 @@
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+            <!-- Oshi 依赖管理 -->
             <dependency>
                 <groupId>com.github.oshi</groupId>
                 <artifactId>oshi-core</artifactId>
                 <version>${oshi.version}</version>
             </dependency>
+            <!-- ip2region 依赖管理 -->
             <dependency>
                 <groupId>org.lionsoul</groupId>
                 <artifactId>ip2region</artifactId>
@@ -390,7 +394,7 @@
                 <artifactId>weixin-java-miniapp</artifactId>
                 <version>${weixin-java.version}</version>
             </dependency>
-            <!-- 微信小支付 -->
+            <!-- 微信支付 -->
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-pay</artifactId>
@@ -447,6 +451,12 @@
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>${logback.version}</version>
+            </dependency>
+            <!-- 文本差异对比库 -->
+            <dependency>
+                <groupId>io.github.java-diff-utils</groupId>
+                <artifactId>java-diff-utils</artifactId>
+                <version>${java-diff-utils.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +38,7 @@ import java.util.stream.Collectors;
 @Schema(description = "请求排序")
 public class OrderItems implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

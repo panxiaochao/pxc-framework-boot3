@@ -60,7 +60,7 @@
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-miniapp</artifactId>
         </dependency>
-        <!-- 微信小支付 -->
+        <!-- 微信支付 -->
         <dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-pay</artifactId>

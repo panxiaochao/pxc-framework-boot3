@@ -567,19 +567,19 @@ public class ConvertUtil {
     }
 
     /**
-     * Convert String to specified type with default value
-     * @param str String to convert
+     * Convert Object to specified type with default value.
+     * @param obj Object to convert
      * @param defaultValue default value if conversion fails
-     * @param parser function to parse string to target type
+     * @param parser function to parse object to target type
      * @param <T> target type
      * @return converted value or default value
      */
-    public static <T> T convert(String str, T defaultValue, Function<String, T> parser) {
-        if (StrUtil.isBlank(str)) {
+    public static <T> T convert(Object obj, T defaultValue, Function<Object, T> parser) {
+        if (ObjectUtil.isEmpty(obj)) {
             return defaultValue;
         }
         try {
-            return parser.apply(str);
+            return parser.apply(obj);
         }
         catch (NumberFormatException e) {
             return defaultValue;
