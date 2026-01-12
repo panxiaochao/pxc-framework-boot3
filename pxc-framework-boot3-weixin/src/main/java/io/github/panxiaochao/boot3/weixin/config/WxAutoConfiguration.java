@@ -75,19 +75,11 @@ public class WxAutoConfiguration {
     @Bean
     public IWxManager wxManager(final WxProperties wxProperties) {
         final StorageType storageType = wxProperties.getStorageType();
-        IWxManager wxManager;
-        switch (storageType) {
-            case Redisson:
-                wxManager = new WxRedissonManager();
-                break;
-            case RedisTemplate:
-                wxManager = new WxRedisTemplateManager();
-                break;
-            default:
-                wxManager = new WxMemoryManager();
-                break;
-        }
-        return wxManager;
+        return switch (storageType) {
+            case Redisson -> new WxRedissonManager();
+            case RedisTemplate -> new WxRedisTemplateManager();
+            default -> new WxMemoryManager();
+        };
     }
 
     /**

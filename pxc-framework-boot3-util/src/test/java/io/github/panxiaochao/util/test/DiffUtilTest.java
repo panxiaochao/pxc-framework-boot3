@@ -1,17 +1,17 @@
 package io.github.panxiaochao.util.test;
 
 import com.github.difflib.DiffUtils;
-import com.github.difflib.UnifiedDiffUtils;
 import com.github.difflib.patch.AbstractDelta;
 import com.github.difflib.patch.Patch;
-import com.github.difflib.text.DiffRow;
-import com.github.difflib.text.DiffRowGenerator;
+import io.github.panxiaochao.boot3.core.utils.DiffCompareUtil;
 import io.github.panxiaochao.boot3.core.utils.JacksonUtil;
+import io.github.panxiaochao.boot3.core.utils.diff.DiffCompareResultInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,37 +30,18 @@ public class DiffUtilTest {
     }
 
     private static void testDiff() {
+        DiffCompareResultInfo rows0 = DiffCompareUtil.diffString("浙江省杭州市西湖区", "浙江省杭州市拱墅区");
+
+        printDiffCompareResult(Collections.singletonList(rows0));
+
         List<String> original = Arrays.asList("Spring", "SpringBoot", "MyBatis");
         List<String> revised = Arrays.asList("Spring", "SpringCloud", "MyBatis");
 
-        // 1. 计算差异
-        Patch<String> patch = DiffUtils.diff(original, revised);
+        // 生成可视化差异行
+        List<DiffCompareResultInfo> rows = DiffCompareUtil.diffList(original, revised);
 
-        // 2. 遍历差异点
-        printDeltas(patch);
-
-        // ... 承接上文
-        List<String> unifiedDiff = UnifiedDiffUtils.generateUnifiedDiff("file_v1.txt", "file_v2.txt", original, patch,
-                0);
-
-        unifiedDiff.forEach(System.out::println);
-        System.out.println("-----------------");
-
-        // 2. 构建生成器 (核心配置)
-        DiffRowGenerator generator = DiffRowGenerator.create()
-            .showInlineDiffs(true) // 开启行内细节对比
-            .inlineDiffByWord(true) // 按单词粒度，而非字符粒度
-            .mergeOriginalRevised(true) // 合并模式，方便通过CSS控制显示
-            .ignoreWhiteSpaces(true) // 忽略空格差异
-            .oldTag(f -> f ? "<span class='del'>" : "</span>") // 自定义旧文本包裹标签
-            .newTag(f -> f ? "<span class='ins'>" : "</span>") // 自定义新文本包裹标签
-            .build();
-
-        // 3. 生成可视化差异行
-        List<DiffRow> rows = generator.generateDiffRows(original, revised);
-
-        // 4. 打印结果模拟
-        printDiffRows(rows);
+        // 打印结果模拟
+        printDiffCompareResult(rows);
 
         User user1 = new User("潘骁超", 25, "lypxc@example.com", "1234567890", "浙江省杭州市西湖区");
         User user2 = new User("潘骁超", 26, "lypxc111@example.com", "1234567890", "浙江省杭州市拱墅区");
@@ -73,16 +54,23 @@ public class DiffUtilTest {
         List<String> oldLines = Arrays.asList(oldJson.split("\n"));
         List<String> newLines = Arrays.asList(newJson.split("\n"));
 
-        List<DiffRow> userDiffRows = generator.generateDiffRows(oldLines, newLines);
+        List<DiffCompareResultInfo> userDiffRows = DiffCompareUtil.diffList(oldLines, newLines);
 
         // 4. 打印结果模拟
-        printDiffRows(userDiffRows);
+        printDiffCompareResult(userDiffRows);
+
+        List<DiffCompareResultInfo> rows1 = DiffCompareUtil.diffList(
+                Arrays.asList("This is a test sentence.", "This is the second line.", "And here is the finish."),
+                Arrays.asList("This is a test for diffutils.", "This is the second line.", "", "asdk,sadkjl"));
+
+        printDiffCompareResult(rows1);
 
     }
 
-    private static void printDiffRows(List<DiffRow> rows) {
-        for (DiffRow row : rows) {
-            System.out.println("Type: " + row.getTag()); // 4.16版本新特性
+    private static void printDiffCompareResult(List<DiffCompareResultInfo> rows) {
+        for (DiffCompareResultInfo row : rows) {
+            System.out.println("Line: " + row.getLineNum());
+            System.out.println("Type: " + row.getTag());
             System.out.println("Old: " + row.getOldLine());
             System.out.println("New: " + row.getNewLine());
             System.out.println("---");
