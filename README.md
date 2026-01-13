@@ -46,6 +46,7 @@
 |  `Holiday模块`  |                [pxc-framework-boot3-holiday](pxc-framework-boot3-holiday)                |           |
 | `ip2region模块` |              [pxc-framework-boot3-ip2region](pxc-framework-boot3-ip2region)              |           |
 |   `Email模块`   |                  [pxc-framework-boot3-email](pxc-framework-boot3-email)                  |           |
+|   `Excel模块`   |                  [pxc-framework-boot3-excel](pxc-framework-boot3-excel)                  |           |
 |    `工具类模块`    |                   [pxc-framework-boot3-util](pxc-framework-boot3-util)                   |           |
 |  `Jackson模块`  |                [pxc-framework-boot3-jackson](pxc-framework-boot3-jackson)                |           |
 |   `操作日志模块`    |            [pxc-framework-boot3-operate-log](pxc-framework-boot3-operate-log)            | 6000-6009 |
@@ -63,6 +64,5 @@
 
 ## 未来模块
 
-|    模块名    | 位置 | 错误码号段 |
-|:---------:|:--:|-------|
-| `Excel模块` |    |       |
+| 模块名 | 位置 | 错误码号段 |
+|:---:|:--:|-------|
