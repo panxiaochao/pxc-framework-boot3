@@ -1,5 +1,10 @@
 # pxc-framework-boot3-repeatsubmit
 
+## 功能描述
+
+pxc-framework-boot3-repeatsubmit 是一个基于 Spring Boot 3 的重复提交处理组件，用于防止用户重复提交表单或接口请求。
+
+
 
 ## 使用方法
 ### maven
@@ -27,8 +32,12 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
-        <!-- 子工程引入 -->
+相关工程引入
+
+```xml
+<!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-framework-boot3-repeatsubmit</artifactId>

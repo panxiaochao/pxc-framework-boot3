@@ -1,5 +1,8 @@
 # pxc-framework-boot3-ratelimiter
 
+## 功能描述
+
+pxc-framework-boot3-ratelimiter 是一个基于 Spring Boot 3 的限流组件，用于限制应用程序对接口或资源的访问频率，防止系统过载。
 
 ## 使用方法
 ### maven
@@ -27,8 +30,12 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
-        <!-- 子工程引入 -->
+相关工程引入
+
+```xml
+<!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-framework-boot3-ratelimiter</artifactId>

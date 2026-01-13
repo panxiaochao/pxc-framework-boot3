@@ -1,4 +1,8 @@
 # pxc-framework-boot3-dynamic-datasource
+## 功能描述
+
+pxc-framework-boot3-dynamic-datasource 是一个基于 Spring Boot 3 的动态数据源组件，用于在运行时切换数据源。
+
 
 
 ## 使用方法
@@ -28,7 +32,11 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
+相关工程引入
+
+```xml
 <!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>

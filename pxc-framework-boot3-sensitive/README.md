@@ -1,5 +1,10 @@
 # pxc-framework-boot3-sensitive
 
+## 功能描述
+
+pxc-framework-boot3-sensitive 是一个基于 Spring Boot 3 的敏感信息处理组件，用于对应用程序中的敏感信息进行加密、解密和脱敏处理。
+
+
 
 ## 使用方法
 
@@ -28,8 +33,12 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
-        <!-- 子工程引入 -->
+相关工程引入
+
+```xml
+<!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-framework-boot3-sensitive</artifactId>

@@ -1,7 +1,11 @@
 # pxc-framework-boot3-operate-log
 
+## 功能描述
+
+pxc-framework-boot3-operate-log 是一个基于 Spring Boot 3 的操作日志组件，用于记录应用程序中的操作日志，包括用户操作、系统操作等。
 
 ## 使用方法
+
 ### maven
 
 ```xml
@@ -27,8 +31,12 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
-        <!-- 子工程引入 -->
+相关工程引入
+
+```xml
+<!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-framework-boot3-operate-log</artifactId>
@@ -48,6 +56,7 @@
 ## 注意事项
 
 ---
+
 * Before: 在切点之前，织入相关代码；
 * After: 在切点之后，织入相关代码;
 * AfterReturning: 在切点返回内容后，织入相关代码，一般用于对返回值做些加工处理的场景；
@@ -55,5 +64,7 @@
 * Around: 在切入点前后织入代码，并且可以自由的控制何时执行切点；
 
 ---
+
 * 当方法符合切点规则不符合环绕通知的规则时候，执行的顺序如下: Before→After→AfterRunning(如果有异常→AfterThrowing)
-* 当方法符合切点规则并且符合环绕通知的规则时候，执行的顺序如下: Around→Before→Around→After执行 ProceedingJoinPoint.proceed() 之后的操作→AfterRunning(如果有异常→AfterThrowing)
+* 当方法符合切点规则并且符合环绕通知的规则时候，执行的顺序如下: Around→Before→Around→After执行
+  ProceedingJoinPoint.proceed() 之后的操作→AfterRunning(如果有异常→AfterThrowing)

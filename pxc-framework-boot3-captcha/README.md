@@ -1,9 +1,13 @@
 # pxc-framework-boot3-captcha
 
-`pxc-framework-boot3-captcha`验证码框架。
+## 功能描述
+
+pxc-framework-boot3-captcha 是一个基于 Spring Boot 3 的验证码组件，用于生成验证码图片。
 
 ## 使用方法
+
 ### maven
+
 ```xml
 <dependency>
     <groupId>io.github.panxiaochao</groupId>
@@ -27,7 +31,11 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
+相关工程引入
+
+```xml
 <!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>

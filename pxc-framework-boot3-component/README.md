@@ -1,6 +1,10 @@
 # pxc-framework-boot3-component
 
-`pxc-framework-boot3-component`是下拉、树形组件框架。
+## 功能描述
+
+pxc-framework-boot3-component 是一个基于 Spring Boot 3 的组件框架，用于提供下拉、树形组件。
+
+
 
 ## 使用方法
 ### maven
@@ -27,7 +31,11 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
+相关工程引入
+
+```xml
 <!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>

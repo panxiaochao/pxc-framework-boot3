@@ -61,6 +61,11 @@ public class JdkUtil {
     public static final boolean IS_JDK24;
 
     /**
+     * 是否 == JDK_25
+     */
+    public static final boolean IS_JDK25;
+
+    /**
      * 是否大于等于JDK_8
      */
     public static final boolean IS_GTE_JDK8;
@@ -89,6 +94,11 @@ public class JdkUtil {
      * 是否大于等于JDK_24
      */
     public static final boolean IS_GTE_JDK24;
+
+    /**
+     * 是否大于等于JDK_25
+     */
+    public static final boolean IS_GTE_JDK25;
 
     /**
      * 是否Android环境
@@ -123,12 +133,14 @@ public class JdkUtil {
         IS_JDK22 = (22 == jvmVersion);
         IS_JDK23 = (23 == jvmVersion);
         IS_JDK24 = (24 == jvmVersion);
+        IS_JDK25 = (25 == jvmVersion);
         IS_GTE_JDK8 = jvmVersion >= 8;
         IS_GTE_JDK17 = jvmVersion >= 17;
         IS_GTE_JDK21 = jvmVersion >= 21;
         IS_GTE_JDK22 = jvmVersion >= 22;
         IS_GTE_JDK23 = jvmVersion >= 23;
         IS_GTE_JDK24 = jvmVersion >= 24;
+        IS_GTE_JDK25 = jvmVersion >= 25;
         IS_ANDROID = isAndroid;
     }
 

@@ -1,7 +1,11 @@
 # pxc-framework-boot3-cache
 
+## 功能描述
+
+pxc-framework-boot3-cache 是一个基于 Spring Boot 3 的缓存组件，用于缓存数据。
 
 ## 使用方法
+
 ### maven
 
 ```xml
@@ -27,8 +31,12 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
-        <!-- 子工程引入 -->
+相关工程引入
+
+```xml
+<!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-framework-boot3-cache</artifactId>

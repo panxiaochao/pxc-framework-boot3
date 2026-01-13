@@ -1,9 +1,11 @@
 # pxc-framework-boot3-crypto
 
-`pxc-framework-boot3-crypto`加解密框架。
+## 功能描述
 
+pxc-framework-boot3-crypto 是一个基于 Spring Boot 3 的加解密组件，用于对数据进行加密和解密。
 
 ## 使用方法
+
 ### maven
 
 ```xml
@@ -29,7 +31,11 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
+相关工程引入
+
+```xml
 <!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>

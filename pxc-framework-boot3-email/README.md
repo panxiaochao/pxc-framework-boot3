@@ -1,5 +1,10 @@
 # pxc-framework-boot3-email
 
+## 功能描述
+
+pxc-framework-boot3-email 是一个基于 Spring Boot 3 的邮件发送组件，用于发送邮件。
+
+
 
 ## 使用方法
 ### maven
@@ -27,8 +32,12 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
-        <!-- 子工程引入 -->
+相关工程引入
+
+```xml
+<!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-framework-boot3-email</artifactId>

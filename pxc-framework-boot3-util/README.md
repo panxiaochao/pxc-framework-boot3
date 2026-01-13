@@ -1,5 +1,9 @@
 # pxc-framework-boot3-util
 
+## 功能描述
+
+pxc-framework-boot3-util 是一个基于 Spring Boot 3 的工具组件库，提供了一系列常用的工具类和方法，用于简化开发过程。
+
 ## 使用方法
 
 ### maven
@@ -30,6 +34,8 @@
 </dependencyManagement>
 ```
 
+相关工程引入
+
 ```xml
 <!-- 子工程引入 -->
 <dependency>
@@ -39,7 +45,6 @@
 ```
 
 ## 注意事项
-
 
 ## Utils 工具类汇总
 

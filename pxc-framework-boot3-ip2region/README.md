@@ -1,7 +1,12 @@
 # pxc-framework-boot3-ip2region
 
+## 功能描述
+
+pxc-framework-boot3-ip2region 是一个基于 Spring Boot 3 的 IP 地址到区域信息的组件，用于根据 IP
+地址查询对应的区域信息，包括国家、省份、城市、运营商等。
 
 ## 使用方法
+
 ### maven
 
 ```xml
@@ -27,8 +32,12 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
-        <!-- 子工程引入 -->
+相关工程引入
+
+```xml
+<!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-framework-boot3-ip2region</artifactId>
