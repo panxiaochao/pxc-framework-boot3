@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.panxiaochao.boot3.common.constants;
+package io.github.panxiaochao.boot3.utils.download;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

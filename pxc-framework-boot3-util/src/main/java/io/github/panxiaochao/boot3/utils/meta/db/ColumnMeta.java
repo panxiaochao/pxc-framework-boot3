@@ -21,6 +21,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.util.StringUtils;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,6 +40,7 @@ import java.sql.SQLException;
 @ToString
 public class ColumnMeta implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

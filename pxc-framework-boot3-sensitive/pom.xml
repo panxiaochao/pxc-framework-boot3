@@ -31,6 +31,10 @@
             <artifactId>fastjson2</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>io.github.panxiaochao</groupId>
+            <artifactId>pxc-framework-boot3-common</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

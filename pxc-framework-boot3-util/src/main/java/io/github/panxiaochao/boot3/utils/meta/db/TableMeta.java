@@ -20,6 +20,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.util.StringUtils;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,6 +46,7 @@ import java.util.Set;
 @ToString
 public class TableMeta implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

@@ -18,6 +18,7 @@ package io.github.panxiaochao.boot3.utils.meta.db;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -34,6 +35,7 @@ import java.util.Objects;
 @Setter
 public class IndexMeta implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

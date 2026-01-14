@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.utils;
 
-import io.github.panxiaochao.boot3.common.constants.MimeType;
+import io.github.panxiaochao.boot3.utils.download.MimeType;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

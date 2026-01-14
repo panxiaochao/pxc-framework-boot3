@@ -24,7 +24,7 @@
 /////////////////////////////////////////////////////////////
 package io.github.panxiaochao.boot3.utils.meta.ddl;
 
-import io.github.panxiaochao.boot3.common.constants.DatabaseType;
+import io.github.panxiaochao.boot3.utils.meta.constants.DatabaseType;
 import io.github.panxiaochao.boot3.utils.meta.ddl.impl.DatabaseDMImpl;
 import io.github.panxiaochao.boot3.utils.meta.ddl.impl.DatabaseMySqlImpl;
 

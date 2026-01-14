@@ -17,8 +17,8 @@ package io.github.panxiaochao.boot3.utils;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import io.github.panxiaochao.boot3.common.constants.DatabaseType;
 import io.github.panxiaochao.boot3.crypto.utils.HexUtil;
+import io.github.panxiaochao.boot3.utils.meta.constants.DatabaseType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.NumberUtils;
