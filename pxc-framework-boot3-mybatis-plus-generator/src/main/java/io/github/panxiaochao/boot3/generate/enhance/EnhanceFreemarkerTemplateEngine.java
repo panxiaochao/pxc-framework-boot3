@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.generator.config.builder.ConfigBuilder;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import io.github.panxiaochao.boot3.core.utils.StringPools;
+import io.github.panxiaochao.boot3.utils.StringPools;
 import org.springframework.util.StringUtils;
 
 import java.io.File;

@@ -15,8 +15,8 @@
  */
 package io.github.panxiaochao.boot3.mybatis.plus.interceptor;
 
-import io.github.panxiaochao.boot3.core.utils.ObjectUtil;
-import io.github.panxiaochao.boot3.core.utils.date.LocalDateTimeUtil;
+import io.github.panxiaochao.boot3.utils.ObjectUtil;
+import io.github.panxiaochao.boot3.utils.date.LocalDateTimeUtil;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;

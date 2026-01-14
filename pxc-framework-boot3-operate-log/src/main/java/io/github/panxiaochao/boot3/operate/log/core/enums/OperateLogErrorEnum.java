@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.operate.log.core.enums;
 
-import io.github.panxiaochao.boot3.core.ienums.IEnum;
+import io.github.panxiaochao.boot3.common.enums.IEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

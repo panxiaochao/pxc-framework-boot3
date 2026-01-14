@@ -20,7 +20,7 @@ import cn.binarywang.wx.miniapp.bean.WxMaMessage;
 import cn.binarywang.wx.miniapp.constant.WxMaConstants;
 import cn.binarywang.wx.miniapp.message.WxMaMessageRouter;
 import cn.binarywang.wx.miniapp.util.WxMaConfigHolder;
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import io.github.panxiaochao.boot3.weixin.constants.WxConstant;
 import io.github.panxiaochao.boot3.weixin.manager.IWxManager;
 import io.swagger.v3.oas.annotations.tags.Tag;

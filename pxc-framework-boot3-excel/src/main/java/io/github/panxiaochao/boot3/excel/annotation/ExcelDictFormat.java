@@ -1,6 +1,6 @@
 package io.github.panxiaochao.boot3.excel.annotation;
 
-import io.github.panxiaochao.boot3.core.utils.StringPools;
+import io.github.panxiaochao.boot3.utils.StringPools;
 
 /**
  * <p>

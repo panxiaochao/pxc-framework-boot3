@@ -15,10 +15,10 @@
  */
 package io.github.panxiaochao.boot3.trace.log.core.domain;
 
-import io.github.panxiaochao.boot3.core.utils.IpUtil;
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
-import io.github.panxiaochao.boot3.core.utils.StringPools;
-import io.github.panxiaochao.boot3.core.utils.UuidUtil;
+import io.github.panxiaochao.boot3.utils.IpUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.StringPools;
+import io.github.panxiaochao.boot3.utils.UuidUtil;
 import io.github.panxiaochao.boot3.trace.log.constants.TraceLogConstant;
 import io.github.panxiaochao.boot3.trace.log.core.context.TraceLogContext;
 import lombok.Getter;

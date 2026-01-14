@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.weixin.core.open;
 
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import io.github.panxiaochao.boot3.weixin.config.properties.WxProperties;
 import io.github.panxiaochao.boot3.weixin.config.properties.nested.WxOpenProperties;
 import io.github.panxiaochao.boot3.weixin.enums.StorageType;

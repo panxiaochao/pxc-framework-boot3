@@ -15,9 +15,9 @@
  */
 package io.github.panxiaochao.boot3.web.handler;
 
-import io.github.panxiaochao.boot3.core.enums.CommonResponseEnum;
-import io.github.panxiaochao.boot3.core.enums.ServletResponseEnum;
-import io.github.panxiaochao.boot3.core.response.R;
+import io.github.panxiaochao.boot3.common.constants.CommonResponseEnum;
+import io.github.panxiaochao.boot3.common.constants.ServletResponseEnum;
+import io.github.panxiaochao.boot3.common.response.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

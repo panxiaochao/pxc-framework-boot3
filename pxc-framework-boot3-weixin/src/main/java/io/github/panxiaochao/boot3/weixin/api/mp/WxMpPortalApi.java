@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.weixin.api.mp;
 
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import io.github.panxiaochao.boot3.weixin.constants.WxConstant;
 import io.github.panxiaochao.boot3.weixin.manager.IWxManager;
 import io.swagger.v3.oas.annotations.Operation;

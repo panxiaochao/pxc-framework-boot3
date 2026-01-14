@@ -12,7 +12,7 @@
 
     <artifactId>pxc-framework-boot3-crypto</artifactId>
     <name>${project.artifactId}</name>
-    <description>[3.0.1-SNAPSHOT]pxc framework boot3 crypto 加密解密模块</description>
+    <description>[${revision}]pxc framework boot3 crypto 加密解密模块</description>
 
     <dependencies>
         <dependency>
@@ -36,6 +36,7 @@
             <groupId>net.minidev</groupId>
             <artifactId>json-smart</artifactId>
             <version>2.6.0</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

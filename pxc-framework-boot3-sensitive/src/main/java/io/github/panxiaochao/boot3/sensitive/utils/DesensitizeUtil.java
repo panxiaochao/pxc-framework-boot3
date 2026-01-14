@@ -15,9 +15,9 @@
  */
 package io.github.panxiaochao.boot3.sensitive.utils;
 
-import io.github.panxiaochao.boot3.core.utils.CharPools;
-import io.github.panxiaochao.boot3.core.utils.CharSequenceUtil;
-import io.github.panxiaochao.boot3.core.utils.StrUtil;
+import io.github.panxiaochao.boot3.utils.CharPools;
+import io.github.panxiaochao.boot3.utils.CharSequenceUtil;
+import io.github.panxiaochao.boot3.utils.StrUtil;
 
 import java.util.function.Predicate;
 

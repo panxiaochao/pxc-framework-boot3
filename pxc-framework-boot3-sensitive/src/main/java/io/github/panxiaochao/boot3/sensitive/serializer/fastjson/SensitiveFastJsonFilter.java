@@ -16,8 +16,8 @@
 package io.github.panxiaochao.boot3.sensitive.serializer.fastjson;
 
 import com.alibaba.fastjson.serializer.ValueFilter;
-import io.github.panxiaochao.boot3.core.enums.CommonResponseEnum;
-import io.github.panxiaochao.boot3.core.exception.ServerRuntimeException;
+import io.github.panxiaochao.boot3.common.constants.CommonResponseEnum;
+import io.github.panxiaochao.boot3.common.exception.ServerRuntimeException;
 import io.github.panxiaochao.boot3.sensitive.annotation.Sensitive;
 import io.github.panxiaochao.boot3.sensitive.strategy.IHandler;
 import io.github.panxiaochao.boot3.sensitive.strategy.sensitive.SensitiveStrategy;

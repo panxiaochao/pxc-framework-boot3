@@ -15,9 +15,9 @@
  */
 package io.github.panxiaochao.boot3.web.filter;
 
-import io.github.panxiaochao.boot3.core.utils.ArrayUtil;
-import io.github.panxiaochao.boot3.core.utils.StrUtil;
-import io.github.panxiaochao.boot3.core.utils.XssUtil;
+import io.github.panxiaochao.boot3.utils.ArrayUtil;
+import io.github.panxiaochao.boot3.utils.StrUtil;
+import io.github.panxiaochao.boot3.utils.XssUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;

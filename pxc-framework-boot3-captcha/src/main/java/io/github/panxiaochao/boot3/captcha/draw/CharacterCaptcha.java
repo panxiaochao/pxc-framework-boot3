@@ -20,9 +20,9 @@ import io.github.panxiaochao.boot3.captcha.enums.ImageType;
 import io.github.panxiaochao.boot3.captcha.generator.CharacterCaptchaGenerator;
 import io.github.panxiaochao.boot3.captcha.generator.ICaptchaGenerator;
 import io.github.panxiaochao.boot3.captcha.utils.Graphics2DUtil;
-import io.github.panxiaochao.boot3.core.utils.ObjectUtil;
-import io.github.panxiaochao.boot3.core.utils.RandomUtil;
-import io.github.panxiaochao.boot3.core.utils.StringPools;
+import io.github.panxiaochao.boot3.utils.ObjectUtil;
+import io.github.panxiaochao.boot3.utils.RandomUtil;
+import io.github.panxiaochao.boot3.utils.StringPools;
 import io.github.panxiaochao.boot3.crypto.utils.Base64Util;
 import org.apache.commons.io.IOUtils;
 

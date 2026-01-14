@@ -3,7 +3,9 @@
 `pxc-framework-boot3-core`框架，集成`ThreadPoolTaskExecutor`，`TaskScheduler`模块，以及异步`AsyncExecutor`执行器。
 
 ## 使用方法
+
 ### maven
+
 ```xml
 <dependency>
     <groupId>io.github.panxiaochao</groupId>
@@ -27,7 +29,11 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
+相关工程引入
+
+```xml
 <!-- 子工程引入 -->
 <dependency>
     <groupId>io.github.panxiaochao</groupId>
@@ -36,8 +42,9 @@
 ```
 
 ## YAML配置
+
 ```yaml
-spring: 
+spring:
   # 开启框架配置
   pxc-framework:
     # 是否开启异步, 默认false

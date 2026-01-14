@@ -15,8 +15,8 @@
  */
 package io.github.panxiaochao.boot3.holiday.core;
 
-import io.github.panxiaochao.boot3.core.utils.Singleton;
-import io.github.panxiaochao.boot3.core.utils.StringPools;
+import io.github.panxiaochao.boot3.utils.Singleton;
+import io.github.panxiaochao.boot3.utils.StringPools;
 import io.github.panxiaochao.boot3.holiday.constants.HolidayConstant;
 import io.github.panxiaochao.boot3.holiday.entity.Holiday;
 import lombok.RequiredArgsConstructor;

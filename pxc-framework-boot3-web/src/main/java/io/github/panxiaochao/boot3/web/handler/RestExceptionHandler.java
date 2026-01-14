@@ -15,11 +15,11 @@
  */
 package io.github.panxiaochao.boot3.web.handler;
 
-import io.github.panxiaochao.boot3.core.enums.CommonResponseEnum;
-import io.github.panxiaochao.boot3.core.exception.ServerException;
-import io.github.panxiaochao.boot3.core.exception.ServerRuntimeException;
-import io.github.panxiaochao.boot3.core.exception.ext.ApiException;
-import io.github.panxiaochao.boot3.core.response.R;
+import io.github.panxiaochao.boot3.common.constants.CommonResponseEnum;
+import io.github.panxiaochao.boot3.common.exception.ServerException;
+import io.github.panxiaochao.boot3.common.exception.ServerRuntimeException;
+import io.github.panxiaochao.boot3.common.exception.ext.ApiException;
+import io.github.panxiaochao.boot3.common.response.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.weixin.manager;
 
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.redisson.client.codec.StringCodec;

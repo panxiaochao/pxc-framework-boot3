@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.captcha.utils;
 
-import io.github.panxiaochao.boot3.core.utils.RandomUtil;
+import io.github.panxiaochao.boot3.utils.RandomUtil;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;

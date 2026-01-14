@@ -17,10 +17,10 @@ package io.github.panxiaochao.boot3.email.utils;
 
 import cn.hutool.extra.mail.Mail;
 import cn.hutool.extra.mail.MailAccount;
-import io.github.panxiaochao.boot3.core.utils.CharPools;
-import io.github.panxiaochao.boot3.core.utils.MapUtil;
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
-import io.github.panxiaochao.boot3.core.utils.StrUtil;
+import io.github.panxiaochao.boot3.utils.CharPools;
+import io.github.panxiaochao.boot3.utils.MapUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.StrUtil;
 import jakarta.mail.Authenticator;
 import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;

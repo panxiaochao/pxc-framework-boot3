@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.weixin.api.open;
 
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;

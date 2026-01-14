@@ -15,9 +15,9 @@
  */
 package io.github.panxiaochao.boot3.sensitive.utils;
 
-import io.github.panxiaochao.boot3.core.enums.CommonResponseEnum;
-import io.github.panxiaochao.boot3.core.exception.ServerRuntimeException;
-import io.github.panxiaochao.boot3.core.utils.Singleton;
+import io.github.panxiaochao.boot3.common.constants.CommonResponseEnum;
+import io.github.panxiaochao.boot3.common.exception.ServerRuntimeException;
+import io.github.panxiaochao.boot3.utils.Singleton;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Method;

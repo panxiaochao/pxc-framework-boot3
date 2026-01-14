@@ -18,7 +18,7 @@ package io.github.panxiaochao.boot3.weixin.core.ma.handler;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaMessage;
 import cn.binarywang.wx.miniapp.message.WxMaXmlOutMessage;
-import io.github.panxiaochao.boot3.core.utils.JacksonUtil;
+import io.github.panxiaochao.boot3.utils.JacksonUtil;
 import me.chanjar.weixin.common.session.WxSessionManager;
 
 import java.util.Map;

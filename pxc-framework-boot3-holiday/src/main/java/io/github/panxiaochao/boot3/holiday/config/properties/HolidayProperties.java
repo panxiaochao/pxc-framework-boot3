@@ -15,9 +15,9 @@
  */
 package io.github.panxiaochao.boot3.holiday.config.properties;
 
-import io.github.panxiaochao.boot3.core.utils.JacksonUtil;
-import io.github.panxiaochao.boot3.core.utils.ResourceUtil;
-import io.github.panxiaochao.boot3.core.utils.Singleton;
+import io.github.panxiaochao.boot3.utils.JacksonUtil;
+import io.github.panxiaochao.boot3.utils.ResourceUtil;
+import io.github.panxiaochao.boot3.utils.Singleton;
 import io.github.panxiaochao.boot3.holiday.constants.HolidayConstant;
 import io.github.panxiaochao.boot3.holiday.entity.Holiday;
 import lombok.Getter;

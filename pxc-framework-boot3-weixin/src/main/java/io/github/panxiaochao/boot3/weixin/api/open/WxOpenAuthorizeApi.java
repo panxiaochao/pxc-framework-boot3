@@ -15,12 +15,14 @@
  */
 package io.github.panxiaochao.boot3.weixin.api.open;
 
-import io.github.panxiaochao.boot3.core.response.R;
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.common.response.R;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import io.github.panxiaochao.boot3.weixin.api.mp.request.WxH5OAuthForm;
 import io.github.panxiaochao.boot3.weixin.config.properties.WxProperties;
 import io.github.panxiaochao.boot3.weixin.entity.WxUser;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
@@ -40,8 +42,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.stream.Collectors;

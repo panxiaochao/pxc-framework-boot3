@@ -99,6 +99,12 @@
                 <artifactId>pxc-framework-boot3-captcha</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <!-- 公共通用模块 模块 -->
+            <dependency>
+                <groupId>io.github.panxiaochao</groupId>
+                <artifactId>pxc-framework-boot3-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <!-- 组件 模块 -->
             <dependency>
                 <groupId>io.github.panxiaochao</groupId>

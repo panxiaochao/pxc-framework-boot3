@@ -15,8 +15,8 @@
  */
 package io.github.panxiaochao.boot3.weixin.api.cp;
 
-import io.github.panxiaochao.boot3.core.response.R;
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.common.response.R;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import io.github.panxiaochao.boot3.weixin.core.cp.service.WxCpMultiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

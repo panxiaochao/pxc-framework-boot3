@@ -1,6 +1,6 @@
 package io.github.panxiaochao.util.test;
 
-import io.github.panxiaochao.boot3.core.utils.SystemServerUtil;
+import io.github.panxiaochao.boot3.utils.SystemServerUtil;
 
 /**
  * <p>

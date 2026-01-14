@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.sensitive.utils;
 
-import io.github.panxiaochao.boot3.core.utils.BooleanUtil;
+import io.github.panxiaochao.boot3.utils.BooleanUtil;
 
 import java.util.Objects;
 

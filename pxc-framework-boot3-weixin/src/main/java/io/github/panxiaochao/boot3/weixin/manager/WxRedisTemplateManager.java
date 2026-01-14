@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.weixin.manager;
 
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.Objects;

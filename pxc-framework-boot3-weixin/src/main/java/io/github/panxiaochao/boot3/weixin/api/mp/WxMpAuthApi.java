@@ -15,8 +15,8 @@
  */
 package io.github.panxiaochao.boot3.weixin.api.mp;
 
-import io.github.panxiaochao.boot3.core.response.R;
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.common.response.R;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import io.github.panxiaochao.boot3.weixin.api.mp.request.WxH5OAuthForm;
 import io.github.panxiaochao.boot3.weixin.constants.WxConstant;
 import io.github.panxiaochao.boot3.weixin.entity.WxUser;
@@ -24,6 +24,8 @@ import io.github.panxiaochao.boot3.weixin.manager.IWxManager;
 import io.github.panxiaochao.boot3.weixin.utils.SHA1Util;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
@@ -40,8 +42,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;

@@ -15,8 +15,8 @@
  */
 package io.github.panxiaochao.boot3.trace.log.core.interceptor.resttemplate;
 
-import io.github.panxiaochao.boot3.core.utils.IpUtil;
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.IpUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import io.github.panxiaochao.boot3.trace.log.constants.TraceLogConstant;
 import io.github.panxiaochao.boot3.trace.log.core.context.TraceLogContext;
 import org.springframework.http.HttpRequest;

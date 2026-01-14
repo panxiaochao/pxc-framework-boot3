@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.core.config;
 
-import io.github.panxiaochao.boot3.core.utils.JdkUtil;
+import io.github.panxiaochao.boot3.utils.JdkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

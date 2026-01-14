@@ -70,6 +70,7 @@
         <module>pxc-framework-boot3-component</module>
         <module>pxc-framework-boot3-ip2region</module>
         <module>pxc-framework-boot3-excel</module>
+        <module>pxc-framework-boot3-common</module>
     </modules>
 
     <properties>

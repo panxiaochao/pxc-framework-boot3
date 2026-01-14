@@ -23,7 +23,7 @@ import cn.binarywang.wx.miniapp.api.impl.WxMaServiceOkHttpImpl;
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
 import cn.binarywang.wx.miniapp.config.impl.WxMaRedissonConfigImpl;
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import io.github.panxiaochao.boot3.weixin.config.properties.WxProperties;
 import io.github.panxiaochao.boot3.weixin.config.properties.nested.WxMaProperties;
 import io.github.panxiaochao.boot3.weixin.constants.WxConstant;

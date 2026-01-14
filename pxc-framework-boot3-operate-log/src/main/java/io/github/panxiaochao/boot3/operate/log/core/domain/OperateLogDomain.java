@@ -17,9 +17,9 @@ package io.github.panxiaochao.boot3.operate.log.core.domain;
 
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
-import io.github.panxiaochao.boot3.core.utils.IpUtil;
-import io.github.panxiaochao.boot3.core.utils.ObjectUtil;
-import io.github.panxiaochao.boot3.core.utils.RequestUtil;
+import io.github.panxiaochao.boot3.utils.IpUtil;
+import io.github.panxiaochao.boot3.utils.ObjectUtil;
+import io.github.panxiaochao.boot3.utils.RequestUtil;
 import io.github.panxiaochao.boot3.operate.log.core.annotation.OperateLog;
 import io.github.panxiaochao.boot3.operate.log.core.enums.OperateLogStatus;
 import lombok.Getter;

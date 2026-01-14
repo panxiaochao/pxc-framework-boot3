@@ -16,7 +16,7 @@
 package io.github.panxiaochao.boot3.mybatis.plus.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import io.github.panxiaochao.boot3.core.utils.ObjectUtil;
+import io.github.panxiaochao.boot3.utils.ObjectUtil;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;

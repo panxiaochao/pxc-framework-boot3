@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.weixin.core.mp.handler;
 
-import io.github.panxiaochao.boot3.core.utils.JacksonUtil;
+import io.github.panxiaochao.boot3.utils.JacksonUtil;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;

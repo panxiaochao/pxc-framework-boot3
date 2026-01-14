@@ -12,12 +12,16 @@
 
     <artifactId>pxc-framework-boot3-util</artifactId>
     <name>${project.artifactId}</name>
-    <description>[3.0.1-SNAPSHOT]pxc framework boot3 util 工具类模块</description>
+    <description>[${revision}]pxc framework boot3 util 工具类模块</description>
 
     <dependencies>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-boot3-crypto</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.panxiaochao</groupId>
+            <artifactId>pxc-framework-boot3-common</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -34,10 +38,6 @@
             <artifactId>spring-context-support</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core</artifactId>
         </dependency>
@@ -52,10 +52,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations-jakarta</artifactId>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -111,11 +107,6 @@
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
         </dependency>
-        <!-- httpclient5 -->
-        <dependency>
-            <groupId>org.apache.httpcomponents.client5</groupId>
-            <artifactId>httpclient5</artifactId>
-        </dependency>
         <!-- emoji-java -->
         <dependency>
             <groupId>com.vdurmont</groupId>
@@ -152,6 +143,7 @@
             <groupId>net.minidev</groupId>
             <artifactId>json-smart</artifactId>
             <version>2.6.0</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>

@@ -15,7 +15,7 @@
  */
 package io.github.panxiaochao.boot3.redis.cache;
 
-import io.github.panxiaochao.boot3.core.utils.StringPools;
+import io.github.panxiaochao.boot3.utils.StringPools;
 import io.github.panxiaochao.boot3.redis.utils.RedissonUtil;
 import org.redisson.api.RMap;
 import org.redisson.api.RMapCache;

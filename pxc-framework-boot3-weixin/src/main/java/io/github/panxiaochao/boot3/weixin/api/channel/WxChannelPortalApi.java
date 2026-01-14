@@ -16,7 +16,7 @@
 package io.github.panxiaochao.boot3.weixin.api.channel;
 
 import cn.binarywang.wx.miniapp.constant.WxMaConstants;
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import io.github.panxiaochao.boot3.weixin.core.channel.service.WxChannelMultiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -17,7 +17,7 @@ package io.github.panxiaochao.boot3.weixin.core.ma;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.message.WxMaMessageRouter;
-import io.github.panxiaochao.boot3.core.utils.SpringContextUtil;
+import io.github.panxiaochao.boot3.utils.SpringContextUtil;
 import io.github.panxiaochao.boot3.weixin.config.properties.WxProperties;
 import io.github.panxiaochao.boot3.weixin.config.properties.nested.WxMaProperties;
 import io.github.panxiaochao.boot3.weixin.core.ma.handler.AbstractMaHandler;
