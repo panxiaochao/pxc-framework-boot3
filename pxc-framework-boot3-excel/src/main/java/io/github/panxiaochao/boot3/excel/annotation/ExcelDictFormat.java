@@ -19,9 +19,9 @@ public @interface ExcelDictFormat {
     String dictType() default "";
 
     /**
-     * 读取内容转表达式 (如: 0=男,1=女,2=未知)
+     * 静态表达式内容转表达式，不走数据字典模式 (如: 0=男, 1=女, 2=未知)
      */
-    String readConverterExpress() default "";
+    String staticExpressionContent() default "";
 
     /**
      * 分隔符，读取字符串组内容

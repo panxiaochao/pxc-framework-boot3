@@ -15,6 +15,8 @@
  */
 package io.github.panxiaochao.boot3.utils;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
@@ -463,6 +465,14 @@ public class ConvertUtil {
         }
         if (obj instanceof String) {
             return (String) obj;
+        }
+        // 添加对大数值类型的支持
+        if (obj instanceof BigDecimal) {
+            // 使用 toPlainString() 避免科学计数法
+            return ((BigDecimal) obj).toPlainString();
+        }
+        if (obj instanceof BigInteger) {
+            return obj.toString();
         }
         if (obj instanceof Object[]) {
             return Arrays.deepToString((Object[]) obj);

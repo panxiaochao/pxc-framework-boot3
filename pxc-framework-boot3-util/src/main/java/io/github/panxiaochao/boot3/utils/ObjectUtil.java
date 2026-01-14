@@ -203,7 +203,7 @@ public class ObjectUtil {
             return !((Optional<?>) object).isPresent();
         }
         if (object instanceof CharSequence) {
-            return ((CharSequence) object).length() == 0;
+            return ((CharSequence) object).isEmpty();
         }
         if (object.getClass().isArray()) {
             return Array.getLength(object) == 0;

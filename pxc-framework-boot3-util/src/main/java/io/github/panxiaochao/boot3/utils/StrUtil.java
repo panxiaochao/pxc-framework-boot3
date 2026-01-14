@@ -1908,7 +1908,7 @@ public class StrUtil {
         if (null == str) {
             return null;
         }
-        if (str.length() > 0) {
+        if (!str.isEmpty()) {
             char firstChar = str.charAt(0);
             if (Character.isLowerCase(firstChar)) {
                 return Character.toUpperCase(firstChar) + subSuf(str, 1);
