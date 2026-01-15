@@ -16,7 +16,7 @@ public @interface ExcelDictFormat {
     /**
      * 如果是字典类型，请设置字典的type值 (如: sex)
      */
-    String dictType() default "";
+    String dictCode() default "";
 
     /**
      * 静态表达式内容转表达式，不走数据字典模式 (如: 0=男, 1=女, 2=未知)

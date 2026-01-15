@@ -579,6 +579,17 @@ public class ConvertUtil {
     /**
      * Convert Object to specified type with default value.
      * @param obj Object to convert
+     * @param parser function to parse object to target type
+     * @param <T> target type
+     * @return converted value or null if object is null
+     */
+    public static <T> T convert(Object obj, Function<Object, T> parser) {
+        return convert(obj, null, parser);
+    }
+
+    /**
+     * Convert Object to specified type with default value.
+     * @param obj Object to convert
      * @param defaultValue default value if conversion fails
      * @param parser function to parse object to target type
      * @param <T> target type
