@@ -14,7 +14,7 @@ import io.github.panxiaochao.boot3.utils.StringPools;
 public @interface ExcelDictFormat {
 
     /**
-     * 如果是字典类型，请设置字典的type值 (如: sex)
+     * 如果是字典类型，请设置字典的 code 值 (如: sex)
      */
     String dictCode() default "";
 

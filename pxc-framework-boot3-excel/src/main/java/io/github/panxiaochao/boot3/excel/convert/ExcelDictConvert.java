@@ -8,6 +8,7 @@ import cn.idev.excel.metadata.property.ExcelContentProperty;
 import io.github.panxiaochao.boot3.excel.annotation.ExcelDictFormat;
 import io.github.panxiaochao.boot3.excel.util.ExcelUtil;
 import io.github.panxiaochao.boot3.utils.ConvertUtil;
+import io.github.panxiaochao.boot3.utils.DictUtil;
 import io.github.panxiaochao.boot3.utils.ObjectUtil;
 import io.github.panxiaochao.boot3.utils.StrUtil;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -35,14 +36,15 @@ public class ExcelDictConvert implements Converter<Object> {
             GlobalConfiguration globalConfiguration) {
         ExcelDictFormat anno = getAnnotation(contentProperty.getField());
         String code = anno.dictCode();
-        String label = cellData.getStringValue();
-        String value = "";
-        if (StrUtil.isBlank(code)) {
-            value = ExcelUtil.forwardParseByExpressionContent(label, anno.staticExpressionContent(), anno.separator());
+        String text = cellData.getStringValue();
+        String staticExpressionContent = anno.staticExpressionContent();
+        String value;
+        if (StrUtil.isNotBlank(staticExpressionContent)) {
+            // 优先走静态表达式内容转表达式模式
+            value = ExcelUtil.forwardParseByExpressionContent(text, staticExpressionContent, anno.separator());
         }
         else {
-            // value = SpringUtils.getBean(DictService.class).getDictValue(code, label,
-            // anno.separator());
+            value = DictUtil.getDictValue(code, text, anno.separator());
         }
         return value;
     }
@@ -54,15 +56,16 @@ public class ExcelDictConvert implements Converter<Object> {
             return new WriteCellData<>("");
         }
         ExcelDictFormat anno = getAnnotation(contentProperty.getField());
-        String type = anno.dictCode();
+        String code = anno.dictCode();
         String value = ConvertUtil.toString(object);
-        String text = "";
-        if (StrUtil.isBlank(type)) {
-            text = ExcelUtil.forwardParseByExpressionContent(value, anno.staticExpressionContent(), anno.separator());
+        String staticExpressionContent = anno.staticExpressionContent();
+        String text;
+        if (StrUtil.isNotBlank(staticExpressionContent)) {
+            // 优先走静态表达式内容转表达式模式
+            text = ExcelUtil.reverseParseByExpressionContent(value, staticExpressionContent, anno.separator());
         }
         else {
-            // text = SpringUtils.getBean(DictService.class).getDictLabel(type, value,
-            // anno.separator());
+            text = DictUtil.getDictText(code, value, anno.separator());
         }
         return new WriteCellData<>(text);
     }
