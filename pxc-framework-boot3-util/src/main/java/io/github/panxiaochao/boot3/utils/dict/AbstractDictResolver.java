@@ -20,7 +20,7 @@ public abstract class AbstractDictResolver implements IDictResolver {
     @Override
     public String getDictText(String dictCode, String dictValue, String separator) {
         Map<String, String> dictMap = this.getAllDictByDictCode(dictCode);
-        if (StrUtil.isBlank(dictValue)) {
+        if (StrUtil.isBlank(dictValue) || dictMap.isEmpty()) {
             return StrUtil.EMPTY;
         }
 
@@ -45,7 +45,7 @@ public abstract class AbstractDictResolver implements IDictResolver {
     @Override
     public String getDictValue(String dictCode, String dictText, String separator) {
         Map<String, String> dictMap = this.getAllDictByDictCode(dictCode);
-        if (StrUtil.isBlank(dictText)) {
+        if (StrUtil.isBlank(dictText) || dictMap.isEmpty()) {
             return StrUtil.EMPTY;
         }
 
