@@ -11,7 +11,7 @@ import java.util.Map;
  * @since 2026-01-15
  * @version 1.0
  */
-public interface IDictService {
+public interface IDictResolver {
 
     /**
      * 根据字典编码和字典值获取字典文本，默认分隔符为逗号
@@ -32,6 +32,12 @@ public interface IDictService {
     default String getDictValue(String dictCode, String dictText) {
         return getDictValue(dictCode, dictText, StringPools.COMMA);
     }
+
+    /**
+     * 加载所有字典项到缓存
+     */
+    default void loadAllDict(Map<String, Map<String, String>> dictMap) {
+    };
 
     /**
      * 根据字典编码和字典值获取字典文本

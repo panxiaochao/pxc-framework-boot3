@@ -611,6 +611,17 @@ public class RedissonUtil {
     }
 
     /**
+     * Stores all map into ramp
+     * @param name name of object
+     * @param mapAll mappings to be stored in this map
+     * @param <T> T Object
+     */
+    public static <T> void putAllMap(String name, Map<String, T> mapAll) {
+        RMap<String, T> rMap = getRMap(name);
+        rMap.putAll(mapAll);
+    }
+
+    /**
      * Stores k and v into ramp
      * @param name name of object
      * @param key key

@@ -51,7 +51,7 @@ public class CacheManagerAutoConfiguration {
      */
     @Bean
     public CacheManager cacheManager(final CacheManagerProperties cacheManagerProperties) {
-        if (CacheManagerType.CAFFEINE.equals(cacheManagerProperties.getCacheType())) {
+        if (CacheManagerType.CAFFEINE.equals(cacheManagerProperties.getType())) {
             // 使用自定义 PlusCaffeineCacheManager 缓存管理器
             PlusCaffeineCacheManager caffeineCacheManager = new PlusCaffeineCacheManager();
             String specification = cacheManagerProperties.getCaffeine().getSpec();
@@ -61,7 +61,7 @@ public class CacheManagerAutoConfiguration {
             LOGGER.info("配置[Cache -> Caffeine]成功！");
             return caffeineCacheManager;
         }
-        else if (CacheManagerType.REDIS.equals(cacheManagerProperties.getCacheType())) {
+        else if (CacheManagerType.REDIS.equals(cacheManagerProperties.getType())) {
             Class<?> cacheManagerClass = loadClass("io.github.panxiaochao.boot3.redis.cache.PlusRedissonCacheManager");
             if (cacheManagerClass != null) {
                 try {

@@ -1,6 +1,6 @@
 package io.github.panxiaochao.boot3.utils;
 
-import io.github.panxiaochao.boot3.utils.dict.DictServiceProvider;
+import io.github.panxiaochao.boot3.utils.dict.DictResolverProvider;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -47,7 +47,7 @@ public class DictUtil {
         if (StrUtil.isBlank(dictCode)) {
             return StrUtil.EMPTY;
         }
-        return DictServiceProvider.getDictService().getDictText(dictCode, dictValue, separator);
+        return DictResolverProvider.getDictResolver().getDictText(dictCode, dictValue, separator);
     }
 
     /**
@@ -71,8 +71,7 @@ public class DictUtil {
         if (StrUtil.isBlank(dictCode)) {
             return StrUtil.EMPTY;
         }
-
-        return DictServiceProvider.getDictService().getDictValue(dictCode, dictText, separator);
+        return DictResolverProvider.getDictResolver().getDictValue(dictCode, dictText, separator);
     }
 
     /**
@@ -84,7 +83,15 @@ public class DictUtil {
         if (StrUtil.isBlank(dictCode)) {
             return Map.of();
         }
-        return DictServiceProvider.getDictService().getAllDictByDictCode(dictCode);
+        return DictResolverProvider.getDictResolver().getAllDictByDictCode(dictCode);
+    }
+
+    /**
+     * 加载所有字典项到缓存
+     * @param dictMap 字典项 Map，key = dictCode, value = Map(dictValue, dictText)
+     */
+    public static void loadAllDict(Map<String, Map<String, String>> dictMap) {
+        DictResolverProvider.getDictResolver().loadAllDict(dictMap);
     }
 
 }

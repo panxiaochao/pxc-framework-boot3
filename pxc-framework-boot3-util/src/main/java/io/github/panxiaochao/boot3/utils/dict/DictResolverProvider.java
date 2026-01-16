@@ -11,28 +11,28 @@ import lombok.Setter;
  * @since 2026-01-16
  * @version 1.0
  */
-public class DictServiceProvider {
+public class DictResolverProvider {
 
     /**
      * 设置字典服务实现，volatile 确保线程安全
      */
     @Setter
-    private static volatile IDictService dictService;
+    private static volatile IDictResolver dictResolver;
 
     /**
      * 获取当前字典服务
      * @return 字典服务
      */
-    public static IDictService getDictService() {
-        if (dictService == null) {
-            synchronized (DictServiceProvider.class) {
-                if (dictService == null) {
+    public static IDictResolver getDictResolver() {
+        if (dictResolver == null) {
+            synchronized (DictResolverProvider.class) {
+                if (dictResolver == null) {
                     // 默认返回空实现，防止NPE
-                    dictService = new DefaultDictService();
+                    dictResolver = new DefaultDictResolver();
                 }
             }
         }
-        return dictService;
+        return dictResolver;
     }
 
 }

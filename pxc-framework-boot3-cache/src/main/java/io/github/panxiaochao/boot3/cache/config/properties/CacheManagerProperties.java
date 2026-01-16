@@ -36,12 +36,17 @@ public class CacheManagerProperties {
     /**
      * 缓存类型: caffeine（默认）、REDIS、SIMPLE
      */
-    private CacheManagerType cacheType = CacheManagerType.CAFFEINE;
+    private CacheManagerType type = CacheManagerType.CAFFEINE;
 
     /**
-     *
+     * Caffeine 缓存配置
      */
     private final Caffeine caffeine = new Caffeine();
+
+    /**
+     * 字典缓存键前缀, 默认值: sys_dict:
+     */
+    private String dictCacheKeyPrefix = "sys_dict:";
 
     @Getter
     @Setter

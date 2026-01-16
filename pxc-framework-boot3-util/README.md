@@ -104,24 +104,34 @@ graph BT
     classDef top fill:#e1f5d4,stroke:#333,stroke-width:2px;
 
     subgraph "Level 1: 基础工具 (Utils)"
-        U[pxc-boot3-utils]:::base
-        Note1(包含 DictUtil 类<br>包含 DictDataProvider 接口<br>不含 Redis 代码)
+        U[pxc-framework-boot3-util]:::base
+        Note1(字典工具类, 提供字典相关的工具方法)
     end
 
-    subgraph "Level 2: 框架支持 (Framework/Starter)"
-        F[pxc-boot3-starter-dict]:::mid
-        Note2(依赖 Redis<br>实现 RedisDictDataProvider<br>自动注入到 DictUtil)
+    subgraph "Level 2: 框架支持 (接口类)"
+        F[IDictResolver]:::mid
+        Note2(字典服务接口, 提供字典操作的基本方法)
     end
 
-    subgraph "Level 3: 业务微服务 (Services)"
-        S1[User Service]:::top
-        S2[Order Service]:::top
+    subgraph "Level 3: 抽象类 (Abstract)"
+        S1[AbstractDictResolver]:::top
+        Note3(字典服务接口, 提供字典操作的基本方法)
+        S2[DefaultDictResolver]:::top
+        Note4(默认字典服务实现类)
+    end
+    
+    subgraph "Level 4: 实现类"
+        A1[RedisDictResolver]:::top
+        Note5(字典服务接口, 使用 Caffeine 提供字典操作的基本方法)
+        A2[CaffeineDictResolver]:::top
+        Note6(字典服务接口, 使用 Redis 提供字典操作的基本方法)
     end
 
     F --> U
     S1 --> F
     S2 --> F
+    A1 --> S1
+    A2 --> S1
 
-    %% 解释线条
-    linkStyle 0,1,2 stroke-width:2px,fill:none,stroke:blue;
+    linkStyle 0,1,2,3 stroke-width:2px,fill:none,stroke:blue;
 ```
