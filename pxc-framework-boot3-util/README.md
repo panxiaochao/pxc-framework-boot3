@@ -133,5 +133,5 @@ graph BT
     A1 --> S1
     A2 --> S1
 
-    linkStyle 0,1,2,3 stroke-width:2px,fill:none,stroke:blue;
+    linkStyle 0,1,2,3,4 stroke-width:2px,fill:none,stroke:blue;
 ```
