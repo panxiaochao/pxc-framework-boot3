@@ -1,5 +1,9 @@
 package io.github.panxiaochao.boot3.utils;
 
+import io.github.panxiaochao.boot3.utils.dict.DictServiceProvider;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.util.Map;
 
 /**
@@ -17,37 +21,70 @@ import java.util.Map;
  * @since 2026-01-15
  * @version 1.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DictUtil {
 
+    private static final String DEFAULT_SEPARATOR = StringPools.COMMA;
+
     /**
-     * 根据字典类型和字典值获取字典标签
+     * 根据字典类型和字典值获取字典文本，默认分隔符为逗号
      * @param dictCode 字典编码
      * @param dictValue 字典值
-     * @param separator 分隔符
-     * @return 字典标签
+     * @return 字典文本
      */
-    public static String getDictText(String dictCode, String dictValue, String separator) {
-        return "";
+    public static String getDictText(String dictCode, String dictValue) {
+        return getDictText(dictCode, dictValue, DEFAULT_SEPARATOR);
     }
 
     /**
-     * 根据字典类型和字典标签获取字典值
+     * 根据字典类型和字典值获取字典文本
+     * @param dictCode 字典编码
+     * @param dictValue 字典值
+     * @param separator 分隔符
+     * @return 字典文本
+     */
+    public static String getDictText(String dictCode, String dictValue, String separator) {
+        if (StrUtil.isBlank(dictCode)) {
+            return StrUtil.EMPTY;
+        }
+        return DictServiceProvider.getDictService().getDictText(dictCode, dictValue, separator);
+    }
+
+    /**
+     * 根据字典类型和字典文本获取字典值，默认分隔符为逗号
+     * @param dictCode 字典编码
+     * @param dictText 字典文本
+     * @return 字典值
+     */
+    public static String getDictValue(String dictCode, String dictText) {
+        return getDictValue(dictCode, dictText, DEFAULT_SEPARATOR);
+    }
+
+    /**
+     * 根据字典类型和字典文本获取字典值
      * @param dictCode 字典编码
      * @param dictText 字典文本
      * @param separator 分隔符
      * @return 字典值
      */
     public static String getDictValue(String dictCode, String dictText, String separator) {
-        return "";
+        if (StrUtil.isBlank(dictCode)) {
+            return StrUtil.EMPTY;
+        }
+
+        return DictServiceProvider.getDictService().getDictValue(dictCode, dictText, separator);
     }
 
     /**
-     * 获取字典下所有的字典值与标签
+     * 获取字典下所有的字典值与文本
      * @param dictCode 字典编码
-     * @return dictValue为key，dictText为值组成的Map
+     * @return key = dictValue, value = dictText 组成的 Map
      */
     public static Map<String, String> getAllDictByDictCode(String dictCode) {
-        return Map.of();
+        if (StrUtil.isBlank(dictCode)) {
+            return Map.of();
+        }
+        return DictServiceProvider.getDictService().getAllDictByDictCode(dictCode);
     }
 
 }

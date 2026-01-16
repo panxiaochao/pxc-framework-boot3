@@ -6,6 +6,7 @@ import cn.idev.excel.metadata.data.WriteCellData;
 import cn.idev.excel.metadata.property.ExcelContentProperty;
 import io.github.panxiaochao.boot3.utils.ConvertUtil;
 import io.github.panxiaochao.boot3.utils.ObjectUtil;
+import io.github.panxiaochao.boot3.utils.StringPools;
 
 /**
  * <p>
@@ -32,7 +33,7 @@ public class ExcelToPercentageConvert implements Converter<Object> {
         }
 
         String numberStr = ConvertUtil.toString(object);
-        return new WriteCellData<>(numberStr + "%");
+        return new WriteCellData<>(numberStr + StringPools.PERCENT);
     }
 
 }

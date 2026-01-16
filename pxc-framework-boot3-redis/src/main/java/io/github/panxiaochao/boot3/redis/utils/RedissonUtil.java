@@ -76,7 +76,9 @@ public class RedissonUtil {
     // ------------------------------- Key查询类型操作 --------------------------------
 
     /**
-     * 按匹配模式获取键值，默认10个 <pre>
+     * 按匹配模式获取键值，默认10个
+     *
+     * <pre>
      * Supported glob-style patterns:
      *  h?llo subscribes to hello, hallo and hxllo
      *  h*llo subscribes to hllo and heeeello
@@ -91,7 +93,9 @@ public class RedissonUtil {
     }
 
     /**
-     * 按匹配模式获取count个数键值 <pre>
+     * 按匹配模式获取count个数键值
+     *
+     * <pre>
      * Supported glob-style patterns:
      *  h?llo subscribes to hello, hallo and hxllo
      *  h*llo subscribes to hllo and heeeello
@@ -108,6 +112,7 @@ public class RedissonUtil {
 
     /**
      * 按匹配模式删除多个对象。
+     * 
      * <p>
      * Method executes in <b>NON atomic way</b> in cluster mode due to lua script
      * limitations.
