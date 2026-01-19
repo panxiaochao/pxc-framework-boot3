@@ -28,6 +28,7 @@ public class RedisDictAutoConfiguration {
         RedisDictResolver redisDictResolver = new RedisDictResolver(cacheManagerProperties.getDictCacheKeyPrefix());
         // 注册 RedisDictResolver 到 DictResolverProvider
         DictResolverProvider.setDictResolver(redisDictResolver);
+        DictResolverProvider.setDictCacheKeyPrefix(cacheManagerProperties.getDictCacheKeyPrefix());
         return redisDictResolver;
     }
 

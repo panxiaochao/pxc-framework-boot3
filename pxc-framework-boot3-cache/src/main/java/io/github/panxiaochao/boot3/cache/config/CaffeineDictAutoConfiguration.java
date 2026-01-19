@@ -29,6 +29,7 @@ public class CaffeineDictAutoConfiguration {
                 cacheManagerProperties.getDictCacheKeyPrefix());
         // 注册 CaffeineDictResolver 到 DictResolverProvider
         DictResolverProvider.setDictResolver(caffeineDictResolver);
+        DictResolverProvider.setDictCacheKeyPrefix(cacheManagerProperties.getDictCacheKeyPrefix());
         return caffeineDictResolver;
     }
 
