@@ -24,12 +24,10 @@ import org.springframework.context.annotation.Bean;
 public class CaffeineDictAutoConfiguration {
 
     @Bean
-    public IDictResolver caffeineDictResolver(final CacheManagerProperties cacheManagerProperties) {
-        CaffeineDictResolver caffeineDictResolver = new CaffeineDictResolver(
-                cacheManagerProperties.getDictCacheKeyPrefix());
+    public IDictResolver caffeineDictResolver() {
+        CaffeineDictResolver caffeineDictResolver = new CaffeineDictResolver();
         // 注册 CaffeineDictResolver 到 DictResolverProvider
         DictResolverProvider.setDictResolver(caffeineDictResolver);
-        DictResolverProvider.setDictCacheKeyPrefix(cacheManagerProperties.getDictCacheKeyPrefix());
         return caffeineDictResolver;
     }
 

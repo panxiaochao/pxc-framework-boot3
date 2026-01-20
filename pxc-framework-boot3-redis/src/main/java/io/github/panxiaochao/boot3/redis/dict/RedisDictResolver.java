@@ -2,7 +2,6 @@ package io.github.panxiaochao.boot3.redis.dict;
 
 import io.github.panxiaochao.boot3.redis.utils.RedissonUtil;
 import io.github.panxiaochao.boot3.utils.dict.AbstractDictResolver;
-import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 
@@ -15,23 +14,18 @@ import java.util.Map;
  * @since 2026-01-16
  * @version 1.0
  */
-@RequiredArgsConstructor
 public class RedisDictResolver extends AbstractDictResolver {
-
-    private final String dictCacheKeyPrefix;
-
+    
     @Override
     public Map<String, String> getAllDictByDictCode(String dictCode) {
-        String dictCacheKey = dictCacheKeyPrefix + dictCode;
+        String dictCacheKey = this.getCacheKeyPrefix() + dictCode;
         Map<String, String> dictMap = RedissonUtil.getMapAll(dictCacheKey);
         return (dictMap == null || dictMap.isEmpty()) ? Map.of() : dictMap;
     }
 
     @Override
     public void loadAllDict(Map<String, Map<String, String>> dictMap) {
-        dictMap.forEach((dictCode, map) -> {
-            RedissonUtil.putAllMap(dictCacheKeyPrefix + dictCode, map);
-        });
+        dictMap.forEach((dictCode, map) -> RedissonUtil.putAllMap(this.getCacheKeyPrefix() + dictCode, map));
     }
 
 }

@@ -26,6 +26,13 @@ public class DictUtil {
 
     private static final String DEFAULT_SEPARATOR = StringPools.COMMA;
 
+    private static String CACHE_KEY_PREFIX;
+
+    public DictUtil of(String cacheKeyPrefix) {
+        CACHE_KEY_PREFIX = cacheKeyPrefix;
+        return this;
+    }
+
     /**
      * 根据字典类型和字典值获取字典文本，默认分隔符为逗号
      * @param dictCode 字典编码
@@ -47,7 +54,7 @@ public class DictUtil {
         if (StrUtil.isBlank(dictCode)) {
             return StrUtil.EMPTY;
         }
-        return DictResolverProvider.getDictResolver().getDictText(dictCode, dictValue, separator);
+        return DictResolverProvider.getDictResolver(CACHE_KEY_PREFIX).getDictText(dictCode, dictValue, separator);
     }
 
     /**
@@ -71,7 +78,7 @@ public class DictUtil {
         if (StrUtil.isBlank(dictCode)) {
             return StrUtil.EMPTY;
         }
-        return DictResolverProvider.getDictResolver().getDictValue(dictCode, dictText, separator);
+        return DictResolverProvider.getDictResolver(CACHE_KEY_PREFIX).getDictValue(dictCode, dictText, separator);
     }
 
     /**
@@ -79,19 +86,19 @@ public class DictUtil {
      * @param dictCode 字典编码
      * @return key = dictValue, value = dictText 组成的 Map
      */
-    public static Map<String, String> getAllDictByDictCode(String dictCode) {
+    public static Map<String, String> getAllDictByDictCode(String cacheKeyPrefix, String dictCode) {
         if (StrUtil.isBlank(dictCode)) {
             return Map.of();
         }
-        return DictResolverProvider.getDictResolver().getAllDictByDictCode(dictCode);
+        return DictResolverProvider.getDictResolver(cacheKeyPrefix).getAllDictByDictCode(dictCode);
     }
 
     /**
      * 加载所有字典项到缓存
      * @param dictMap 字典项 Map，key = dictCode, value = Map(dictValue, dictText)
      */
-    public static void loadAllDict(Map<String, Map<String, String>> dictMap) {
-        DictResolverProvider.getDictResolver().loadAllDict(dictMap);
+    public static void loadAllDict(String cacheKeyPrefix, Map<String, Map<String, String>> dictMap) {
+        DictResolverProvider.getDictResolver(cacheKeyPrefix).loadAllDict(dictMap);
     }
 
 }

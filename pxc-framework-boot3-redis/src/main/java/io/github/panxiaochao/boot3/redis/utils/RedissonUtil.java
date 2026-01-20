@@ -428,7 +428,7 @@ public class RedissonUtil {
      * @param key 缓存的键值
      * @return 缓存的对象
      */
-    public static <T> List<T> getList(String key) {
+    public static <T> List<T> getListAll(String key) {
         RList<T> rList = getRList(key);
         return rList.readAll();
     }

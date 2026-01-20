@@ -24,11 +24,10 @@ import org.springframework.context.annotation.Bean;
 public class RedisDictAutoConfiguration {
 
     @Bean
-    public IDictResolver redisDictResolver(final CacheManagerProperties cacheManagerProperties) {
-        RedisDictResolver redisDictResolver = new RedisDictResolver(cacheManagerProperties.getDictCacheKeyPrefix());
+    public IDictResolver redisDictResolver() {
+        RedisDictResolver redisDictResolver = new RedisDictResolver();
         // 注册 RedisDictResolver 到 DictResolverProvider
         DictResolverProvider.setDictResolver(redisDictResolver);
-        DictResolverProvider.setDictCacheKeyPrefix(cacheManagerProperties.getDictCacheKeyPrefix());
         return redisDictResolver;
     }
 

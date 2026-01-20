@@ -26,9 +26,10 @@ public class ExcelTest {
         // Method codeMethod = getMethod(DatabaseType.class, "dbType");
         // Method valueMethod = getMethod(DatabaseType.class, "driverClassName");
         // for (Enum<?> enumConstant : enumConstants) {
-        //     Object codeValue = ReflectionUtils.invokeMethod(codeMethod, enumConstant);
-        //     String textValue = ConvertUtil.toString(ReflectionUtils.invokeMethod(valueMethod, enumConstant));
-        //     enumValueMap.put(codeValue, textValue);
+        // Object codeValue = ReflectionUtils.invokeMethod(codeMethod, enumConstant);
+        // String textValue =
+        // ConvertUtil.toString(ReflectionUtils.invokeMethod(valueMethod, enumConstant));
+        // enumValueMap.put(codeValue, textValue);
         // }
         // System.out.println(enumValueMap);
 

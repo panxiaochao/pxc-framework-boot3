@@ -19,22 +19,21 @@ public class DictResolverProvider {
     @Setter
     private static volatile IDictResolver dictResolver;
 
-    @Setter
-    private static String dictCacheKeyPrefix;
-
     /**
      * 获取当前字典服务
      * @return 字典服务
      */
-    public static IDictResolver getDictResolver() {
+    public static IDictResolver getDictResolver(String cacheKeyPrefix) {
         if (dictResolver == null) {
             synchronized (DictResolverProvider.class) {
                 if (dictResolver == null) {
                     // 默认返回空实现，防止NPE
-                    dictResolver = new DefaultDictResolver(dictCacheKeyPrefix);
+                    dictResolver = new DefaultDictResolver();
                 }
             }
         }
+        // 设置缓存键前缀
+        dictResolver.setCacheKeyPrefix(cacheKeyPrefix);
         return dictResolver;
     }
 
