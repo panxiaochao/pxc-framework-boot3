@@ -24,14 +24,19 @@ public class CaffeineDictResolver extends AbstractDictResolver {
 
     @Override
     public Map<String, String> getAllDictByDictCode(String dictCode) {
-        String dictCacheKey = this.getCacheKeyPrefix() + dictCode;
+        String dictCacheKey = CACHE_KEY_PREFIX + dictCode;
         Map<String, String> dictMap = CAFFEINE.getIfPresent(dictCacheKey);
         return (dictMap == null || dictMap.isEmpty()) ? Map.of() : dictMap;
     }
 
     @Override
-    public void loadAllDict(Map<String, Map<String, String>> dictMap) {
-        dictMap.forEach((dictCode, map) -> CAFFEINE.put(this.getCacheKeyPrefix() + dictCode, map));
+    public void loadAllDict(Map<String, Map<String, String>> dictAllMap) {
+        dictAllMap.forEach((dictCode, map) -> CAFFEINE.put(CACHE_KEY_PREFIX + dictCode, map));
+    }
+
+    @Override
+    public void loadDict(String dictCode, Map<String, String> dictMap) {
+        CAFFEINE.put(CACHE_KEY_PREFIX + dictCode, dictMap);
     }
 
 }

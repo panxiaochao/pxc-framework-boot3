@@ -1,8 +1,6 @@
 package io.github.panxiaochao.boot3.utils.dict;
 
 import io.github.panxiaochao.boot3.utils.StrUtil;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -17,11 +15,9 @@ import java.util.stream.Collectors;
  * @since 2026-01-16
  * @version 1.0
  */
-@Getter
-@Setter
 public abstract class AbstractDictResolver implements IDictResolver {
 
-    private String cacheKeyPrefix;
+    public static final String CACHE_KEY_PREFIX = "pxc-framework-boot3:cache:dict:";
 
     @Override
     public String getDictText(String dictCode, String dictValue, String separator) {

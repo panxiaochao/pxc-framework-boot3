@@ -14,11 +14,6 @@ import java.util.Map;
 public interface IDictResolver {
 
     /**
-     * 设置缓存键前缀
-     */
-    void setCacheKeyPrefix(String cacheKeyPrefix);
-
-    /**
      * 根据字典编码和字典值获取字典文本，默认分隔符为逗号
      * @param dictCode 字典编码
      * @param dictValue 字典值
@@ -40,9 +35,18 @@ public interface IDictResolver {
 
     /**
      * 加载所有字典项到缓存
-     * @param dictMap 字典映射关系数据
+     * @param dictAllMap 字典映射关系数据，key = 缓存键, value = 字典项 Map，[key = dictValue, value =
+     * dictText]
      */
-    default void loadAllDict(Map<String, Map<String, String>> dictMap) {
+    default void loadAllDict(Map<String, Map<String, String>> dictAllMap) {
+    };
+
+    /**
+     * 加载字典项到缓存
+     * @param dictCode 缓存键
+     * @param dictMap 字典项 Map，key = dictValue, value = dictText
+     */
+    default void loadDict(String dictCode, Map<String, String> dictMap) {
     };
 
     /**

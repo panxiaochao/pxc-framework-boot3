@@ -19,14 +19,19 @@ public class DefaultDictResolver extends AbstractDictResolver {
 
     @Override
     public Map<String, String> getAllDictByDictCode(String dictCode) {
-        String dictCacheKey = this.getCacheKeyPrefix() + dictCode;
+        String dictCacheKey = CACHE_KEY_PREFIX + dictCode;
         Map<String, String> dictMap = CONCURRENT_HASH_MAP.getOrDefault(dictCacheKey, Map.of());
         return dictMap.isEmpty() ? Map.of() : dictMap;
     }
 
     @Override
-    public void loadAllDict(Map<String, Map<String, String>> dictMap) {
-        dictMap.forEach((dictCode, map) -> CONCURRENT_HASH_MAP.put(this.getCacheKeyPrefix() + dictCode, map));
+    public void loadAllDict(Map<String, Map<String, String>> dictAllMap) {
+        dictAllMap.forEach((dictCode, map) -> CONCURRENT_HASH_MAP.put(CACHE_KEY_PREFIX + dictCode, map));
+    }
+
+    @Override
+    public void loadDict(String dictCode, Map<String, String> dictMap) {
+        CONCURRENT_HASH_MAP.put(CACHE_KEY_PREFIX + dictCode, dictMap);
     }
 
 }

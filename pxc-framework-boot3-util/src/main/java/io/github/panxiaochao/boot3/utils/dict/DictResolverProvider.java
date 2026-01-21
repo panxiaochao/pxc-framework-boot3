@@ -23,7 +23,7 @@ public class DictResolverProvider {
      * 获取当前字典服务
      * @return 字典服务
      */
-    public static IDictResolver getDictResolver(String cacheKeyPrefix) {
+    public static IDictResolver getDictResolver() {
         if (dictResolver == null) {
             synchronized (DictResolverProvider.class) {
                 if (dictResolver == null) {
@@ -32,8 +32,6 @@ public class DictResolverProvider {
                 }
             }
         }
-        // 设置缓存键前缀
-        dictResolver.setCacheKeyPrefix(cacheKeyPrefix);
         return dictResolver;
     }
 

@@ -15,17 +15,22 @@ import java.util.Map;
  * @version 1.0
  */
 public class RedisDictResolver extends AbstractDictResolver {
-    
+
     @Override
     public Map<String, String> getAllDictByDictCode(String dictCode) {
-        String dictCacheKey = this.getCacheKeyPrefix() + dictCode;
+        String dictCacheKey = CACHE_KEY_PREFIX + dictCode;
         Map<String, String> dictMap = RedissonUtil.getMapAll(dictCacheKey);
         return (dictMap == null || dictMap.isEmpty()) ? Map.of() : dictMap;
     }
 
     @Override
-    public void loadAllDict(Map<String, Map<String, String>> dictMap) {
-        dictMap.forEach((dictCode, map) -> RedissonUtil.putAllMap(this.getCacheKeyPrefix() + dictCode, map));
+    public void loadAllDict(Map<String, Map<String, String>> dictAllMap) {
+        dictAllMap.forEach((dictCode, map) -> RedissonUtil.putAllMap(CACHE_KEY_PREFIX + dictCode, map));
+    }
+
+    @Override
+    public void loadDict(String dictCode, Map<String, String> dictMap) {
+        RedissonUtil.putAllMap(CACHE_KEY_PREFIX + dictCode, dictMap);
     }
 
 }

@@ -125,6 +125,8 @@ graph BT
         Note5(字典服务接口, 使用 Caffeine 提供字典操作的基本方法)
         A2[CaffeineDictResolver]:::top
         Note6(字典服务接口, 使用 Redis 提供字典操作的基本方法)
+        A3[DefaultDictResolver]:::top
+        Note7(字典服务接口, 使用 Memory 提供字典操作的基本方法)
     end
 
     F --> U
@@ -132,6 +134,7 @@ graph BT
     S2 --> F
     A1 --> S1
     A2 --> S1
+    A3 --> S1
 
     linkStyle 0,1,2,3,4 stroke-width:2px,fill:none,stroke:blue;
 ```
