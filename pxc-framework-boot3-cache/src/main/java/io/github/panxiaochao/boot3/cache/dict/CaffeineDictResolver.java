@@ -39,4 +39,9 @@ public class CaffeineDictResolver extends AbstractDictResolver {
         CAFFEINE.put(CACHE_KEY_PREFIX + dictCode, dictMap);
     }
 
+    @Override
+    public void clearAllDict() {
+        CAFFEINE.invalidateAll();
+    }
+
 }

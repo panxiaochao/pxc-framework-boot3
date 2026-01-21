@@ -50,6 +50,12 @@ public interface IDictResolver {
     };
 
     /**
+     * 清空所有字典项缓存
+     */
+    default void clearAllDict() {
+    };
+
+    /**
      * 根据字典编码和字典值获取字典文本
      * @param dictCode 字典编码
      * @param dictValue 字典值

@@ -34,4 +34,9 @@ public class DefaultDictResolver extends AbstractDictResolver {
         CONCURRENT_HASH_MAP.put(CACHE_KEY_PREFIX + dictCode, dictMap);
     }
 
+    @Override
+    public void clearAllDict() {
+        CONCURRENT_HASH_MAP.clear();
+    }
+
 }

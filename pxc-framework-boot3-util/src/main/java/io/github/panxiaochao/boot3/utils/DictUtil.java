@@ -106,4 +106,11 @@ public class DictUtil {
         DictResolverProvider.getDictResolver().loadDict(dictCode, dictMap);
     }
 
+    /**
+     * 清空所有字典项缓存
+     */
+    public static void clearAllDict() {
+        DictResolverProvider.getDictResolver().clearAllDict();
+    }
+
 }

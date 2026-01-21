@@ -123,8 +123,14 @@ graph BT
     subgraph "Level 4: 实现类"
         A1[RedisDictResolver]:::top
         Note5(字典服务接口, 使用 Caffeine 提供字典操作的基本方法)
+    end
+    
+    subgraph "Level 4: 实现类"
         A2[CaffeineDictResolver]:::top
         Note6(字典服务接口, 使用 Redis 提供字典操作的基本方法)
+    end
+    
+    subgraph "Level 4: 实现类"
         A3[DefaultDictResolver]:::top
         Note7(字典服务接口, 使用 Memory 提供字典操作的基本方法)
     end

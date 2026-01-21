@@ -33,4 +33,9 @@ public class RedisDictResolver extends AbstractDictResolver {
         RedissonUtil.putAllMap(CACHE_KEY_PREFIX + dictCode, dictMap);
     }
 
+    @Override
+    public void clearAllDict() {
+        RedissonUtil.deleteKeyByPattern(CACHE_KEY_PREFIX + "*");
+    }
+
 }
