@@ -4,6 +4,8 @@ import io.github.panxiaochao.boot3.cache.config.properties.CacheManagerPropertie
 import io.github.panxiaochao.boot3.redis.dict.RedisDictResolver;
 import io.github.panxiaochao.boot3.utils.dict.DictResolverProvider;
 import io.github.panxiaochao.boot3.utils.dict.IDictResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,11 +25,17 @@ import org.springframework.context.annotation.Bean;
 @ConditionalOnProperty(name = "spring.pxc-framework-boot3.cache.type", havingValue = "REDIS")
 public class RedisDictAutoConfiguration {
 
+    /**
+     * LOGGER RedisDictAutoConfiguration.class
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(RedisDictAutoConfiguration.class);
+
     @Bean
     public IDictResolver redisDictResolver() {
         RedisDictResolver redisDictResolver = new RedisDictResolver();
         // 注册 RedisDictResolver 到 DictResolverProvider
         DictResolverProvider.setDictResolver(redisDictResolver);
+        LOGGER.info("配置[Dict -> RedisDict]成功！");
         return redisDictResolver;
     }
 

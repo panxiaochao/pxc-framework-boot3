@@ -12,7 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 2026-01-16
  * @version 1.0
  */
-
 public class DefaultDictResolver extends AbstractDictResolver {
 
     private final ConcurrentHashMap<String, Map<String, String>> CONCURRENT_HASH_MAP = new ConcurrentHashMap<>();

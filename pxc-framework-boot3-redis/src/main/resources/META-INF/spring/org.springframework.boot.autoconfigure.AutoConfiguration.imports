@@ -1,1 +1,2 @@
 io.github.panxiaochao.boot3.redis.config.Redisson3AutoConfiguration
+io.github.panxiaochao.boot3.redis.config.RedisDictAutoConfiguration

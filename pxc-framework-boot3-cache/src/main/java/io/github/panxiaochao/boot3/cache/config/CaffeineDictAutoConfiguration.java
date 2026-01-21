@@ -4,6 +4,8 @@ import io.github.panxiaochao.boot3.cache.config.properties.CacheManagerPropertie
 import io.github.panxiaochao.boot3.cache.dict.CaffeineDictResolver;
 import io.github.panxiaochao.boot3.utils.dict.DictResolverProvider;
 import io.github.panxiaochao.boot3.utils.dict.IDictResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,11 +25,17 @@ import org.springframework.context.annotation.Bean;
 @ConditionalOnProperty(name = "spring.pxc-framework-boot3.cache.type", havingValue = "CAFFEINE")
 public class CaffeineDictAutoConfiguration {
 
+    /**
+     * LOGGER CaffeineDictAutoConfiguration.class
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(CaffeineDictAutoConfiguration.class);
+
     @Bean
     public IDictResolver caffeineDictResolver() {
         CaffeineDictResolver caffeineDictResolver = new CaffeineDictResolver();
         // 注册 CaffeineDictResolver 到 DictResolverProvider
         DictResolverProvider.setDictResolver(caffeineDictResolver);
+        LOGGER.info("配置[Dict -> CaffeineDict]成功！");
         return caffeineDictResolver;
     }
 

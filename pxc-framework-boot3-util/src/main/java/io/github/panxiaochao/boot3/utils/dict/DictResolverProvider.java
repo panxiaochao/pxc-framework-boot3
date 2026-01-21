@@ -1,6 +1,8 @@
 package io.github.panxiaochao.boot3.utils.dict;
 
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>
@@ -12,6 +14,11 @@ import lombok.Setter;
  * @version 1.0
  */
 public class DictResolverProvider {
+
+    /**
+     * LOGGER DictResolverProvider.class
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(DictResolverProvider.class);
 
     /**
      * 设置字典服务实现，volatile 确保线程安全
@@ -29,6 +36,7 @@ public class DictResolverProvider {
                 if (dictResolver == null) {
                     // 默认返回空实现，防止NPE
                     dictResolver = new DefaultDictResolver();
+                    LOGGER.info("配置[Dict -> Default]成功！");
                 }
             }
         }
