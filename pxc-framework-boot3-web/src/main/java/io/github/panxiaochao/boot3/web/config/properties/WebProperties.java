@@ -32,7 +32,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "spring.pxc-framework", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "spring.pxc-framework-boot3", ignoreInvalidFields = true)
 public class WebProperties {
 
     /**
