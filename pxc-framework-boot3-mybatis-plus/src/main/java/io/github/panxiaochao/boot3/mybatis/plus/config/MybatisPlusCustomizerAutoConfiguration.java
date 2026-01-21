@@ -19,21 +19,18 @@ import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
-import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ParameterUtils;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import io.github.panxiaochao.boot3.utils.BooleanUtil;
-import io.github.panxiaochao.boot3.utils.IpUtil;
 import io.github.panxiaochao.boot3.mybatis.plus.config.properties.MpProperties;
 import io.github.panxiaochao.boot3.mybatis.plus.handler.IMetaObjectHandler;
 import io.github.panxiaochao.boot3.mybatis.plus.handler.MetaObjectHandlerCustomizer;
-import io.github.panxiaochao.boot3.mybatis.plus.injector.mysql.MySqlInjector;
-import io.github.panxiaochao.boot3.mybatis.plus.injector.oracle.OracleInjector;
 import io.github.panxiaochao.boot3.mybatis.plus.interceptor.SqlLogInterceptor;
+import io.github.panxiaochao.boot3.utils.BooleanUtil;
+import io.github.panxiaochao.boot3.utils.IpUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -43,7 +40,6 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -52,6 +48,13 @@ import org.springframework.core.Ordered;
 /**
  * <p>
  * MyBatis plus 自动配置类
+ * </p>
+ *
+ * <p>
+ * 理论上, mybatisPlus 连表插件(MPJBaseMapper) 与自定义SQL注入器(MySqlInjector, OracleInjector) 不应该冲突,
+ * 但是在实际使用中, 发现 MPJBaseMapper 会覆盖自定义SQL注入器的方法, 导致自定义SQL注入器失效. 参考
+ * <a href="https://blog.csdn.net/ygxyvip/article/details/120524157">论mybatisPlus
+ * 连表插件(MPJBaseMapper) 与自定义SQL注入器冲突</a>
  * </p>
  *
  * @author Lypxc
@@ -119,14 +122,11 @@ public class MybatisPlusCustomizerAutoConfiguration {
     }
 
     /**
-     * 乐观锁插件
-     */
-    public OptimisticLockerInnerInterceptor optimisticLockerInnerInterceptor() {
-        return new OptimisticLockerInnerInterceptor();
-    }
-
-    /**
-     * 配置 mybatis plus 插件
+     * 自定义 Mybatis Plus 插件配置：
+     *
+     * <ul>
+     * <li>1.配置 sql 日志拦截器</li>
+     * </ul>
      */
     @Bean
     public ConfigurationCustomizer configurationCustomizer() {
@@ -161,21 +161,21 @@ public class MybatisPlusCustomizerAutoConfiguration {
      * 仅 MySQL 注入器
      * @return 注入器
      */
-    @Bean
-    @ConditionalOnProperty(name = "mybatis-plus.db-type", havingValue = "mysql")
-    public DefaultSqlInjector mySqlInjector() {
-        return new MySqlInjector();
-    }
+    // @Bean
+    // @ConditionalOnProperty(name = "mybatis-plus.db-type", havingValue = "mysql")
+    // public MySqlInjector mySqlInjector() {
+    // return new MySqlInjector();
+    // }
 
     /**
      * 仅 Oracle 注入器
      * @return 注入器
      */
-    @Bean
-    @ConditionalOnProperty(name = "mybatis-plus.db-type", havingValue = "oracle")
-    public DefaultSqlInjector oracleInjector() {
-        return new OracleInjector();
-    }
+    // @Bean
+    // @ConditionalOnProperty(name = "mybatis-plus.db-type", havingValue = "oracle")
+    // public OracleInjector oracleInjector() {
+    // return new OracleInjector();
+    // }
 
     /**
      * 自定义元对象字段填充默认实现类
