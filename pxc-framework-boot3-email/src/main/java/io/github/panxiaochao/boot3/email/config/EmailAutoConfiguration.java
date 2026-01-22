@@ -42,8 +42,8 @@ public class EmailAutoConfiguration {
         account.setPort(emailProperties.getPort());
         account.setAuth(emailProperties.getAuth());
         account.setFrom(emailProperties.getFrom());
-        account.setUser(emailProperties.getLoginName());
-        account.setPass(emailProperties.getPassword());
+        account.setUser(emailProperties.getUser());
+        account.setPass(emailProperties.getPass());
         account.setSocketFactoryPort(emailProperties.getPort());
         account.setStarttlsEnable(emailProperties.getStarttlsEnable());
         account.setSslEnable(emailProperties.getSslEnable());
