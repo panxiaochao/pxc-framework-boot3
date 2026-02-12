@@ -105,8 +105,7 @@ public class RepeatSubmitLimiterAspect {
     @AfterReturning(pointcut = "@annotation(repeatSubmitLimiter)", returning = "returnValue")
     public void doAfterReturning(JoinPoint joinPoint, RepeatSubmitLimiter repeatSubmitLimiter, Object returnValue) {
         try {
-            if (returnValue instanceof R) {
-                R<?> r = (R<?>) returnValue;
+            if (returnValue instanceof R<?> r) {
                 // 请求成功后不删除操作，保存还在有效时间内继续防止重复提交
                 if (R.isFail(r)) {
                     RedissonUtil.delete(CACHE_KEY_SET.get());

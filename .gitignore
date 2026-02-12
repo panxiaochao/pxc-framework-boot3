@@ -57,6 +57,8 @@ buildNumber.properties
 .idea
 .idea/
 
+report.md
+
 .flattened-pom.xml
 
 # VSCode

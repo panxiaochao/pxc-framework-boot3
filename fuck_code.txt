@@ -1,1 +1,1 @@
-./fuck-u-code analyze --verbose --markdown > report.md
+./fuck-u-code analyze --verbose --lang zh-CN --markdown > report.md
