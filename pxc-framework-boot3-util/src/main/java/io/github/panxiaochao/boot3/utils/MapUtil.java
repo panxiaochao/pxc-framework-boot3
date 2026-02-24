@@ -15,11 +15,14 @@
  */
 package io.github.panxiaochao.boot3.utils;
 
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
-
-import java.util.*;
-import java.util.function.Function;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -135,111 +138,6 @@ public class MapUtil {
      */
     public static <T extends Map<K, V>, K, V> T defaultIfEmpty(T map, T defaultMap) {
         return isEmpty(map) ? defaultMap : map;
-    }
-
-    /**
-     * Put into map if value is not null.
-     * @param target target map
-     * @param key key
-     * @param value value
-     */
-    public static void putIfValNoNull(Map target, Object key, Object value) {
-        Objects.requireNonNull(key, "key");
-        if (value != null) {
-            target.put(key, value);
-        }
-    }
-
-    /**
-     * Put into map if value is not empty.
-     * @param target target map
-     * @param key key
-     * @param value value
-     */
-    public static void putIfValNoEmpty(Map target, Object key, Object value) {
-        Objects.requireNonNull(key, "key");
-        if (value instanceof String) {
-            if (!StringUtils.hasText((String) value)) {
-                target.put(key, value);
-            }
-            return;
-        }
-        if (value instanceof Collection) {
-            if (!CollectionUtils.isEmpty((Collection) value)) {
-                target.put(key, value);
-            }
-            return;
-        }
-        if (value instanceof Map) {
-            if (isNotEmpty((Map) value)) {
-                target.put(key, value);
-            }
-            return;
-        }
-    }
-
-    /**
-     * 如果 key 对应的 value 不存在，则使用获取 mappingFunction 重新计算后的值，并保存为该 key 的 value，否则返回
-     * value。<br>
-     * 方法来自Dubbo，解决使用ConcurrentHashMap.computeIfAbsent导致的死循环问题。（issues#2349）<br>
-     * A temporary workaround for Java 8 specific performance issue JDK-8161372 .<br>
-     * This class should be removed once we drop Java 8 support.<br>
-     * 参考：https://github.com/apache/dubbo/blob/3.2/dubbo-common/src/main/java/org/apache/dubbo/common/utils/ConcurrentHashMapUtils.java
-     * @param <K> 键类型
-     * @param <V> 值类型
-     * @param map Map
-     * @param key 键
-     * @param mappingFunction 值不存在时值的生成函数
-     * @return 值
-     * @see <a href=
-     * "https://bugs.openjdk.java.net/browse/JDK-8161372">https://bugs.openjdk.java.net/browse/JDK-8161372</a>
-     */
-    public static <K, V> V computeIfAbsent(Map<K, V> map, K key, Function<? super K, ? extends V> mappingFunction) {
-        if (JdkUtil.IS_JDK8) {
-            return computeIfAbsentForJdk8(map, key, mappingFunction);
-        }
-        else {
-            return map.computeIfAbsent(key, mappingFunction);
-        }
-    }
-
-    /**
-     * 如果 key 对应的 value 不存在，则使用获取 mappingFunction 重新计算后的值，并保存为该 key 的 value，否则返回
-     * value。<br>
-     * 解决使用ConcurrentHashMap.computeIfAbsent导致的死循环问题。（issues#2349）<br>
-     * A temporary workaround for Java 8 specific performance issue JDK-8161372 .<br>
-     * This class should be removed once we drop Java 8 support.
-     *
-     * <p>
-     * 注意此方法只能用于JDK8
-     * </p>
-     * @param <K> 键类型
-     * @param <V> 值类型
-     * @param map Map，一般用于线程安全的Map
-     * @param key 键
-     * @param mappingFunction 值计算函数
-     * @return 值
-     * @see <a href=
-     * "https://bugs.openjdk.java.net/browse/JDK-8161372">https://bugs.openjdk.java.net/browse/JDK-8161372</a>
-     */
-    public static <K, V> V computeIfAbsentForJdk8(final Map<K, V> map, final K key,
-            final Function<? super K, ? extends V> mappingFunction) {
-        V value = map.get(key);
-        if (null == value) {
-            value = mappingFunction.apply(key);
-            final V res = map.putIfAbsent(key, value);
-            if (null != res) {
-                // issues#I6RVMY
-                // 如果旧值存在，说明其他线程已经赋值成功，putIfAbsent没有执行，返回旧值
-                return res;
-            }
-            // 如果旧值不存在，说明赋值成功，返回当前值
-
-            // Dubbo的解决方式，判空后调用依旧无法解决死循环问题
-            // 见：Issue2349Test
-            // value = map.computeIfAbsent(key, mappingFunction);
-        }
-        return value;
     }
 
     /**

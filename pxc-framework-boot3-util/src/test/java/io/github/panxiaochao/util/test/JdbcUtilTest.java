@@ -1,9 +1,9 @@
 package io.github.panxiaochao.util.test;
 
-import io.github.panxiaochao.boot3.core.enums.DatabaseType;
 import io.github.panxiaochao.boot3.utils.DbMetaUtil;
 import io.github.panxiaochao.boot3.utils.JacksonUtil;
 import io.github.panxiaochao.boot3.utils.JdbcUtil;
+import io.github.panxiaochao.boot3.utils.meta.constants.DatabaseType;
 import io.github.panxiaochao.boot3.utils.meta.db.ColumnMeta;
 import io.github.panxiaochao.boot3.utils.meta.ddl.AbstractDatabase;
 import io.github.panxiaochao.boot3.utils.meta.ddl.DatabaseFactory;

@@ -100,7 +100,11 @@ public class IpInfo {
      * @return 地址字符串，包含国家、区域、省、城市、运营商
      */
     public String getAddressAndIsp() {
-        return getAddress() + "|" + isp;
+        String address = getAddress();
+        if (!StringUtils.hasText(address) && !StringUtils.hasText(isp)) {
+            return UNKNOWN;
+        }
+        return address + "|" + isp;
     }
 
     /**

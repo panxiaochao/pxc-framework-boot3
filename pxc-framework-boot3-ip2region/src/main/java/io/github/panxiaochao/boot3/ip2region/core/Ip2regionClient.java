@@ -21,6 +21,7 @@ import org.lionsoul.ip2region.service.ConfigBuilder;
 import org.lionsoul.ip2region.service.Ip2Region;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -40,7 +41,7 @@ import java.util.function.Function;
  * @since 2025-10-09
  * @version 1.0
  */
-public class Ip2regionClient implements InitializingBean {
+public class Ip2regionClient implements InitializingBean, DisposableBean {
 
     /**
      * LOGGER HolidayProperties.class
@@ -113,6 +114,11 @@ public class Ip2regionClient implements InitializingBean {
         }
     }
 
+    @Override
+    public void destroy() throws Exception {
+        IP_SEARCHER.close();
+    }
+
     /**
      * 构建 Config 对象
      * @param inputStream xdb 输入流
@@ -159,8 +165,8 @@ public class Ip2regionClient implements InitializingBean {
         Resource[] v4Resources = getResources(Ip2regionConstant.IP2REGION_V4_DB_LOCATION);
         if (v4Resources.length > 0) {
             for (Resource resource : v4Resources) {
-                try {
-                    v4Config = buildConfig(resource.getInputStream(), false);
+                try (InputStream v4InputStream = resource.getInputStream()) {
+                    v4Config = buildConfig(v4InputStream, false);
                     LOGGER.info("配置自定义[ip2region_v4]成功！");
                 }
                 catch (IOException e) {
@@ -177,8 +183,8 @@ public class Ip2regionClient implements InitializingBean {
         Resource[] v6Resources = getResources(Ip2regionConstant.IP2REGION_V6_DB_LOCATION);
         if (v6Resources.length > 0) {
             for (Resource resource : v6Resources) {
-                try {
-                    v6Config = buildConfig(resource.getInputStream(), true);
+                try (InputStream v6InputStream = resource.getInputStream()) {
+                    v6Config = buildConfig(v6InputStream, true);
                     LOGGER.info("配置自定义[ip2region_v6]成功！");
                 }
                 catch (IOException e) {

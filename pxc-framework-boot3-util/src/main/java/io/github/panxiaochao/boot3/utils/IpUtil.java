@@ -15,11 +15,11 @@
  */
 package io.github.panxiaochao.boot3.utils;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.math.BigInteger;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
@@ -621,6 +621,21 @@ public class IpUtil {
             return addr;
         }
 
+    }
+
+    /**
+     * 判断是否为IPv6地址
+     * @param ip IP地址
+     * @return 是否为IPv6地址
+     */
+    public static boolean isIPv6(String ip) {
+        try {
+            // 判断是否为IPv6地址
+            return InetAddress.getByName(ip) instanceof Inet6Address;
+        }
+        catch (UnknownHostException e) {
+            return false;
+        }
     }
 
 }

@@ -20,8 +20,6 @@ import lombok.Getter;
 import org.springframework.http.MediaType;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -314,7 +312,7 @@ public enum MimeType {
      * 获取所有扩展名
      */
     public Set<String> getAllExtensions() {
-        return Collections.unmodifiableSet(new HashSet<>(VALUES_MAP.keySet()));
+        return Set.copyOf(VALUES_MAP.keySet());
     }
 
 }

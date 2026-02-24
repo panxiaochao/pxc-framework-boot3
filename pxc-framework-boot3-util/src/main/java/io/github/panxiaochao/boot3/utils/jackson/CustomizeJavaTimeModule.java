@@ -58,21 +58,6 @@ public class CustomizeJavaTimeModule extends SimpleModule {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 默认日期时间格式
-     */
-    private static final String LOCAL_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
-    /**
-     * 默认日期格式
-     */
-    private static final String LOCAL_DATE_FORMAT = "yyyy-MM-dd";
-
-    /**
-     * 默认时间格式
-     */
-    private static final String DATE_TIME_FORMAT = "HH:mm:ss";
-
     public CustomizeJavaTimeModule() {
         super(PackageVersion.VERSION);
         // ====== Serialize ======

@@ -66,12 +66,7 @@ public class OperateLogEventListener {
     public void operateLog(OperateLogDomain operateLogDomain) {
         if (StringUtils.hasText(operateLogDomain.getIp())) {
             IpInfo info = ip2regionClient.memorySearch(operateLogDomain.getIp());
-            if (info != null) {
-                operateLogDomain.setAddress(info.getAddressAndIsp());
-            }
-            else {
-                operateLogDomain.setAddress(IpInfo.ipUnknown());
-            }
+            operateLogDomain.setAddress(info.getAddressAndIsp());
         }
         LOGGER.info("[ip]: {}, [address]: {}, [classMethod]: {}, [requestDateTime]: {}, [costTime]: {}ms",
                 operateLogDomain.getIp(), operateLogDomain.getAddress(), operateLogDomain.getClassMethod(),
