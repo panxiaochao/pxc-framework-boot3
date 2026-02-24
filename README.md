@@ -61,6 +61,7 @@
 |    `微信模块`     |                 [pxc-framework-boot3-weixin](pxc-framework-boot3-weixin)                 |           |
 |   `动态数据源模块`   |     [pxc-framework-boot3-dynamic-datasource](pxc-framework-boot3-dynamic-datasource)     |           |
 |    `组件模块`     |           [pxc-framework-boot3-component](pxc-framework-boot3-boot3-component)           |           |
+|    `通用模块`     |                 [pxc-framework-boot3-common](pxc-framework-boot3-common)                 |           |
 
 ## 未来模块
 
