@@ -53,11 +53,6 @@ public class IpInfo {
     private String country;
 
     /**
-     * 区域
-     */
-    private String area;
-
-    /**
      * 省
      */
     private String province;
@@ -78,68 +73,57 @@ public class IpInfo {
     private String ip;
 
     /**
-     * 原生数据
+     * 地区，例如：CN、US、JP 等
      */
     private String region;
 
     /**
+     * 原生数据
+     */
+    private String rawData;
+
+    /**
      * 拼接完整的地址
-     * @return address
+     * @return 地址字符串，包含国家、区域、省、城市
      */
     public String getAddress() {
-        Set<String> regionSet = new LinkedHashSet<>();
-        regionSet.add(country);
-        regionSet.add(area);
-        regionSet.add(province);
-        regionSet.add(city);
-        regionSet.removeIf(s -> !StringUtils.hasText(s));
-        return String.join("|", regionSet);
+        Set<String> rawSet = new LinkedHashSet<>();
+        rawSet.add(country);
+        rawSet.add(province);
+        rawSet.add(city);
+        rawSet.removeIf(s -> !StringUtils.hasText(s));
+        return String.join("|", rawSet);
     }
 
     /**
      * 拼接完整的地址
-     * @return address
+     * @return 地址字符串，包含国家、区域、省、城市、运营商
      */
     public String getAddressAndIsp() {
-        Set<String> regionSet = new LinkedHashSet<>();
-        regionSet.add(country);
-        regionSet.add(area);
-        regionSet.add(province);
-        regionSet.add(city);
-        regionSet.add(isp);
-        regionSet.removeIf(s -> !StringUtils.hasText(s));
-        return String.join("|", regionSet);
+        return getAddress() + "|" + isp;
     }
 
     /**
-     * 获取 ip v4 part
-     * @return 是否 ipv4
-     */
-    public static String[] getIpv4Part(String ip) {
-        return DOT_PATTERN.split(ip);
-    }
-
-    /**
-     * 将 region 转化为 IpInfo
-     * @param region region
+     * 将 ip2region 搜索结果 转化为 IpInfo
+     * @param searchResult ip2region 搜索结果
      * @return IpInfo
      */
-    public static IpInfo toIpInfo(String region) {
+    public static IpInfo toIpInfo(String searchResult) {
         IpInfo ipInfo = new IpInfo();
-        if (!StringUtils.hasText(region)) {
+        if (!StringUtils.hasText(searchResult)) {
             return ipInfo;
         }
-        String[] splitInfoArr = SPLIT_PATTERN.split(region);
+        String[] splitInfoArr = SPLIT_PATTERN.split(searchResult);
         // 补齐5位
         if (splitInfoArr.length < 5) {
             splitInfoArr = Arrays.copyOf(splitInfoArr, 5);
         }
         ipInfo.setCountry(filterZero(splitInfoArr[0]));
-        // ipInfo.setArea(filterZero(splitInfoArr[1]));
         ipInfo.setProvince(filterZero(splitInfoArr[1]));
         ipInfo.setCity(filterZero(splitInfoArr[2]));
         ipInfo.setIsp(filterZero(splitInfoArr[3]));
-        ipInfo.setRegion(region);
+        ipInfo.setRegion(filterZero(splitInfoArr[4]));
+        ipInfo.setRawData(searchResult);
         return ipInfo;
     }
 
@@ -171,7 +155,7 @@ public class IpInfo {
 
     /**
      * 返回Ip未知的情况下，返回 “Unknown”
-     * @return 返回 UnKnown
+     * @return 返回 Unknown
      */
     public static String ipUnknown() {
         return UNKNOWN;

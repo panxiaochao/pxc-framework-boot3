@@ -19,11 +19,12 @@ import io.github.panxiaochao.boot3.utils.JdkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnThreading;
+import org.springframework.boot.autoconfigure.thread.Threading;
 import org.springframework.boot.web.embedded.tomcat.TomcatProtocolHandlerCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
 import java.lang.reflect.Method;
@@ -50,7 +51,7 @@ public class VirtualThreadConfig {
      * @return TomcatProtocolHandlerCustomizer
      */
     @Bean
-    @Conditional(Jdk21OrHigherCondition.class)
+    @ConditionalOnThreading(Threading.VIRTUAL)
     public TomcatProtocolHandlerCustomizer<?> protocolHandlerVirtualThreadExecutorCustomizer() {
         return protocolHandler -> {
             try {
@@ -75,7 +76,7 @@ public class VirtualThreadConfig {
      * @return Executor
      */
     @Bean(name = "virtualThreadExecutor")
-    @Conditional(Jdk21OrHigherCondition.class)
+    @ConditionalOnThreading(Threading.VIRTUAL)
     public Executor virtualThreadExecutor() {
         try {
             // 使用反射避免直接引用JDK21+方法

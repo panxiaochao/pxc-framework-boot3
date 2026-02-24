@@ -15,12 +15,10 @@
  */
 package io.github.panxiaochao.boot3.ip2region.config;
 
-import io.github.panxiaochao.boot3.ip2region.config.properties.Ip2regionProperties;
 import io.github.panxiaochao.boot3.ip2region.core.Ip2regionClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -33,7 +31,6 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0
  */
 @AutoConfiguration
-@EnableConfigurationProperties(Ip2regionProperties.class)
 public class Ip2regionAutoConfiguration {
 
     /**
@@ -43,13 +40,12 @@ public class Ip2regionAutoConfiguration {
 
     /**
      * 创建 Ip2regionClient 对象
-     * @param ip2regionProperties ip2regionProperties
      * @return Ip2regionClient
      */
     @Bean
-    public Ip2regionClient ip2regionClient(Ip2regionProperties ip2regionProperties) {
+    public Ip2regionClient ip2regionClient() {
         LOGGER.info("配置[Ip2regionClient]成功");
-        return new Ip2regionClient(ip2regionProperties);
+        return new Ip2regionClient();
     }
 
 }

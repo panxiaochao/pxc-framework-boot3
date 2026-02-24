@@ -1,6 +1,5 @@
 package io.github.panxiaochao.boot3.ip2region.test;
 
-import io.github.panxiaochao.boot3.ip2region.config.properties.Ip2regionProperties;
 import io.github.panxiaochao.boot3.ip2region.core.Ip2regionClient;
 import io.github.panxiaochao.boot3.ip2region.core.IpInfo;
 
@@ -16,11 +15,9 @@ import io.github.panxiaochao.boot3.ip2region.core.IpInfo;
 public class Ip2RegionTest {
 
     public static void main(String[] args) {
-        // 创建 Ip2regionProperties 配置对象（可使用默认值）
-        Ip2regionProperties properties = new Ip2regionProperties();
 
         // 初始化 Ip2regionClient 客户端
-        Ip2regionClient client = new Ip2regionClient(properties);
+        Ip2regionClient client = new Ip2regionClient();
 
         try {
             client.afterPropertiesSet(); // 加载数据库文件
@@ -38,7 +35,7 @@ public class Ip2RegionTest {
 
             // 获取特定信息测试
             System.out.println(client.getInfo("220.248.12.158", IpInfo::getAddress));
-            System.out.println(client.getInfo("220.248.12.158", IpInfo::getRegion));
+            System.out.println(client.getInfo("220.248.12.158", IpInfo::getAddressAndIsp));
 
             // IPv6 测试
             System.out.println(client.memorySearch("240e:57f:32ff:ffff:ffff:ffff:ffff:ffff"));

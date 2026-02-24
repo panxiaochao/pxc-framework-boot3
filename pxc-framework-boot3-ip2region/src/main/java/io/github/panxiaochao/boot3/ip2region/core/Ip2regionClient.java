@@ -15,7 +15,6 @@
  */
 package io.github.panxiaochao.boot3.ip2region.core;
 
-import io.github.panxiaochao.boot3.ip2region.config.properties.Ip2regionProperties;
 import io.github.panxiaochao.boot3.ip2region.constants.Ip2regionConstant;
 import org.lionsoul.ip2region.service.Config;
 import org.lionsoul.ip2region.service.ConfigBuilder;
@@ -26,10 +25,10 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Duration;
 import java.util.function.Function;
 
 /**
@@ -50,13 +49,7 @@ public class Ip2regionClient implements InitializingBean {
 
     private final ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
 
-    private final Ip2regionProperties ip2regionProperties;
-
     private static Ip2Region IP_SEARCHER;
-
-    public Ip2regionClient(Ip2regionProperties ip2regionProperties) {
-        this.ip2regionProperties = ip2regionProperties;
-    }
 
     /**
      * IP解析, 返回{@link IpInfo}对象
@@ -86,6 +79,41 @@ public class Ip2regionClient implements InitializingBean {
     }
 
     /**
+     * 关闭Ip2Region服务
+     */
+    public void close() {
+        if (IP_SEARCHER == null) {
+            return;
+        }
+        try {
+            IP_SEARCHER.close(10000);
+        }
+        catch (Exception e) {
+            LOGGER.error("Ip2Region服务关闭异常", e);
+        }
+    }
+
+    /**
+     * 关闭Ip2Region服务
+     * @param timeout 关闭超时时间
+     */
+    public void close(final Duration timeout) {
+        if (IP_SEARCHER == null) {
+            return;
+        }
+        if (timeout == null) {
+            close();
+            return;
+        }
+        try {
+            IP_SEARCHER.close(timeout.toMillis());
+        }
+        catch (Exception e) {
+            LOGGER.error("Ip2Region服务关闭异常", e);
+        }
+    }
+
+    /**
      * 构建 Config 对象
      * @param inputStream xdb 输入流
      * @param isV6 是否为 IPv6
@@ -104,47 +132,66 @@ public class Ip2regionClient implements InitializingBean {
             return configBuilder.asV4();
         }
         catch (Exception e) {
-            throw new RuntimeException("构建 Config 失败", e);
+            throw new RuntimeException("构建 Ip2region Config 失败", e);
+        }
+    }
+
+    /**
+     * 获取资源
+     * @param location 路径
+     * @return Resource[]
+     */
+    private Resource[] getResources(String location) {
+        try {
+            return this.resourcePatternResolver.getResources(location);
+        }
+        catch (IOException e) {
+            return new Resource[0];
         }
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        String v4dbLocation = ip2regionProperties.getV4dbLocation();
-        Config v4Config;
-        if (StringUtils.hasText(v4dbLocation)) {
-            try {
-                Resource v4Resource = this.resourcePatternResolver.getResource(v4dbLocation);
-                v4Config = buildConfig(v4Resource.getInputStream(), false);
-                LOGGER.info("配置自定义[ip2region_v4]成功！");
-            }
-            catch (IOException e) {
-                throw new RuntimeException("未找到自定义IPV4数据库文件：" + v4dbLocation, e);
+        Config v4Config = null;
+        // 加载位置在classpath下的ip2region文件夹下的 ip2region_v4.db 数据库
+        // 建议读取项目中的自带数据库，方便对视更新Xdb数据库
+        // 本次版本已去除自带的 ip2region_v4.db 数据库，减少Jar打包体积
+        Resource[] v4Resources = getResources(Ip2regionConstant.IP2REGION_V4_DB_LOCATION);
+        if (v4Resources.length > 0) {
+            for (Resource resource : v4Resources) {
+                try {
+                    v4Config = buildConfig(resource.getInputStream(), false);
+                    LOGGER.info("配置自定义[ip2region_v4]成功！");
+                }
+                catch (IOException e) {
+                    throw new RuntimeException("初始化IPV4数据库文件失败，检查数据库路径是否正确放置 resources/ip2region 任意目录下", e);
+                }
             }
         }
         else {
-            // 默认加载自带的 ip2region_v4.db 数据库
-            Resource v4Resource = this.resourcePatternResolver.getResource(Ip2regionConstant.IP2REGION_V4_DB_LOCATION);
-            v4Config = buildConfig(v4Resource.getInputStream(), false);
-            LOGGER.info("配置默认[ip2region_v4]成功！");
+            LOGGER.warn("未检测到 ip2region_v4.xdb 数据库文件，如需使用Ipv4检索功能，请将 ip2region_v4.xdb 放置到 resources/ip2region 任意目录下");
         }
 
         // 自定义 IPV6 数据库
-        String v6dbLocation = ip2regionProperties.getV6dbLocation();
         Config v6Config = null;
-        if (StringUtils.hasText(v6dbLocation)) {
-            try {
-                Resource v6Resource = this.resourcePatternResolver.getResource(v6dbLocation);
-                v6Config = buildConfig(v6Resource.getInputStream(), true);
-                LOGGER.info("配置自定义[ip2region_v6]成功！");
+        Resource[] v6Resources = getResources(Ip2regionConstant.IP2REGION_V6_DB_LOCATION);
+        if (v6Resources.length > 0) {
+            for (Resource resource : v6Resources) {
+                try {
+                    v6Config = buildConfig(resource.getInputStream(), true);
+                    LOGGER.info("配置自定义[ip2region_v6]成功！");
+                }
+                catch (IOException e) {
+                    throw new RuntimeException("初始化IPV6数据库文件失败，检查数据库路径是否正确放置 resources/ip2region 任意目录下", e);
+                }
             }
-            catch (IOException e) {
-                throw new RuntimeException("未找到自定义IPV6数据库文件：" + v6dbLocation, e);
-            }
+        }
+        else {
+            LOGGER.warn("未检测到 ip2region_v6.xdb 数据库文件，如需使用Ipv6检索功能，请将 ip2region_v6.xdb 放置到 resources/ip2region 任意目录下");
         }
 
         // 通过上述配置创建 Ip2Region 查询服务
-        IP_SEARCHER = org.lionsoul.ip2region.service.Ip2Region.create(v4Config, v6Config);
+        IP_SEARCHER = Ip2Region.create(v4Config, v6Config);
     }
 
 }
