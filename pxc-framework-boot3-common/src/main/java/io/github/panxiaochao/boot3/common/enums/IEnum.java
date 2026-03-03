@@ -37,13 +37,4 @@ public interface IEnum<T> {
      */
     String getMessage();
 
-    /**
-     * 根据code获取描述
-     * @param code 码值
-     * @return 返回信息
-     */
-    default String ofCode(T code) {
-        return "";
-    }
-
 }

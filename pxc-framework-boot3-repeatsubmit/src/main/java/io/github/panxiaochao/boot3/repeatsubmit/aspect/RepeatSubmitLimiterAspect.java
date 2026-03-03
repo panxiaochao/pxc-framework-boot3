@@ -143,17 +143,8 @@ public class RepeatSubmitLimiterAspect {
         String classMethodName = className + "." + methodName;
         // 请求地址
         String requestUrl = (null == RequestUtil.getRequest()) ? "" : RequestUtil.getRequest().getRequestURI();
-        RequestUtil.getRequest().getRequestURI();
         // 拼接参数
         String argsString = argsArrayToString(args);
-        // 是否自定义请求头
-        // if (StringUtils.hasText(repeatSubmitLimiter.headerName())) {
-        // String headerName =
-        // RequestUtil.getRequest().getHeader(repeatSubmitLimiter.headerName());
-        // if (StringUtils.hasText(headerName )){
-        // argsString += "."+ headerName;
-        // }
-        // }
         StringJoiner paramsString = new StringJoiner(StringPools.COLON);
         paramsString.add(requestUrl).add(classMethodName).add(argsString);
         String combineKey = DigestUtils.md5DigestAsHex(paramsString.toString().getBytes(StandardCharsets.UTF_8));

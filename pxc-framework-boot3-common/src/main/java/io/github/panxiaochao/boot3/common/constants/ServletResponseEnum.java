@@ -92,8 +92,7 @@ public enum ServletResponseEnum implements IResponseEnum<Integer> {
 
     private final String message;
 
-    @Override
-    public String ofCode(Integer code) {
+    public String getMessageByCode(Integer code) {
         for (ServletResponseEnum value : ServletResponseEnum.values()) {
             if (value.getCode().equals(code)) {
                 return value.getMessage();

@@ -19,10 +19,6 @@ import io.github.panxiaochao.boot3.common.enums.IResponseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 /**
  * <p>
  * 通用枚举异常
@@ -94,11 +90,7 @@ public enum CommonResponseEnum implements IResponseEnum<Integer> {
 
     private final String message;
 
-    public static final Map<Integer, String> MAP_VALUES = Arrays.stream(CommonResponseEnum.values())
-        .collect(Collectors.toMap(CommonResponseEnum::getCode, CommonResponseEnum::getMessage));
-
-    @Override
-    public String ofCode(Integer code) {
+    public String getMessageByCode(Integer code) {
         for (CommonResponseEnum value : CommonResponseEnum.values()) {
             if (value.getCode().equals(code)) {
                 return value.getMessage();
