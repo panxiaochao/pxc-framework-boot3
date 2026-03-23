@@ -25,7 +25,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -111,17 +110,13 @@ public class DownLoadUtil {
         return (lastSlashIndex != -1) ? templatePath.substring(lastSlashIndex + 1) : templatePath;
     }
 
+    /**
+     * 获取 Content-Disposition 响应头值，方法内部已经正确处理了 UTF-8 编码和 RFC 5987 标准，不需要手动进行百分号编
+     * @param fileName 文件名
+     * @return Content-Disposition 值
+     */
     private static String getContentDispositionValue(String fileName) {
-        String percentEncodedFileName = percentEncode(fileName);
-        return ContentDisposition.attachment()
-            .filename(percentEncodedFileName, StandardCharsets.UTF_8)
-            .build()
-            .toString();
+        return ContentDisposition.attachment().filename(fileName, StandardCharsets.UTF_8).build().toString();
     }
-
-    private static String percentEncode(String s) {
-        String encode = URLEncoder.encode(s, StandardCharsets.UTF_8);
-        return encode.replaceAll("\\+", "%20");
-    }
-
+    
 }
