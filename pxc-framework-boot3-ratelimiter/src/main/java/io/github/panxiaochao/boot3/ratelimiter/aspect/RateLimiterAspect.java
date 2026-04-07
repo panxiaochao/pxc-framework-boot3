@@ -34,7 +34,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.annotation.Order;
-import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.ParserContext;
@@ -46,7 +45,6 @@ import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -73,6 +71,11 @@ public class RateLimiterAspect {
     private static final String RATE_LIMITER_KEY = "rate_limiter:";
 
     /**
+     * 限流 redis key 最大长度
+     */
+    private static final int MAX_RATE_LIMITER_KEY_LENGTH = 256;
+
+    /**
      * 定义EL表达式解析器
      */
     private final ExpressionParser expressionParser = new SpelExpressionParser();
@@ -83,11 +86,6 @@ public class RateLimiterAspect {
     private final ParserContext parserContext = new TemplateParserContext();
 
     /**
-     * 定义EL上下文对象进行解析
-     */
-    private final EvaluationContext evaluationContext = new StandardEvaluationContext();
-
-    /**
      * 方法参数解析器
      */
     private final ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
@@ -95,6 +93,7 @@ public class RateLimiterAspect {
     @Before("@annotation(rateLimiter)")
     public void before(JoinPoint joinPoint, RateLimiter rateLimiter) {
         try {
+            validateRateLimiterConfig(rateLimiter);
             int maxCount = rateLimiter.maxCount();
             long limitTime = rateLimiter.limitTime();
             TimeUnit timeUnit = rateLimiter.timeUnit();
@@ -104,20 +103,24 @@ public class RateLimiterAspect {
             // RateType.PER_CLIENT 客户端单独计算限流
             long availableCount = RedissonUtil.tryRateLimiter(rateLimiterKey, RateType.OVERALL, maxCount,
                     timeUnit.toMillis(limitTime));
-            if (availableCount == -1) {
+            if (availableCount < 0) {
                 String message = StringUtils.hasText(rateLimiter.message()) ? rateLimiter.message()
                         : RateLimiterErrorEnum.RATE_LIMITER_FREQUENT_ERROR.getMessage();
                 throw new ServerRuntimeException(RateLimiterErrorEnum.RATE_LIMITER_FREQUENT_ERROR, message);
             }
-            LOGGER.info("缓存key: {}, 限制数: {}, 剩余数: {}", rateLimiterKey, maxCount, availableCount);
+            LOGGER.debug("缓存key: {}, 限制数: {}, 剩余数: {}", rateLimiterKey, maxCount, availableCount);
+        }
+        catch (ServerRuntimeException e) {
+            throw e;
         }
         catch (Exception e) {
-            if (e instanceof ServerRuntimeException) {
-                throw e;
-            }
-            else {
-                throw new RuntimeException(RateLimiterErrorEnum.RATE_LIMITER_SERVER_ERROR.getMessage(), e);
-            }
+            throw new ServerRuntimeException(RateLimiterErrorEnum.RATE_LIMITER_SERVER_ERROR);
+        }
+    }
+
+    private void validateRateLimiterConfig(RateLimiter rateLimiter) {
+        if (rateLimiter.maxCount() <= 0 || rateLimiter.limitTime() <= 0 || rateLimiter.timeUnit() == null) {
+            throw new ServerRuntimeException(RateLimiterErrorEnum.RATE_LIMITER_CONFIG_ERROR);
         }
     }
 
@@ -142,32 +145,34 @@ public class RateLimiterAspect {
      * 解析EL表达式获取动态Key
      */
     private String parseExpressionKey(JoinPoint joinPoint, Method method, String key) {
-        if (StrUtil.isNotBlank(key) && StrUtil.containsAny(key, StringPools.HASH)) {
-            Object[] args = joinPoint.getArgs();
-            String[] parameterNames = parameterNameDiscoverer.getParameterNames(method);
-            Objects.requireNonNull(parameterNames, "限流Key解析异常, 请确认方法体是否存在定义参数！");
-
-            for (int i = 0; i < parameterNames.length; i++) {
-                evaluationContext.setVariable(parameterNames[i], args[i]);
-            }
-
-            try {
-                Expression expression;
-                if (StringUtils.startsWithIgnoreCase(key, parserContext.getExpressionPrefix())
-                        && StringUtils.endsWithIgnoreCase(key, parserContext.getExpressionSuffix())) {
-                    expression = expressionParser.parseExpression(key, parserContext);
-                }
-                else {
-                    expression = expressionParser.parseExpression(key);
-                }
-                String value = expression.getValue(evaluationContext, String.class);
-                return StringUtils.hasText(value) ? value + ":" : StringPools.EMPTY;
-            }
-            catch (Exception e) {
-                throw new ServerRuntimeException(RateLimiterErrorEnum.RATE_LIMITER_PARSE_EXPRESSION_ERROR);
-            }
+        if (!StrUtil.isNotBlank(key) || !StrUtil.containsAny(key, StringPools.HASH)) {
+            return key;
         }
-        return key;
+        Object[] args = joinPoint.getArgs();
+        String[] parameterNames = parameterNameDiscoverer.getParameterNames(method);
+        if (parameterNames == null || parameterNames.length == 0 || parameterNames.length != args.length) {
+            throw new ServerRuntimeException(RateLimiterErrorEnum.RATE_LIMITER_PARSE_EXPRESSION_ERROR);
+        }
+        StandardEvaluationContext evaluationContext = new StandardEvaluationContext();
+        for (int i = 0; i < parameterNames.length; i++) {
+            evaluationContext.setVariable(parameterNames[i], args[i]);
+        }
+
+        try {
+            Expression expression;
+            if (StringUtils.startsWithIgnoreCase(key, parserContext.getExpressionPrefix())
+                    && StringUtils.endsWithIgnoreCase(key, parserContext.getExpressionSuffix())) {
+                expression = expressionParser.parseExpression(key, parserContext);
+            }
+            else {
+                expression = expressionParser.parseExpression(key);
+            }
+            String value = expression.getValue(evaluationContext, String.class);
+            return StringUtils.hasText(value) ? value + ":" : StringPools.EMPTY;
+        }
+        catch (Exception e) {
+            throw new ServerRuntimeException(RateLimiterErrorEnum.RATE_LIMITER_PARSE_EXPRESSION_ERROR);
+        }
     }
 
     /**
@@ -175,7 +180,9 @@ public class RateLimiterAspect {
      */
     private String buildCompleteKey(RateLimiter rateLimiter, String key, String classMethodName) {
         StringBuilder stringBuilder = new StringBuilder(RATE_LIMITER_KEY);
-        stringBuilder.append(key);
+        if (StringUtils.hasText(key)) {
+            stringBuilder.append(key);
+        }
 
         switch (rateLimiter.rateLimiterType()) {
             case IP:
@@ -196,7 +203,11 @@ public class RateLimiterAspect {
                 // 默认使用全局限流
                 break;
         }
-        return stringBuilder.toString();
+        String finalKey = stringBuilder.toString();
+        if (finalKey.length() > MAX_RATE_LIMITER_KEY_LENGTH) {
+            return RATE_LIMITER_KEY + DigestUtils.md5DigestAsHex(finalKey.getBytes(StandardCharsets.UTF_8));
+        }
+        return finalKey;
     }
 
     /**
@@ -217,7 +228,11 @@ public class RateLimiterAspect {
         /**
          * 限流服务器异常
          */
-        RATE_LIMITER_SERVER_ERROR(6029, "服务器限流异常，请稍候再试!");
+        RATE_LIMITER_SERVER_ERROR(6029, "服务器限流异常，请稍候再试!"),
+        /**
+         * 限流配置参数异常
+         */
+        RATE_LIMITER_CONFIG_ERROR(6030, "限流参数配置异常!");
 
         private final Integer code;
 
