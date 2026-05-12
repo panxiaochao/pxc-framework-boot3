@@ -217,6 +217,16 @@ pxc-framework-boot3-component (依赖 common + core)
 4. Snapshot 版本发布到：https://central.sonatype.com/repository/maven-snapshots/
 5. Release 版本发布到：https://ossrh-staging-api.central.sonatype.com/service/local/
 
+## Test Commands
+
+```bash
+# Run all tests in a single module
+mvn test -pl pxc-framework-boot3-core
+
+# Run specific test class
+mvn test -pl pxc-framework-boot3-util -Dtest=RegexUtilTest
+```
+
 ## Common Issues
 
 | Issue | Solution |
@@ -224,7 +234,15 @@ pxc-framework-boot3-component (依赖 common + core)
 | Format violations | `mvn validate` before commit |
 | Version not resolved | flatten-maven-plugin 会自动处理 `${revision}`，确保插件执行 |
 | Missing dependency | 遵循 BOM -> 子模块的顺序添加 |
-| CONTRIBUTING.md outdated | 忽略（仍提到Gradle） |
+| CONTRIBUTING.md outdated | 忽略（仍提到 Gradle，实际使用 Maven） |
+| Javadoc generation fails | 临时配置 `<additionalJOption>-Xdoclint:none</additionalJOption>` 已启用，可忽略非规范 Javadoc 警告 |
+
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `pom.xml` | Root POM - 定义 `${revision}` 版本、全局插件配置 |
+| `pxc-framework-boot3-bom/pom.xml` | 依赖版本管理 |
 
 ## Reference
 
