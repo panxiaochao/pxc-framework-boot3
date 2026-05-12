@@ -16,7 +16,7 @@
 package io.github.panxiaochao.boot3.redis.mapper;
 
 import io.github.panxiaochao.boot3.utils.StringPools;
-import org.redisson.api.NameMapper;
+import org.redisson.config.NameMapper;
 import org.springframework.util.StringUtils;
 
 /**

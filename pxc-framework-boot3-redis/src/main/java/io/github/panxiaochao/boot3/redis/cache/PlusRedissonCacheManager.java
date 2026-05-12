@@ -15,8 +15,8 @@
  */
 package io.github.panxiaochao.boot3.redis.cache;
 
-import io.github.panxiaochao.boot3.utils.StringPools;
 import io.github.panxiaochao.boot3.redis.utils.RedissonUtil;
+import io.github.panxiaochao.boot3.utils.StringPools;
 import org.redisson.api.RMap;
 import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
@@ -242,15 +242,8 @@ public class PlusRedissonCacheManager implements CacheManager, ResourceLoaderAwa
             this.configMap = (Map<String, CacheConfig>) CacheConfig.fromYAML(resource.getInputStream());
         }
         catch (IOException e) {
-            // try to read yaml
-            try {
-                this.configMap = (Map<String, CacheConfig>) CacheConfig.fromJSON(resource.getInputStream());
-            }
-            catch (IOException e1) {
-                e1.addSuppressed(e);
-                throw new BeanDefinitionStoreException(
-                        "Could not parse cache configuration at [" + configLocation + "]", e1);
-            }
+            throw new BeanDefinitionStoreException("Could not parse cache configuration at [" + configLocation + "]",
+                    e);
         }
     }
 

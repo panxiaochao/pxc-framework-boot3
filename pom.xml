@@ -112,7 +112,7 @@
         <mysql-connector-j.version>9.7.0</mysql-connector-j.version>
         <freemarker.version>2.3.34</freemarker.version>
         <redisson.version>4.3.1</redisson.version>
-        <redisson-spring-boot-starter.version>3.52.0</redisson-spring-boot-starter.version>
+        <redisson-spring-boot-starter.version>4.3.1</redisson-spring-boot-starter.version>
         <jakarta.mail-api.version>2.1.5</jakarta.mail-api.version>
         <hikariCP.version>7.0.2</hikariCP.version>
         <slf4j-api.version>2.0.17</slf4j-api.version>
@@ -323,6 +323,11 @@
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-cache</artifactId>
                 <version>${redisson.version}</version>
             </dependency>
             <dependency>
