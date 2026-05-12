@@ -118,5 +118,5 @@ public class DownLoadUtil {
     private static String getContentDispositionValue(String fileName) {
         return ContentDisposition.attachment().filename(fileName, StandardCharsets.UTF_8).build().toString();
     }
-    
+
 }
