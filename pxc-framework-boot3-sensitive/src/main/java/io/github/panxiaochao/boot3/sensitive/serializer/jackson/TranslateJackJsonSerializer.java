@@ -29,7 +29,8 @@ import io.github.panxiaochao.boot3.sensitive.utils.InvokeMethodUtil;
 import io.github.panxiaochao.boot3.utils.ObjectUtil;
 import org.springframework.util.Assert;
 
-import java.util.Objects;
+import java.io.IOException;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -64,31 +65,71 @@ public class TranslateJackJsonSerializer extends JsonSerializer<String> implemen
     @Override
     public void serialize(String value, JsonGenerator gen, SerializerProvider serializers) {
         try {
+            Object invokeValue;
             // 默认方法
             if (strategyClassName.equals(IHandler.class.getName())) {
-                Object objectVal = strategy.use().apply(value);
-                if (Objects.equals(objectVal.getClass(), Boolean.class)) {
-                    gen.writeBoolean(Boolean.parseBoolean(objectVal.toString()));
-                }
-                else {
-                    gen.writeString(objectVal.toString());
-                }
+                invokeValue = strategy.use().apply(value);
             }
             else {
-                Object invokeValue = InvokeMethodUtil.invoke(strategyClassName, value);
-                if (Objects.equals(invokeValue.getClass(), Boolean.class)) {
-                    gen.writeBoolean(Boolean.parseBoolean(invokeValue.toString()));
-                }
-                else {
-                    gen.writeString(invokeValue.toString());
-                }
+                invokeValue = InvokeMethodUtil.invoke(strategyClassName, value);
             }
+            // 根据目标字段类型进行相应的序列化输出
+            writeValueByType(invokeValue, gen);
         }
         catch (Exception e) {
             throw new ServerRuntimeException(CommonResponseEnum.INTERNAL_SERVER_ERROR,
                     "The field [" + gen.getOutputContext().getCurrentName() + "] serialize is error! ");
         }
+    }
 
+    /**
+     * 根据目标字段类型写入相应格式的值
+     */
+    private void writeValueByType(Object value, JsonGenerator gen) throws IOException {
+        if (value == null) {
+            gen.writeNull();
+            return;
+        }
+
+        Class<?> targetClass = value.getClass();
+
+        // Boolean类型
+        if (Boolean.class.isAssignableFrom(targetClass)) {
+            gen.writeBoolean(Boolean.parseBoolean(value.toString()));
+            return;
+        }
+
+        // 数字类型处理
+        if (Number.class.isAssignableFrom(targetClass)) {
+            if (targetClass == Integer.class) {
+                gen.writeNumber((Integer) value);
+            }
+            else if (targetClass == Long.class) {
+                gen.writeNumber((Long) value);
+            }
+            else if (targetClass == Double.class) {
+                gen.writeNumber((Double) value);
+            }
+            else if (targetClass == Float.class) {
+                gen.writeNumber((Float) value);
+            }
+            else if (targetClass == BigDecimal.class) {
+                gen.writeNumber((BigDecimal) value);
+            }
+            else if (targetClass == Short.class) {
+                gen.writeNumber((Short) value);
+            }
+            else if (targetClass == Byte.class) {
+                gen.writeNumber((Byte) value);
+            }
+            else {
+                gen.writeString(value.toString());
+            }
+            return;
+        }
+
+        // String类型 或 其他的
+        gen.writeString(value.toString());
     }
 
     @Override
